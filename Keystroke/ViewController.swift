@@ -79,8 +79,7 @@ class ViewController: NSViewController {
             
             if keyCode == 53 && viewController.windowVisible {
                 // hide with escape
-                viewController.view.window!.orderOut(true)
-                viewController.windowVisible = false
+                hideWindow()
             }
             
             if keyCode != 53 && keyCode != 55 && !viewController.windowVisible && hasCommand {
@@ -113,14 +112,12 @@ class ViewController: NSViewController {
             if keyCode == 55 {
                 if viewController.windowVisible {
                     if !hasCommand {
-                        viewController.view.window?.orderOut(true)
-                        viewController.windowVisible = false
+                        hideWindow()
                     }
                 } else {
                     if !hasCommand {
                         if !viewController.skip {
-                            viewController.view.window?.orderFront(true)
-                            viewController.windowVisible = true
+                            showWindow()
                         } else {
                             viewController.skip = false
                         }
