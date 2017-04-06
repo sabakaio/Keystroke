@@ -44,7 +44,10 @@ class ViewController: NSViewController {
 
         actionLoader.loadDataForAppWithName("test")
         configureCollectionView()
-        
+        startKeyListener()
+    }
+    
+    func startKeyListener() {
         func callback(
             proxy: OpaquePointer,
             type: CGEventType,

@@ -92,35 +92,10 @@ class ActionLoader: NSObject {
     
 
     fileprivate func getActionsForApp(_ appName: String) -> [String]? {
-        
+        if (appName == "iTerm2") {
+          return ["S - Split Horizontally", "V - Split Vertically"]
+        }
         return ["Action one", "Action Two", "Action Three"]
-        
-//        let options: FileManager.DirectoryEnumerationOptions =
-//            [.skipsHiddenFiles, .skipsSubdirectoryDescendants, .skipsPackageDescendants]
-//        let fileManager = FileManager.default
-//        let resourceValueKeys = [URLResourceKey.isRegularFileKey, URLResourceKey.typeIdentifierKey]
-//        
-//        guard let directoryEnumerator = fileManager.enumerator(at: folderURL, includingPropertiesForKeys: resourceValueKeys,
-//                                                               options: options, errorHandler: { url, error in
-//                                                                print("`directoryEnumerator` error: \(error).")
-//                                                                return true
-//        }) else { return nil }
-//        
-//        var urls: [URL] = []
-//        for case let url as URL in directoryEnumerator {
-//            do {
-//                let resourceValues = try (url as NSURL).resourceValues(forKeys: resourceValueKeys)
-//                guard let isRegularFileResourceValue = resourceValues[URLResourceKey.isRegularFileKey] as? NSNumber else { continue }
-//                guard isRegularFileResourceValue.boolValue else { continue }
-//                guard let fileType = resourceValues[URLResourceKey.typeIdentifierKey] as? String else { continue }
-//                guard UTTypeConformsTo(fileType as CFString, "public.image" as CFString) else { continue }
-//                urls.append(url)
-//            }
-//            catch {
-//                print("Unexpected error occured: \(error).")
-//            }
-//        }
-//        return urls
     }
     
     func numberOfItemsInSection(_ section: Int) -> Int {
