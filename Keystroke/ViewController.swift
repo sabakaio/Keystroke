@@ -25,6 +25,22 @@ class ViewController: NSViewController, StoreSubscriber {
     var windowVisible = true
     var skip = false
 
+    func activateTheme(theme: Theme) {
+        if let collectionViewItem = collectionView.itemPrototype {
+            collectionViewItem.textField?.textColor = NSColor.init(
+                calibratedRed: theme.actionColor.calibratedRed,
+                green: theme.actionColor.green,
+                blue: theme.actionColor.blue,
+                alpha: theme.actionColor.alpha
+            );
+        }
+        
+    }
+    
+    func newState(state: AppState) {
+        activateTheme(theme: state.theme)
+    }
+
     private func configureCollectionView() {
         // Setup flow layout
         let flowLayout = NSCollectionViewFlowLayout()
@@ -39,10 +55,6 @@ class ViewController: NSViewController, StoreSubscriber {
         
         // Transparent background
         collectionView.layer?.backgroundColor = NSColor.clear.cgColor
-    }
-    
-    func newState(state: AppState) {
-        //        counterLabel.text = "\(state.counter)"
     }
     
     override func viewDidLoad() {
@@ -72,6 +84,7 @@ class ViewController: NSViewController, StoreSubscriber {
             }
             
             func showWindow() {
+                mainStore.dispatch(ThemeActionToggle())
                 viewController.view.window?.orderFront(true)
                 viewController.windowVisible = true
             }

@@ -7,31 +7,12 @@
 //
 
 import Cocoa
+import ReSwift
 
-struct RGBA {
-    public var calibratedRed: CGFloat
-    public var green: CGFloat
-    public var blue: CGFloat
-    public var alpha: CGFloat
-}
-
-struct Theme {
-    public var name: String
-    public var backgroundColor: RGBA
-    public var actionColor: RGBA
-}
-
-let DarkTheme = Theme(
-    name: "dark",
-    backgroundColor: RGBA(calibratedRed: 0.176, green: 0.176, blue: 0.176, alpha: 1),
-    actionColor: RGBA(calibratedRed: 0.964, green: 0.752, blue: 0.313, alpha: 1)
-)
-
-class WindowController: NSWindowController {
-    private(set) var activeTheme: Theme = DarkTheme
+class WindowController: NSWindowController, StoreSubscriber {
+    typealias StoreSubscriberStateType = AppState
     
     func activateTheme(theme: Theme) {
-        activeTheme = theme
         if let window = window {
             window.backgroundColor = NSColor.init(
                 calibratedRed: theme.backgroundColor.calibratedRed,
@@ -43,8 +24,14 @@ class WindowController: NSWindowController {
         
     }
     
+    func newState(state: AppState) {
+        activateTheme(theme: state.theme)
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
+        
+        mainStore.subscribe(self)
         
         // Position window
         if let window = window, let screen = NSScreen.main() {

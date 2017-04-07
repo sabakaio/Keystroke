@@ -10,9 +10,8 @@ import ReSwift
 
 // the reducer is responsible for evolving the application state based
 // on the actions it receives
-struct CounterReducer: Reducer {
+struct ThemeReducer: Reducer {
     typealias ReducerStateType = AppState
-    
     
     func handleAction(action: Action, state: AppState?) -> AppState {
         
@@ -20,10 +19,12 @@ struct CounterReducer: Reducer {
         var state = state ?? AppState()
         
         switch action {
-        case _ as CounterActionIncrease:
-            state.counter += 1
-        case _ as CounterActionDecrease:
-            state.counter -= 1
+        case _ as ThemeActionToggle:
+            if state.theme.name == "dark" {
+                state.theme = LightTheme
+            } else {
+                state.theme = DarkTheme
+            }
         default:
             break
         }
