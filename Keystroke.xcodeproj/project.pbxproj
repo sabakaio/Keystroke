@@ -12,6 +12,9 @@
 		685CB4C31E97A12C00C92195 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4C21E97A12C00C92195 /* Actions.swift */; };
 		685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4C41E97A15E00C92195 /* ThemeReducer.swift */; };
 		685CB4CA1E97C4DE00C92195 /* iTerm2.keystroke in Resources */ = {isa = PBXBuildFile; fileRef = 685CB4C91E97C4DE00C92195 /* iTerm2.keystroke */; };
+		685CB4CD1E97F2E400C92195 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4CC1E97F2E400C92195 /* Utils.swift */; };
+		685CB4CF1E97F44B00C92195 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4CE1E97F44B00C92195 /* AppReducer.swift */; };
+		685CB4D11E97F49400C92195 /* ThemeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4D01E97F49400C92195 /* ThemeState.swift */; };
 		68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */; };
 		68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FF1E96EE7A00C186F5 /* ViewController.swift */; };
 		68B068021E96EE7A00C186F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B068011E96EE7A00C186F5 /* Assets.xcassets */; };
@@ -54,6 +57,9 @@
 		685CB4C21E97A12C00C92195 /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		685CB4C41E97A15E00C92195 /* ThemeReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeReducer.swift; sourceTree = "<group>"; };
 		685CB4C91E97C4DE00C92195 /* iTerm2.keystroke */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = iTerm2.keystroke; path = Bindings/iTerm2.keystroke; sourceTree = "<group>"; };
+		685CB4CC1E97F2E400C92195 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		685CB4CE1E97F44B00C92195 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		685CB4D01E97F49400C92195 /* ThemeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeState.swift; sourceTree = "<group>"; };
 		68B067FA1E96EE7A00C186F5 /* Keystroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystroke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68B067FF1E96EE7A00C186F5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				685CB4C41E97A15E00C92195 /* ThemeReducer.swift */,
+				685CB4CE1E97F44B00C92195 /* AppReducer.swift */,
 			);
 			name = Reducers;
 			sourceTree = "<group>";
@@ -140,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				685CB4C01E97A06F00C92195 /* AppState.swift */,
+				685CB4D01E97F49400C92195 /* ThemeState.swift */,
 			);
 			name = State;
 			sourceTree = "<group>";
@@ -150,6 +158,14 @@
 				685CB4C91E97C4DE00C92195 /* iTerm2.keystroke */,
 			);
 			name = Bindings;
+			sourceTree = "<group>";
+		};
+		685CB4CB1E97F2BD00C92195 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				685CB4CC1E97F2E400C92195 /* Utils.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		68B067F11E96EE7A00C186F5 = {
@@ -178,6 +194,7 @@
 		68B067FC1E96EE7A00C186F5 /* Keystroke */ = {
 			isa = PBXGroup;
 			children = (
+				685CB4CB1E97F2BD00C92195 /* Utils */,
 				685CB4BF1E97A04F00C92195 /* State */,
 				685CB4BE1E97A04700C92195 /* Reducers */,
 				685CB4BD1E97A03C00C92195 /* Actions */,
@@ -543,10 +560,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */,
+				685CB4CF1E97F44B00C92195 /* AppReducer.swift in Sources */,
 				685CB4C31E97A12C00C92195 /* Actions.swift in Sources */,
+				685CB4D11E97F49400C92195 /* ThemeState.swift in Sources */,
 				68B068351E96F8BC00C186F5 /* Binding.swift in Sources */,
 				685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */,
 				685CB4C11E97A06F00C92195 /* AppState.swift in Sources */,
+				685CB4CD1E97F2E400C92195 /* Utils.swift in Sources */,
 				68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */,
 				68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */,
 				68B0682D1E96EF7200C186F5 /* WindowController.swift in Sources */,

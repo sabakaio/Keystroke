@@ -32,7 +32,7 @@ class CollectionViewItem: NSCollectionViewItem, StoreSubscriber {
     }
     
     func newState(state: AppState) {
-        activateTheme(theme: state.theme)
+        activateTheme(theme: state.theme.theme)
     }
     
     

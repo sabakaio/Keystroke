@@ -8,22 +8,16 @@
 
 import Cocoa
 
-func bridge<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer {
-    return UnsafeMutableRawPointer(Unmanaged.passUnretained(obj).toOpaque())
-}
-
-func transfer<T : AnyObject>(ptr : UnsafeMutableRawPointer) -> T {
-    return Unmanaged<T>.fromOpaque(ptr).takeUnretainedValue()
-}
-
 class ViewController: NSViewController {
     typealias StoreSubscriberStateType = AppState
+
     @IBOutlet weak var collectionView: NSCollectionView!
+
     let bindingLoader = BindingLoader()
     
     var windowVisible = true
     var skip = false
-
+    
     private func configureCollectionView() {
         // Setup flow layout
         let flowLayout = NSCollectionViewFlowLayout()
@@ -32,7 +26,7 @@ class ViewController: NSViewController {
         flowLayout.minimumInteritemSpacing = 20.0
         flowLayout.minimumLineSpacing = 20.0
         collectionView.collectionViewLayout = flowLayout
-
+        
         // For optimal performance, NSCollectionView is designed to be layer-backed.
         view.wantsLayer = true
         
@@ -43,8 +37,6 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // subscribe to state changes
-
         bindingLoader.loadDataForAppWithName("test")
         configureCollectionView()
         startKeyListener()
@@ -156,10 +148,10 @@ class ViewController: NSViewController {
         bindingLoader.loadDataForAppWithName(appName)
         collectionView.reloadData()
     }
-
+    
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
 }
@@ -184,7 +176,7 @@ extension ViewController : NSCollectionViewDataSource {
         guard let collectionViewItem = item as? CollectionViewItem else {return item}
         
         let action = bindingLoader.bindingForIndexPath(indexPath)
-
+        
         collectionViewItem.actionText = "\(action.bindingKey) - \(action.descriptionText)"
         return item
     }
