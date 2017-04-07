@@ -7,9 +7,10 @@
 //
 
 import Cocoa
+import ReSwift
 
-class ViewController: NSViewController {
-    typealias StoreSubscriberStateType = AppState
+class ViewController: NSViewController, StoreSubscriber {
+    typealias StoreSubscriberStateType = ViewState
 
     @IBOutlet weak var collectionView: NSCollectionView!
 
@@ -34,8 +35,31 @@ class ViewController: NSViewController {
         collectionView.layer?.backgroundColor = NSColor.clear.cgColor
     }
     
+    func newState(state: ViewState) {
+        self.loadDataForAppWithName(state.appName)
+
+        print(state)
+        if (state.windowVisible) {
+            showWindow()
+        } else {
+            hideWindow()
+        }
+    }
+    
+    func hideWindow() {
+        view.window?.orderOut(true)
+    }
+    
+    func showWindow() {
+        view.window?.orderFront(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainStore.subscribe(self) { state in
+            state.view
+        }
         
         bindingLoader.loadDataForAppWithName("test")
         configureCollectionView()
@@ -50,79 +74,30 @@ class ViewController: NSViewController {
             refcon: UnsafeMutableRawPointer?
             ) -> Unmanaged<CGEvent>? {
             
-            let viewController: ViewController = transfer(ptr: refcon!)
+//            let viewController: ViewController = transfer(ptr: refcon!)
+            mainStore.dispatch(handleKeyEvent(type: type, event: event))
             
-            func hideWindow() {
-                viewController.view.window?.orderOut(true)
-                viewController.windowVisible = false
-            }
+//            if (appName == "iTerm2") {
+//                if viewController.windowVisible && [.keyDown].contains(type) {
+//                    
+//                    if keyCode == 9 {
+//                        // replace mnemonic cmd - v with cmd+shift+d, split
+//                        event.setIntegerValueField(.keyboardEventKeycode, value: 2)
+//                        event.flags = event.flags.union(CGEventFlags.maskCommand)
+//                    } else if keyCode == 1 {
+//                        // replace mnemonic cmd - s with cmd+d, vetical split
+//                        event.setIntegerValueField(.keyboardEventKeycode, value: 2)
+//                        event.flags = event.flags.union(CGEventFlags.maskCommand)
+//                        event.flags = event.flags.union(CGEventFlags.maskShift)
+//                    }
+//                    
+//                    
+//                    hideWindow()
+//                    
+//                    return Unmanaged.passRetained(event)
+//                }
+//            }
             
-            func showWindow() {
-                mainStore.dispatch(ThemeActionToggle())
-                viewController.view.window?.orderFront(true)
-                viewController.windowVisible = true
-            }
-            
-            //  if [.keyDown , .keyUp].contains(type) {
-            let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
-            let flags = event.flags
-            let hasCommand = flags.contains(CGEventFlags.maskCommand)
-            print(keyCode.description, hasCommand)
-            let appName = NSWorkspace.shared().frontmostApplication?.localizedName
-            
-            
-            viewController.loadDataForAppWithName(appName!)
-            
-            if keyCode == 53 && viewController.windowVisible {
-                // hide with escape
-                hideWindow()
-            }
-            
-            if keyCode != 53 && keyCode != 55 && !viewController.windowVisible && hasCommand {
-                // Skip on cmd+something (e.g cmd+tab)
-                viewController.skip = true
-                return Unmanaged.passRetained(event)
-            }
-            
-            if (appName == "iTerm2") {
-                if viewController.windowVisible && [.keyDown].contains(type) {
-                    
-                    if keyCode == 9 {
-                        // replace mnemonic cmd - v with cmd+shift+d, split
-                        event.setIntegerValueField(.keyboardEventKeycode, value: 2)
-                        event.flags = event.flags.union(CGEventFlags.maskCommand)
-                    } else if keyCode == 1 {
-                        // replace mnemonic cmd - s with cmd+d, vetical split
-                        event.setIntegerValueField(.keyboardEventKeycode, value: 2)
-                        event.flags = event.flags.union(CGEventFlags.maskCommand)
-                        event.flags = event.flags.union(CGEventFlags.maskShift)
-                    }
-                    
-                    
-                    hideWindow()
-                    
-                    return Unmanaged.passRetained(event)
-                }
-            }
-            
-            if keyCode == 55 {
-                if viewController.windowVisible {
-                    if !hasCommand {
-                        hideWindow()
-                    }
-                } else {
-                    if !hasCommand {
-                        if !viewController.skip {
-                            showWindow()
-                        } else {
-                            viewController.skip = false
-                        }
-                    }
-                }
-            }
-            
-            //
-            //}
             return Unmanaged.passRetained(event)
         }
         
@@ -144,8 +119,8 @@ class ViewController: NSViewController {
         //CFRunLoopRun()
     }
     
-    func loadDataForAppWithName(_ appName: String) {
-        bindingLoader.loadDataForAppWithName(appName)
+    func loadDataForAppWithName(_ appName: String?) {
+        bindingLoader.loadDataForAppWithName(appName ?? "")
         collectionView.reloadData()
     }
     

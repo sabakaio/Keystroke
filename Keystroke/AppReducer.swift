@@ -12,12 +12,12 @@ import ReSwift
 // on the actions it receives
 struct AppReducer: Reducer {
     typealias ReducerStateType = AppState
-    
+
     func handleAction(action: Action, state: AppState?) -> AppState {
         return AppState(
-            theme: themeReducer(state: state?.theme, action: action),
+            theme: themeReducer(state: state?.theme, action),
+            view: viewReducer(state: state?.view, action)
             bindings: bindingsReducer(state: state?.bindings, action)
         )
     }
-    
 }
