@@ -8,7 +8,7 @@
 
 import ReSwift
 
-func themeReducer(state: ThemeState?, action: Action) -> ThemeState {
+func themeReducer(state: ThemeState?, _ action: Action) -> ThemeState {
     
     // if no state has been provided, create the default state
     var state = state ?? ThemeState()
