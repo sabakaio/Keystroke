@@ -7,6 +7,7 @@ target 'Keystroke' do
 
   # Pods for Keystroke
   pod 'ReSwift'
+  pod 'Yaml'
 
   target 'KeystrokeTests' do
     inherit! :search_paths
