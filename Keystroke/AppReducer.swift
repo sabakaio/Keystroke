@@ -16,7 +16,7 @@ struct AppReducer: Reducer {
     func handleAction(action: Action, state: AppState?) -> AppState {
         return AppState(
             theme: themeReducer(state: state?.theme, action: action),
-            bindings: bindingsReducer(state: state?.bindings, action: action)
+            bindings: bindingsReducer(state: state?.bindings, action)
         )
     }
     
