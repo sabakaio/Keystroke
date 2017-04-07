@@ -15,11 +15,17 @@ let mainStore = Store<AppState>(
     state: nil
 )
 
+let appConfigManager = AppConfigManager()
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        // First load configurations from files
+        appConfigManager.loadConfigurationsFromBundle()
+
+        // Then access parsed structures
+        print(appConfigManager.configuations)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

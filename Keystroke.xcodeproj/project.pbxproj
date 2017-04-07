@@ -17,6 +17,7 @@
 		685CB4D11E97F49400C92195 /* ThemeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4D01E97F49400C92195 /* ThemeState.swift */; };
 		685CB4DE1E98020F00C92195 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4DD1E98020F00C92195 /* ViewState.swift */; };
 		685CB4E01E9802BB00C92195 /* ViewReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4DF1E9802BB00C92195 /* ViewReducer.swift */; };
+		685CB4E21E981EF200C92195 /* AppConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4E11E981EF200C92195 /* AppConfigManager.swift */; };
 		68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */; };
 		68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FF1E96EE7A00C186F5 /* ViewController.swift */; };
 		68B068021E96EE7A00C186F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B068011E96EE7A00C186F5 /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		685CB4D01E97F49400C92195 /* ThemeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeState.swift; sourceTree = "<group>"; };
 		685CB4DD1E98020F00C92195 /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		685CB4DF1E9802BB00C92195 /* ViewReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewReducer.swift; sourceTree = "<group>"; };
+		685CB4E11E981EF200C92195 /* AppConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfigManager.swift; sourceTree = "<group>"; };
 		68B067FA1E96EE7A00C186F5 /* Keystroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystroke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68B067FF1E96EE7A00C186F5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				685CB4CC1E97F2E400C92195 /* Utils.swift */,
+				685CB4E11E981EF200C92195 /* AppConfigManager.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */,
 				685CB4C11E97A06F00C92195 /* AppState.swift in Sources */,
 				685CB4CD1E97F2E400C92195 /* Utils.swift in Sources */,
+				685CB4E21E981EF200C92195 /* AppConfigManager.swift in Sources */,
 				68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */,
 				68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */,
 				685CB4DE1E98020F00C92195 /* ViewState.swift in Sources */,
