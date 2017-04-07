@@ -8,7 +8,41 @@
 
 import Cocoa
 
+struct RGBA {
+    public var calibratedRed: CGFloat
+    public var green: CGFloat
+    public var blue: CGFloat
+    public var alpha: CGFloat
+}
+
+struct Theme {
+    public var name: String
+    public var backgroundColor: RGBA
+    public var actionColor: RGBA
+}
+
+let DarkTheme = Theme(
+    name: "dark",
+    backgroundColor: RGBA(calibratedRed: 0.176, green: 0.176, blue: 0.176, alpha: 1),
+    actionColor: RGBA(calibratedRed: 0.964, green: 0.752, blue: 0.313, alpha: 1)
+)
+
 class WindowController: NSWindowController {
+    private(set) var activeTheme: Theme = DarkTheme
+    
+    func activateTheme(theme: Theme) {
+        activeTheme = theme
+        if let window = window {
+            window.backgroundColor = NSColor.init(
+                calibratedRed: theme.backgroundColor.calibratedRed,
+                green: theme.backgroundColor.green,
+                blue: theme.backgroundColor.blue,
+                alpha: theme.backgroundColor.alpha
+            );
+        }
+        
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         
@@ -44,9 +78,9 @@ class WindowController: NSWindowController {
             window.standardWindowButton(NSWindowButton.zoomButton)!.isHidden = true;
             
             // Make window transparent
-            window.isOpaque = false;
+            // window.isOpaque = false;
             // self.window!.hasShadow = false
-            window.backgroundColor = NSColor.init(calibratedRed: 1, green: 1, blue: 1, alpha: 0.9);
+            activateTheme(theme: DarkTheme)
             
             
             // Try to move to active space, works for desktops
