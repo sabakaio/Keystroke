@@ -31,6 +31,13 @@ class WindowController: NSWindowController, StoreSubscriber {
     override func windowDidLoad() {
         super.windowDidLoad()
         
+        // Check accessibility settings
+        // see: http://stackoverflow.com/questions/36258866/how-to-access-accessibility-settings-in-macosx-cocoa-app-using-swift
+        // see: http://stackoverflow.com/questions/17693408/enable-access-for-assistive-devices-programmatically-on-10-9
+        let options : NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
+        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
+        print("Accessibility enabled: \(accessibilityEnabled)")
+        
         mainStore.subscribe(self)
         
         // Position window
