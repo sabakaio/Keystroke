@@ -15,6 +15,14 @@ func viewReducer(state: ViewState?, _ action: Action) -> ViewState {
     
     switch action {
     case let action as KeyEventAction:
+        if [.leftMouseDown].contains(action.type) {
+            if state.windowVisible {
+                // Don't trigger on cmd+click
+                state.skipNextShowTrigger = true
+                return state
+            }
+        }
+        
         let keyCode = action.event.getIntegerValueField(.keyboardEventKeycode)
         let flags = action.event.flags
         let hasCommand = flags.contains(CGEventFlags.maskCommand)
