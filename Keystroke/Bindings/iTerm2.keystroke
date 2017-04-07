@@ -1,10 +1,12 @@
-s:
-  s:
-    name: Split Vertically
+operations:
+  - name: Split Vertically
     hotkey: cmd-d
-  v:
-    name: Split Vertically
-    hotkey: cmd-d
-  h:
-    name: Split Horizontally
+
+  - name: Split Horizontally
     hotkey: cmd-shift-d
+
+bindings:
+  s:
+    s: Split Vertically
+    v: Split Vertically
+    h: Split Horizontally
