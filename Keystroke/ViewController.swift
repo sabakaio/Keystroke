@@ -18,7 +18,7 @@ func transfer<T : AnyObject>(ptr : UnsafeMutableRawPointer) -> T {
 
 class ViewController: NSViewController {
     @IBOutlet weak var collectionView: NSCollectionView!
-    let actionLoader = ActionLoader()
+    let bindingLoader = BindingLoader()
     
     var windowVisible = true
     var skip = false
@@ -42,7 +42,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        actionLoader.loadDataForAppWithName("test")
+        bindingLoader.loadDataForAppWithName("test")
         configureCollectionView()
         startKeyListener()
     }
@@ -149,7 +149,7 @@ class ViewController: NSViewController {
     }
     
     func loadDataForAppWithName(_ appName: String) {
-        actionLoader.loadDataForAppWithName(appName)
+        bindingLoader.loadDataForAppWithName(appName)
         collectionView.reloadData()
     }
 
@@ -164,13 +164,13 @@ extension ViewController : NSCollectionViewDataSource {
     
     // Can be omitted for single section
     func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
-        return actionLoader.numberOfSections
+        return bindingLoader.numberOfSections
     }
     
     // This is one of two required methods for NSCollectionViewDataSource.
     // Here you return the number of items in the section specified by the section parameter.
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return actionLoader.numberOfItemsInSection(section)
+        return bindingLoader.numberOfItemsInSection(section)
     }
     
     // This is the second required method. It returns a collection view item for a given indexPath.
@@ -179,7 +179,7 @@ extension ViewController : NSCollectionViewDataSource {
         let item = collectionView.makeItem(withIdentifier: "CollectionViewItem", for: indexPath)
         guard let collectionViewItem = item as? CollectionViewItem else {return item}
         
-        let action = actionLoader.actionItemForIndexPath(indexPath)
+        let action = bindingLoader.bindingForIndexPath(indexPath)
 
         collectionViewItem.actionText = "\(action.bindingKey) - \(action.descriptionText)"
         return item

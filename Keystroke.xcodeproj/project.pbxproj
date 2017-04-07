@@ -17,8 +17,8 @@
 		68B0682D1E96EF7200C186F5 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0682C1E96EF7200C186F5 /* WindowController.swift */; };
 		68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0682E1E96F41B00C186F5 /* CollectionViewItem.swift */; };
 		68B068311E96F41B00C186F5 /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B0682F1E96F41B00C186F5 /* CollectionViewItem.xib */; };
-		68B068331E96F6F700C186F5 /* ActionLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068321E96F6F700C186F5 /* ActionLoader.swift */; };
-		68B068351E96F8BC00C186F5 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068341E96F8BC00C186F5 /* Action.swift */; };
+		68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068321E96F6F700C186F5 /* BindingLoader.swift */; };
+		68B068351E96F8BC00C186F5 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068341E96F8BC00C186F5 /* Binding.swift */; };
 		68B068371E97160400C186F5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 68B068361E97160400C186F5 /* Podfile */; };
 		A0D24D9DB58A047FC3145879 /* Pods_Keystroke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBBCA4FF38376FF21463B87 /* Pods_Keystroke.framework */; };
 		AB8E731DCDF1CE4409E2FE96 /* Pods_KeystrokeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77D4E848E1D7CAE1F7AA666 /* Pods_KeystrokeTests.framework */; };
@@ -61,8 +61,8 @@
 		68B0682C1E96EF7200C186F5 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		68B0682E1E96F41B00C186F5 /* CollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewItem.swift; sourceTree = "<group>"; };
 		68B0682F1E96F41B00C186F5 /* CollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewItem.xib; sourceTree = "<group>"; };
-		68B068321E96F6F700C186F5 /* ActionLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionLoader.swift; sourceTree = "<group>"; };
-		68B068341E96F8BC00C186F5 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		68B068321E96F6F700C186F5 /* BindingLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingLoader.swift; sourceTree = "<group>"; };
+		68B068341E96F8BC00C186F5 /* Binding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		68B068361E97160400C186F5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		A77D4E848E1D7CAE1F7AA666 /* Pods_KeystrokeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeystrokeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1719170A2BFFEE1F32B4EEF /* Pods-KeystrokeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeystrokeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KeystrokeUITests/Pods-KeystrokeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -188,8 +188,8 @@
 		68B0682A1E96EECE00C186F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				68B068321E96F6F700C186F5 /* ActionLoader.swift */,
-				68B068341E96F8BC00C186F5 /* Action.swift */,
+				68B068321E96F6F700C186F5 /* BindingLoader.swift */,
+				68B068341E96F8BC00C186F5 /* Binding.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -498,8 +498,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */,
-				68B068351E96F8BC00C186F5 /* Action.swift in Sources */,
-				68B068331E96F6F700C186F5 /* ActionLoader.swift in Sources */,
+				68B068351E96F8BC00C186F5 /* Binding.swift in Sources */,
+				68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */,
 				68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */,
 				68B0682D1E96EF7200C186F5 /* WindowController.swift in Sources */,
 				68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */,

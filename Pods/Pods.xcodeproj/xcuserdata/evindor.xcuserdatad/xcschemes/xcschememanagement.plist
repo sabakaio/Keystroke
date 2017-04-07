@@ -7,25 +7,54 @@
 		<key>Pods-Keystroke.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>Pods-KeystrokeTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>Pods-KeystrokeUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>ReSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict/>
+	<dict>
+		<key>100537D00B8C294A7146118FABBA3405</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>67860C553BF30630AC2F388B77579218</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>A6FA10048B46A184D11AFFE783F4925F</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>E309D8FB416E2DB7F401FBDD9129F2FE</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+	</dict>
 </dict>
 </plist>

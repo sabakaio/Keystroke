@@ -1,5 +1,5 @@
 //
-//  Action.swift
+//  Binding.swift
 //  Keystroke
 //
 //  Created by Arseny Zarechnev on 07/04/2017.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Action: NSObject {
+class Binding: NSObject {
     fileprivate(set) var bindingKey: String = ""
     fileprivate(set) var descriptionText: String = ""
     

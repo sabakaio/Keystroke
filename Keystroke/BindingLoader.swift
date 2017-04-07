@@ -1,5 +1,5 @@
 //
-//  ActionLoader.swift
+//  BindingLoader.swift
 //  Keystroke
 //
 //  Created by Arseny Zarechnev on 07/04/2017.
@@ -8,8 +8,8 @@
 
 import Cocoa
 
-class ActionLoader: NSObject {
-    fileprivate var actionsArray = [Action]()
+class BindingLoader: NSObject {
+    fileprivate var bindingSet = [Binding]()
     fileprivate(set) var numberOfSections = 1 // Read by ViewController
     var singleSectionMode = true // Read/Write by ViewController
     
@@ -26,10 +26,10 @@ class ActionLoader: NSObject {
     fileprivate var sectionsAttributesArray = [SectionAttributes]()
     
     
-    func setupDataForActions(_ actions: [String]?) {
+    func setupDataForBindings(_ bindings: [String]?) {
         
-        if let actions = actions {
-            createActionsForActions(actions)
+        if let bindings = bindings {
+            createBindingSetForBindings(bindings)
         }
         
         if sectionsAttributesArray.count > 0 {  // If not first time, clean old sectionsAttributesArray
@@ -46,14 +46,14 @@ class ActionLoader: NSObject {
     }
     
     fileprivate func setupDataForSingleSectionMode() {
-        let sectionAttributes = SectionAttributes(sectionOffset: 0, sectionLength: actionsArray.count)
+        let sectionAttributes = SectionAttributes(sectionOffset: 0, sectionLength: bindingSet.count)
         sectionsAttributesArray.append(sectionAttributes) // sets up attributes for first section
     }
     
     fileprivate func setupDataForMultiSectionMode() {
         
-        let haveOneSection = singleSectionMode || sectionLengthArray.count < 2 || actionsArray.count <= sectionLengthArray[0]
-        var realSectionLength = haveOneSection ? actionsArray.count : sectionLengthArray[0]
+        let haveOneSection = singleSectionMode || sectionLengthArray.count < 2 || bindingSet.count <= sectionLengthArray[0]
+        var realSectionLength = haveOneSection ? bindingSet.count : sectionLengthArray[0]
         var sectionAttributes = SectionAttributes(sectionOffset: 0, sectionLength: realSectionLength)
         sectionsAttributesArray.append(sectionAttributes) // sets up attributes for first section
         
@@ -66,8 +66,8 @@ class ActionLoader: NSObject {
             numberOfSections += 1
             offset = sectionsAttributesArray[i-1].sectionOffset + sectionsAttributesArray[i-1].sectionLength
             nextOffset = offset + sectionLengthArray[i]
-            if actionsArray.count <= nextOffset {
-                realSectionLength = actionsArray.count - offset
+            if bindingSet.count <= nextOffset {
+                realSectionLength = bindingSet.count - offset
                 nextOffset = -1 // signal this is last section for this collection
             } else {
                 realSectionLength = sectionLengthArray[i]
@@ -80,18 +80,18 @@ class ActionLoader: NSObject {
         }
     }
     
-    fileprivate func createActionsForActions(_ actions: [String]) {
-        if actionsArray.count > 0 {
-            actionsArray.removeAll()
+    fileprivate func createBindingSetForBindings(_ actions: [String]) {
+        if bindingSet.count > 0 {
+            bindingSet.removeAll()
         }
         for action in actions {
-            let actionItem = Action(binding: "X", description: action)
-            actionsArray.append(actionItem)
+            let actionItem = Binding(binding: "X", description: action)
+            bindingSet.append(actionItem)
         }
     }
     
 
-    fileprivate func getActionsForApp(_ appName: String) -> [String]? {
+    fileprivate func getBindingsForApp(_ appName: String) -> [String]? {
         if (appName == "iTerm2") {
           return ["S - Split Horizontally", "V - Split Vertically"]
         }
@@ -102,21 +102,21 @@ class ActionLoader: NSObject {
         return sectionsAttributesArray[section].sectionLength
     }
     
-    func actionItemForIndexPath(_ indexPath: IndexPath) -> Action {
-        let actionIndexInActionsArray = sectionsAttributesArray[indexPath.section].sectionOffset + indexPath.item
-        let actionItem = actionsArray[actionIndexInActionsArray]
-        return actionItem
+    func bindingForIndexPath(_ indexPath: IndexPath) -> Binding {
+        let bindingIndexInBindingSet = sectionsAttributesArray[indexPath.section].sectionOffset + indexPath.item
+        let binding = bindingSet[bindingIndexInBindingSet]
+        return binding
     }
     
     func loadDataForAppWithName(_ appName: String) {
-        let actions = getActionsForApp(appName)
+        let bindings = getBindingsForApp(appName)
         
-        if actions != nil {
-            print("\(actions?.count ?? 0) actions found for app \(appName)")
-            for action in actions! {
-                print("\(action)")
+        if bindings != nil {
+            print("\(bindings?.count ?? 0) actions found for app \(appName)")
+            for binding in bindings! {
+                print("\(binding)")
             }
         }
-        setupDataForActions(actions)
+        setupDataForBindings(bindings)
     }
 }
