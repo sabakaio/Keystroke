@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3197424C3BDD56670DB9065B /* Pods_KeystrokeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D486EDF65295482F2913AC7 /* Pods_KeystrokeUITests.framework */; };
+		685CB4C11E97A06F00C92195 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4C01E97A06F00C92195 /* AppState.swift */; };
+		685CB4C31E97A12C00C92195 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4C21E97A12C00C92195 /* Actions.swift */; };
+		685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4C41E97A15E00C92195 /* ThemeReducer.swift */; };
 		68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */; };
 		68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FF1E96EE7A00C186F5 /* ViewController.swift */; };
 		68B068021E96EE7A00C186F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B068011E96EE7A00C186F5 /* Assets.xcassets */; };
@@ -46,6 +49,9 @@
 		0C4DFAC6DAC7A4C85C00A1C1 /* Pods-KeystrokeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeystrokeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KeystrokeTests/Pods-KeystrokeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5D486EDF65295482F2913AC7 /* Pods_KeystrokeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeystrokeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68368F5436C8A0E2C208CD52 /* Pods-Keystroke.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keystroke.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keystroke/Pods-Keystroke.release.xcconfig"; sourceTree = "<group>"; };
+		685CB4C01E97A06F00C92195 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		685CB4C21E97A12C00C92195 /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		685CB4C41E97A15E00C92195 /* ThemeReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeReducer.swift; sourceTree = "<group>"; };
 		68B067FA1E96EE7A00C186F5 /* Keystroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystroke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68B067FF1E96EE7A00C186F5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +118,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		685CB4BD1E97A03C00C92195 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				685CB4C21E97A12C00C92195 /* Actions.swift */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
+		685CB4BE1E97A04700C92195 /* Reducers */ = {
+			isa = PBXGroup;
+			children = (
+				685CB4C41E97A15E00C92195 /* ThemeReducer.swift */,
+			);
+			name = Reducers;
+			sourceTree = "<group>";
+		};
+		685CB4BF1E97A04F00C92195 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				685CB4C01E97A06F00C92195 /* AppState.swift */,
+			);
+			name = State;
+			sourceTree = "<group>";
+		};
 		68B067F11E96EE7A00C186F5 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +168,9 @@
 		68B067FC1E96EE7A00C186F5 /* Keystroke */ = {
 			isa = PBXGroup;
 			children = (
+				685CB4BF1E97A04F00C92195 /* State */,
+				685CB4BE1E97A04700C92195 /* Reducers */,
+				685CB4BD1E97A03C00C92195 /* Actions */,
 				68B0682B1E96EED700C186F5 /* Resources */,
 				68B0682A1E96EECE00C186F5 /* Models */,
 				68B068291E96EEC800C186F5 /* Views */,
@@ -498,7 +531,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */,
+				685CB4C31E97A12C00C92195 /* Actions.swift in Sources */,
 				68B068351E96F8BC00C186F5 /* Binding.swift in Sources */,
+				685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */,
+				685CB4C11E97A06F00C92195 /* AppState.swift in Sources */,
 				68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */,
 				68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */,
 				68B0682D1E96EF7200C186F5 /* WindowController.swift in Sources */,
@@ -756,6 +792,7 @@
 				68B068211E96EE7A00C186F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		68B068221E96EE7A00C186F5 /* Build configuration list for PBXNativeTarget "KeystrokeTests" */ = {
 			isa = XCConfigurationList;
@@ -764,6 +801,7 @@
 				68B068241E96EE7A00C186F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		68B068251E96EE7A00C186F5 /* Build configuration list for PBXNativeTarget "KeystrokeUITests" */ = {
 			isa = XCConfigurationList;
@@ -772,6 +810,7 @@
 				68B068271E96EE7A00C186F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

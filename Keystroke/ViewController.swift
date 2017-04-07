@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ReSwift
 
 func bridge<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer {
     return UnsafeMutableRawPointer(Unmanaged.passUnretained(obj).toOpaque())
@@ -16,7 +17,8 @@ func transfer<T : AnyObject>(ptr : UnsafeMutableRawPointer) -> T {
     return Unmanaged<T>.fromOpaque(ptr).takeUnretainedValue()
 }
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, StoreSubscriber {
+    typealias StoreSubscriberStateType = AppState
     @IBOutlet weak var collectionView: NSCollectionView!
     let bindingLoader = BindingLoader()
     
@@ -39,8 +41,15 @@ class ViewController: NSViewController {
         collectionView.layer?.backgroundColor = NSColor.clear.cgColor
     }
     
+    func newState(state: AppState) {
+        //        counterLabel.text = "\(state.counter)"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // subscribe to state changes
+        mainStore.subscribe(self)
 
         bindingLoader.loadDataForAppWithName("test")
         configureCollectionView()

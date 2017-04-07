@@ -9,10 +9,11 @@
 import Cocoa
 import ReSwift
 
-struct AppState: StateType {
-  var activeTheme = "dark"
-}
-
+// The global application store, which is responsible for managing the appliction state.
+let mainStore = Store<AppState>(
+    reducer: CounterReducer(),
+    state: nil
+)
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
