@@ -10,6 +10,7 @@ import ReSwift
 
 struct AppState: StateType {
     var theme: ThemeState = ThemeState()
+    var view: ViewState = ViewState()
 }
 
 struct KeyEvent {
