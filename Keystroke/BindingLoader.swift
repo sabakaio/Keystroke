@@ -80,13 +80,13 @@ class BindingLoader: NSObject {
         }
     }
     
-    fileprivate func createBindingSetForBindings(_ actions: [String]) {
+    fileprivate func createBindingSetForBindings(_ bindings: [String]) {
         if bindingSet.count > 0 {
             bindingSet.removeAll()
         }
-        for action in actions {
-            let actionItem = Binding(binding: "X", description: action)
-            bindingSet.append(actionItem)
+        for bindingString in bindings {
+            let binding = Binding(binding: "X", description: bindingString)
+            bindingSet.append(binding)
         }
     }
     
