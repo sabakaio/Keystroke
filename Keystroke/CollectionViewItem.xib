@@ -24,7 +24,7 @@
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="3q9-gt-GCY">
                         <font key="font" metaFont="systemMedium" size="15"/>
                         <color key="textColor" red="0.96524854274611394" green="0.85583206276286339" blue="0.50869954334270628" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </textFieldCell>
                 </textField>
             </subviews>

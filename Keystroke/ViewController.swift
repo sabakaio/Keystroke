@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import ReSwift
 
 func bridge<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer {
     return UnsafeMutableRawPointer(Unmanaged.passUnretained(obj).toOpaque())
@@ -17,29 +16,13 @@ func transfer<T : AnyObject>(ptr : UnsafeMutableRawPointer) -> T {
     return Unmanaged<T>.fromOpaque(ptr).takeUnretainedValue()
 }
 
-class ViewController: NSViewController, StoreSubscriber {
+class ViewController: NSViewController {
     typealias StoreSubscriberStateType = AppState
     @IBOutlet weak var collectionView: NSCollectionView!
     let bindingLoader = BindingLoader()
     
     var windowVisible = true
     var skip = false
-
-    func activateTheme(theme: Theme) {
-        if let collectionViewItem = collectionView.itemPrototype {
-            collectionViewItem.textField?.textColor = NSColor.init(
-                calibratedRed: theme.actionColor.calibratedRed,
-                green: theme.actionColor.green,
-                blue: theme.actionColor.blue,
-                alpha: theme.actionColor.alpha
-            );
-        }
-        
-    }
-    
-    func newState(state: AppState) {
-        activateTheme(theme: state.theme)
-    }
 
     private func configureCollectionView() {
         // Setup flow layout
@@ -61,7 +44,6 @@ class ViewController: NSViewController, StoreSubscriber {
         super.viewDidLoad()
         
         // subscribe to state changes
-        mainStore.subscribe(self)
 
         bindingLoader.loadDataForAppWithName("test")
         configureCollectionView()

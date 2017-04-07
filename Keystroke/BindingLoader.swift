@@ -111,12 +111,12 @@ class BindingLoader: NSObject {
     func loadDataForAppWithName(_ appName: String) {
         let bindings = getBindingsForApp(appName)
         
-        if bindings != nil {
-            print("\(bindings?.count ?? 0) actions found for app \(appName)")
-            for binding in bindings! {
-                print("\(binding)")
-            }
-        }
+//        if bindings != nil {
+//            print("\(bindings?.count ?? 0) actions found for app \(appName)")
+//            for binding in bindings! {
+//                print("\(binding)")
+//            }
+//        }
         setupDataForBindings(bindings)
     }
 }
