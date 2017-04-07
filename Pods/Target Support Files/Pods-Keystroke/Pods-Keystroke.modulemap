@@ -1,0 +1,6 @@
+framework module Pods_Keystroke {
+  umbrella header "Pods-Keystroke-umbrella.h"
+
+  export *
+  module * { export * }
+}
