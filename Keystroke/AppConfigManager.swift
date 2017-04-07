@@ -61,6 +61,10 @@ class AppConfigManager: NSObject {
     public func loadConfigurationsFromBundle() {
         guard let urls = getConfigURLsFromBundle() else {return}
         
+        if configuations.count > 0 {
+            configuations.removeAll()
+        }
+        
         for url in urls {
             guard let file = loadFile(from: url) else {continue}
             guard let appConfig = parse(config: file) else {continue}
