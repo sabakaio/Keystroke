@@ -9,14 +9,5 @@
 import ReSwift
 
 struct BindingsState: StateType {
-    var apps = [String: BindingsConfig]()
-}
-
-struct BindingsConfig {
-    var operations: [String: Operation]
-}
-
-struct Operation {
-    var name: String
-    var originalHotkey: String
+    var apps = [String: AppConfig]()
 }

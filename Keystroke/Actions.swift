@@ -10,10 +10,9 @@ import ReSwift
 
 struct ThemeActionToggle: Action {}
 
-struct BindingsOperationAddAction: Action {
+struct AppBindingsSetAction: Action {
     let appName: String
-    let operationName: String
-    let hotkey: String
+    let config: AppConfig
 }
 
 struct KeyEventAction: Action {

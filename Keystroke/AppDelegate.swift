@@ -23,9 +23,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // First load configurations from files
         appConfigManager.loadConfigurationsFromBundle()
-
-        // Then access parsed structures
-        print(appConfigManager.configuations)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
