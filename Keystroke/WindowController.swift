@@ -48,7 +48,7 @@ class WindowController: NSWindowController, StoreSubscriber {
             
             window.setFrame(
                 NSRect(x: screenRect.origin.x + (quaterWidth / 2.0),
-                       y: screenRect.origin.y - (quaterHeight * 3.0),
+                       y: screenRect.origin.y - (quaterHeight * 3.0) + 60,
                        width: quaterWidth * 3.0,
                        height: quaterHeight
                 ),
@@ -61,15 +61,7 @@ class WindowController: NSWindowController, StoreSubscriber {
             // A bad attemt to hide on startup
             window.orderOut(true)
             
-            // Hide title
-            window.titleVisibility = NSWindowTitleVisibility.hidden;
-            window.titlebarAppearsTransparent = true;
             window.isMovableByWindowBackground  = true;
-            
-            // Hide top left buttons
-            window.standardWindowButton(NSWindowButton.closeButton)!.isHidden = true;
-            window.standardWindowButton(NSWindowButton.miniaturizeButton)!.isHidden = true;
-            window.standardWindowButton(NSWindowButton.zoomButton)!.isHidden = true;
             
             // Make window transparent
             // window.isOpaque = false;
