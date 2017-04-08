@@ -1,12 +1,12 @@
 //
-//  KeyCodesMap.swift
+//  KeyCode.swift
 //  Keystroke
 //
 //  Created by Arseny Zarechnev on 08/04/2017.
 //  Copyright © 2017 Sabaka. All rights reserved.
 //
 
-enum KeyCodesMap: UInt64 {
+enum KeyCode: UInt64 {
     // Row 1
     case Key_BACKTICK = 50
     case Key_1 = 18
@@ -83,4 +83,63 @@ enum KeyCodesMap: UInt64 {
     case Key_OPTION_RIGHT = 61
     
     case Key_FN = 63
+    
+    static func fromString(_ value: String) -> KeyCode? {
+        switch value {
+        case "a":
+            return .Key_a
+        case "b":
+            return .Key_b
+        case "c":
+            return .Key_c
+        case "d":
+            return .Key_d
+        case "e":
+            return .Key_e
+        case "f":
+            return .Key_f
+        case "g":
+            return .Key_g
+        case "h":
+            return .Key_h
+        case "i":
+            return .Key_i
+        case "j":
+            return .Key_j
+        case "k":
+            return .Key_k
+        case "l":
+            return .Key_l
+        case "m":
+            return .Key_m
+        case "n":
+            return .Key_n
+        case "o":
+            return .Key_o
+        case "p":
+            return .Key_p
+        case "q":
+            return .Key_q
+        case "r":
+            return .Key_r
+        case "s":
+            return .Key_s
+        case "t":
+            return .Key_t
+        case "u":
+            return .Key_u
+        case "v":
+            return .Key_v
+        case "w":
+            return .Key_w
+        case "x":
+            return .Key_x
+        case "y":
+            return .Key_y
+        case "z":
+            return .Key_z
+        default:
+            return nil
+        }
+    }
 }
