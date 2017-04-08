@@ -39,7 +39,6 @@ class ViewController: NSViewController, StoreSubscriber {
     func newState(state: ViewState) {
         self.loadDataForAppWithName(state.appName)
 
-        print(state)
         if (state.windowVisible) {
             showWindow()
         } else {
@@ -81,28 +80,7 @@ class ViewController: NSViewController, StoreSubscriber {
 //            let viewController: ViewController = transfer(ptr: refcon!)
             mainStore.dispatch(handleKeyEvent(type: type, event: event))
             
-//            if (appName == "iTerm2") {
-//                if viewController.windowVisible && [.keyDown].contains(type) {
-//                    
-//                    if keyCode == 9 {
-//                        // replace mnemonic cmd - v with cmd+shift+d, split
-//                        event.setIntegerValueField(.keyboardEventKeycode, value: 2)
-//                        event.flags = event.flags.union(CGEventFlags.maskCommand)
-//                    } else if keyCode == 1 {
-//                        // replace mnemonic cmd - s with cmd+d, vetical split
-//                        event.setIntegerValueField(.keyboardEventKeycode, value: 2)
-//                        event.flags = event.flags.union(CGEventFlags.maskCommand)
-//                        event.flags = event.flags.union(CGEventFlags.maskShift)
-//                    }
-//                    
-//                    
-//                    hideWindow()
-//                    
-//                    return Unmanaged.passRetained(event)
-//                }
-//            }
-            
-            return Unmanaged.passRetained(event)
+            return Unmanaged.passRetained(mainStore.state.view.lastEvent!)
         }
         
         let eventMask =

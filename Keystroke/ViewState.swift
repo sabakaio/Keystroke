@@ -12,4 +12,5 @@ struct ViewState: StateType {
     var windowVisible: Bool = true
     var skipNextShowTrigger: Bool = false
     var appName: String? = nil
+    var lastEvent: CGEvent? = nil
 }
