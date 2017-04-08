@@ -13,6 +13,7 @@ class ViewController: NSViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = ViewState
 
     @IBOutlet weak var collectionView: NSCollectionView!
+    @IBOutlet var visualEffectView: VisualEffectView!
 
     let bindingLoader = BindingLoader()
     
@@ -29,7 +30,7 @@ class ViewController: NSViewController, StoreSubscriber {
         collectionView.collectionViewLayout = flowLayout
         
         // For optimal performance, NSCollectionView is designed to be layer-backed.
-        view.wantsLayer = true
+        collectionView.wantsLayer = true
         
         // Transparent background
         collectionView.layer?.backgroundColor = NSColor.clear.cgColor
@@ -60,6 +61,9 @@ class ViewController: NSViewController, StoreSubscriber {
         mainStore.subscribe(self) { state in
             state.view
         }
+        
+        visualEffectView.wantsLayer = true
+        visualEffectView.layer!.cornerRadius = 10
         
         bindingLoader.loadDataForAppWithName("test")
         configureCollectionView()
