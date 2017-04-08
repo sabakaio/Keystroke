@@ -14,12 +14,13 @@ class WindowController: NSWindowController, StoreSubscriber {
     
     func activateTheme(theme: Theme) {
         if let window = window {
-            window.backgroundColor = NSColor.init(
-                calibratedRed: theme.backgroundColor.calibratedRed,
-                green: theme.backgroundColor.green,
-                blue: theme.backgroundColor.blue,
-                alpha: theme.backgroundColor.alpha
-            );
+            //            window.backgroundColor = NSColor.clear
+            //            window.backgroundColor = NSColor.init(
+            //                calibratedRed: theme.backgroundColor.calibratedRed,
+            //                green: theme.backgroundColor.green,
+            //                blue: theme.backgroundColor.blue,
+            //                alpha: theme.backgroundColor.alpha
+            //            );
         }
         
     }
@@ -48,31 +49,25 @@ class WindowController: NSWindowController, StoreSubscriber {
             
             window.setFrame(
                 NSRect(x: screenRect.origin.x + (quaterWidth / 2.0),
-                       y: screenRect.origin.y - (quaterHeight * 3.0),
+                       y: screenRect.origin.y - (quaterHeight * 3.0) + 60,
                        width: quaterWidth * 3.0,
                        height: quaterHeight
                 ),
                 display: true
             )
-        
+            
             // Set window floating on top
             window.level = Int(CGWindowLevelForKey(.maximumWindow))
             
             // A bad attemt to hide on startup
             window.orderOut(true)
             
-            // Hide title
-            window.titleVisibility = NSWindowTitleVisibility.hidden;
-            window.titlebarAppearsTransparent = true;
             window.isMovableByWindowBackground  = true;
-            
-            // Hide top left buttons
-            window.standardWindowButton(NSWindowButton.closeButton)!.isHidden = true;
-            window.standardWindowButton(NSWindowButton.miniaturizeButton)!.isHidden = true;
-            window.standardWindowButton(NSWindowButton.zoomButton)!.isHidden = true;
             
             // Make window transparent
             // window.isOpaque = false;
+            // window.backgroundColor = NSColor.clear
+            
             // self.window!.hasShadow = false
             activateTheme(theme: DarkTheme)
             
