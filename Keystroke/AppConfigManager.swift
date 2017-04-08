@@ -17,7 +17,7 @@ private struct AppConfigFile {
 
 public struct AppConfig {
     let appName: String
-    let operations: [AppOperation]
+    let operations: [String: AppOperation]
     let bindings: Any
 }
 
@@ -52,7 +52,11 @@ class AppConfigManager: NSObject {
                     name: op.dictionary!["name"]!.string!,
                     originalHotkey: op.dictionary!["hotkey"]!.string!
                 )
-            })
+            }).reduce([String: AppOperation]()) { acc, op in
+                var dict = acc
+                dict[op.name] = op
+                return dict
+            }
             let bindings = value.dictionary!["bindings"]!.dictionary!
             return AppConfig(
                 appName: file.appName,
