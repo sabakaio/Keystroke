@@ -48,13 +48,13 @@ class AppConfigManager: NSObject {
         do {
             let value = try Yaml.load(file.contents)
             let operations = value.dictionary!["operations"]!.array!.map({
-                op in AppOperation(
-                    name: op.dictionary!["name"]!.string!,
-                    originalHotkey: op.dictionary!["hotkey"]!.string!
+                operation in AppOperation(
+                    name: operation.dictionary!["name"]!.string!,
+                    originalHotkey: operation.dictionary!["hotkey"]!.string!
                 )
-            }).reduce([String: AppOperation]()) { acc, op in
-                var dict = acc
-                dict[op.name] = op
+            }).reduce([String: AppOperation]()) { accumulator, operation in
+                var dict = accumulator
+                dict[operation.name] = operation
                 return dict
             }
             let bindings = value.dictionary!["bindings"]!.dictionary!
