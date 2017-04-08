@@ -10,6 +10,11 @@ import ReSwift
 
 struct ThemeActionToggle: Action {}
 
+struct AppBindingsSetAction: Action {
+    let appName: String
+    let config: AppConfig
+}
+
 struct KeyEventAction: Action {
     let appName: String
     let type: CGEventType

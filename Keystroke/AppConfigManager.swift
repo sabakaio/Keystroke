@@ -15,16 +15,18 @@ private struct AppConfigFile {
     let contents: String
 }
 
-// Todo: prepare a better parsed structure
 public struct AppConfig {
     let appName: String
-    let operations: Any
+    let operations: [String: AppOperation]
     let bindings: Any
 }
 
+public struct AppOperation {
+    let name: String
+    let originalHotkey: String
+}
+
 class AppConfigManager: NSObject {
-    private(set) var configuations: [AppConfig] = []
-    
     private func getConfigURLsFromBundle() -> [URL]? {
         return Bundle.main.urls(forResourcesWithExtension: "keystroke", subdirectory: "")
     }
@@ -45,11 +47,20 @@ class AppConfigManager: NSObject {
     private func parse(config file: AppConfigFile) -> AppConfig? {
         do {
             let value = try Yaml.load(file.contents)
-            let opeations = value.dictionary!["operations"]!.array!
+            let operations = value.dictionary!["operations"]!.array!.map({
+                operation in AppOperation(
+                    name: operation.dictionary!["name"]!.string!,
+                    originalHotkey: operation.dictionary!["hotkey"]!.string!
+                )
+            }).reduce([String: AppOperation]()) { accumulator, operation in
+                var dict = accumulator
+                dict[operation.name] = operation
+                return dict
+            }
             let bindings = value.dictionary!["bindings"]!.dictionary!
             return AppConfig(
                 appName: file.appName,
-                operations: opeations,
+                operations: operations,
                 bindings: bindings
             )
         } catch {
@@ -61,14 +72,10 @@ class AppConfigManager: NSObject {
     public func loadConfigurationsFromBundle() {
         guard let urls = getConfigURLsFromBundle() else {return}
         
-        if configuations.count > 0 {
-            configuations.removeAll()
-        }
-        
         for url in urls {
             guard let file = loadFile(from: url) else {continue}
             guard let appConfig = parse(config: file) else {continue}
-            configuations.append(appConfig)
+            mainStore.dispatch(AppBindingsSetAction(appName: appConfig.appName, config: appConfig))
         }
     }
 }
