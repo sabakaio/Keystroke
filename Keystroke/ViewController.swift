@@ -101,7 +101,12 @@ class ViewController: NSViewController, StoreSubscriber {
             return Unmanaged.passRetained(event)
         }
         
-        let eventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.keyUp.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
+        let eventMask =
+            (1 << CGEventType.keyDown.rawValue) |
+            (1 << CGEventType.keyUp.rawValue) |
+            (1 << CGEventType.flagsChanged.rawValue) |
+            (1 << CGEventType.leftMouseDown.rawValue)
+        
         guard let eventTap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,

@@ -51,8 +51,8 @@ class WindowController: NSWindowController, StoreSubscriber {
                        y: screenRect.origin.y - (quaterHeight * 3.0),
                        width: quaterWidth * 3.0,
                        height: quaterHeight
-                )
-                , display: true
+                ),
+                display: true
             )
         
             // Set window floating on top
