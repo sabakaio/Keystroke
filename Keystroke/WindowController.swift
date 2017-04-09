@@ -60,15 +60,16 @@ class WindowController: NSWindowController, StoreSubscriber {
             window.level = Int(CGWindowLevelForKey(.maximumWindow))
             
             // A bad attemt to hide on startup
-//            window.orderOut(true)
+            //            window.orderOut(true)
             
             window.isMovableByWindowBackground  = true;
             
             // Make window transparent
-            // window.isOpaque = false;
-            // window.backgroundColor = NSColor.clear
-            
-            // self.window!.hasShadow = false
+            window.isOpaque = false
+            window.backgroundColor = NSColor.clear
+            window.hasShadow = true
+            window.styleMask = .borderless
+    
             activateTheme(theme: DarkTheme)
             
             

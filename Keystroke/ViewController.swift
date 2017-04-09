@@ -57,14 +57,16 @@ class ViewController: NSViewController, StoreSubscriber {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showWindow()
+        
         mainStore.subscribe(self) { state in
             state.view
         }
         
         visualEffectView.wantsLayer = true
         visualEffectView.layer!.cornerRadius = 10
+        visualEffectView.layer!.masksToBounds = true
         
-        bindingLoader.loadDataForAppWithName("test")
         configureCollectionView()
         startKeyListener()
     }
