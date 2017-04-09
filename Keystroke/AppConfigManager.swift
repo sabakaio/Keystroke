@@ -18,7 +18,7 @@ private struct AppConfigFile {
 public struct AppConfig {
     let appName: String
     let operations: [String: AppOperation]
-    let bindings: Any
+    let bindings: AppBindingsConfigFolder
 }
 
 public struct AppOperation {
@@ -26,6 +26,34 @@ public struct AppOperation {
     let originalHotkey: String
     let keyCode: KeyCode?
     let flags: CGEventFlags
+}
+
+public protocol AppBindingsConfig {
+    var name: String { get set }
+}
+
+public struct AppBindingsConfigFolder: AppBindingsConfig {
+    public var name: String
+    let bindings: [String: AppBindingsConfig]
+    
+    public func printTree(level: Int = 0) {
+        let indent = level * 4
+        for (key, config) in bindings {
+            let prefix = String(repeating: " ", count: indent) + key + ":"
+            guard let subfolder = config as? AppBindingsConfigFolder else {
+                let operation = config as! AppBindingsConfigOperation
+                print(prefix + " " + operation.name)
+                continue
+            }
+            print(prefix)
+            subfolder.printTree(level: level + 1)
+        }
+    }
+}
+
+public struct AppBindingsConfigOperation: AppBindingsConfig {
+    public var name: String
+    let operation: AppOperation
 }
 
 class AppConfigManager: NSObject {
@@ -49,6 +77,8 @@ class AppConfigManager: NSObject {
     private func parse(config file: AppConfigFile) -> AppConfig? {
         do {
             let value = try Yaml.load(file.contents)
+            
+            // Extract list of Application Operations
             let operations = try value.dictionary!["operations"]!.array!.map({
                 (operation: Yaml) throws -> AppOperation in
                 let hotKey = operation.dictionary!["hotkey"]!.string!
@@ -64,7 +94,31 @@ class AppConfigManager: NSObject {
                 dict[operation.name] = operation
                 return dict
             }
-            let bindings = value.dictionary!["bindings"]!.dictionary!
+            
+            // Create a bindings tree
+            func toBindingsConfig(name: String, value: [Yaml: Yaml]) -> AppBindingsConfig {
+                let currentLevel = value.reduce([String: AppBindingsConfig](), {
+                    (accumulator, nextValue) -> [String: AppBindingsConfig] in
+                    var result = accumulator
+                    let letter = nextValue.key.string!
+                    // TODO guard letter.characters.count == 1
+                    guard let subfolder = nextValue.value.dictionary else {
+                        let operation = nextValue.value.string!
+                        result[letter] = AppBindingsConfigOperation(name: operation, operation: operations[operation]!)
+                        return result
+                    }
+                    result[letter] = toBindingsConfig(name: letter, value: subfolder)
+                    return result
+                })
+                return AppBindingsConfigFolder(name: name, bindings: currentLevel)
+            }
+            let bindings = toBindingsConfig(
+                name: file.appName,
+                value: value.dictionary!["bindings"]!.dictionary!
+            ) as! AppBindingsConfigFolder
+            
+            bindings.printTree()
+            
             return AppConfig(
                 appName: file.appName,
                 operations: operations,
