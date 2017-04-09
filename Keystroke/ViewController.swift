@@ -18,11 +18,7 @@ class ViewController: NSViewController, StoreSubscriber {
     
     private func configureCollectionView() {
         // Setup flow layout
-        let flowLayout = NSCollectionViewFlowLayout()
-        flowLayout.itemSize = NSSize(width: 50.0, height: 50.0)
-        flowLayout.sectionInset = EdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-        flowLayout.minimumInteritemSpacing = 10.0
-        flowLayout.minimumLineSpacing = 10.0
+        let flowLayout = KeyboardLayout()
         collectionView.collectionViewLayout = flowLayout
         
         // For optimal performance, NSCollectionView is designed to be layer-backed.

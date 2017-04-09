@@ -22,7 +22,7 @@ class BindingLoader: NSObject {
     // sectionLengthArray[0] is 7, i.e. put the first 7 images from the imageFiles array into section 0
     // sectionLengthArray[1] is 5, i.e. put the next 5 images from the imageFiles array into section 1
     // and so on...
-    fileprivate let sectionLengthArray = [10, 9, 9]
+    fileprivate let sectionLengthArray = [10, 9, 7]
     fileprivate var sectionsAttributesArray = [SectionAttributes]()
     
     
