@@ -6,6 +6,14 @@
 //  Copyright © 2017 Sabaka. All rights reserved.
 //
 
+import Cocoa
+
+enum KeyCodeError: Error {
+    case MultipleKeys(value: String)
+    case UnknownFlag(value: String)
+    case UnknownKey(value: String)
+}
+
 enum KeyCode: UInt64 {
     // Row 1
     case Key_BACKTICK = 50
@@ -84,62 +92,92 @@ enum KeyCode: UInt64 {
     
     case Key_FN = 63
     
-    static func fromString(_ value: String) -> KeyCode? {
-        switch value {
-        case "a":
-            return .Key_a
-        case "b":
-            return .Key_b
-        case "c":
-            return .Key_c
-        case "d":
-            return .Key_d
-        case "e":
-            return .Key_e
-        case "f":
-            return .Key_f
-        case "g":
-            return .Key_g
-        case "h":
-            return .Key_h
-        case "i":
-            return .Key_i
-        case "j":
-            return .Key_j
-        case "k":
-            return .Key_k
-        case "l":
-            return .Key_l
-        case "m":
-            return .Key_m
-        case "n":
-            return .Key_n
-        case "o":
-            return .Key_o
-        case "p":
-            return .Key_p
-        case "q":
-            return .Key_q
-        case "r":
-            return .Key_r
-        case "s":
-            return .Key_s
-        case "t":
-            return .Key_t
-        case "u":
-            return .Key_u
-        case "v":
-            return .Key_v
-        case "w":
-            return .Key_w
-        case "x":
-            return .Key_x
-        case "y":
-            return .Key_y
-        case "z":
-            return .Key_z
-        default:
-            return nil
+    static func fromString(_ value: String) throws -> (flags: CGEventFlags, keyCode: KeyCode?) {
+        let sections = value.components(separatedBy: "-")
+        var flags = CGEventFlags()
+        var letter: String? = nil
+        var code: KeyCode? = nil
+        
+        for section in sections {
+            switch section {
+            case "cmd", "command":
+                flags = flags.union(.maskCommand)
+            case "ctrl", "control":
+                flags = flags.union(.maskControl)
+            case "alt", "option":
+                flags = flags.union(.maskAlternate)
+            case "shift":
+                flags = flags.union(.maskShift)
+            default:
+                guard section.characters.count == 1 else {
+                    throw KeyCodeError.UnknownFlag(value: section)
+                }
+                guard letter == nil else {
+                    throw KeyCodeError.MultipleKeys(value: value)
+                }
+                letter = section
+            }
         }
+        
+        guard letter != nil else { return (flags, nil) }
+        
+        switch letter! {
+        case "a":
+            code = .Key_a
+        case "b":
+            code = .Key_b
+        case "c":
+            code = .Key_c
+        case "d":
+            code = .Key_d
+        case "e":
+            code = .Key_e
+        case "f":
+            code = .Key_f
+        case "g":
+            code = .Key_g
+        case "h":
+            code = .Key_h
+        case "i":
+            code = .Key_i
+        case "j":
+            code = .Key_j
+        case "k":
+            code = .Key_k
+        case "l":
+            code = .Key_l
+        case "m":
+            code = .Key_m
+        case "n":
+            code = .Key_n
+        case "o":
+            code = .Key_o
+        case "p":
+            code = .Key_p
+        case "q":
+            code = .Key_q
+        case "r":
+            code = .Key_r
+        case "s":
+            code = .Key_s
+        case "t":
+            code = .Key_t
+        case "u":
+            code = .Key_u
+        case "v":
+            code = .Key_v
+        case "w":
+            code = .Key_w
+        case "x":
+            code = .Key_x
+        case "y":
+            code = .Key_y
+        case "z":
+            code = .Key_z
+        default:
+            throw KeyCodeError.UnknownKey(value: letter!)
+        }
+        
+        return (flags, code)
     }
 }

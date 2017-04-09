@@ -24,8 +24,8 @@ public struct AppConfig {
 public struct AppOperation {
     let name: String
     let originalHotkey: String
-    //    let keyCode: KeyCode
-    //    let flags: CGEventFlags
+    let keyCode: KeyCode?
+    let flags: CGEventFlags
 }
 
 class AppConfigManager: NSObject {
@@ -46,41 +46,18 @@ class AppConfigManager: NSObject {
         }
     }
     
-    private func parseOperationHotkey(from value: String) -> (flags: CGEventFlags, keyCode: KeyCode?) {
-        let sections = value.components(separatedBy: "-")
-        var flags = CGEventFlags()
-        var keyCode: KeyCode? = nil
-        
-        for section in sections {
-            switch section {
-            case "cmd", "command":
-                flags = flags.union(.maskCommand)
-            case "ctrl", "control":
-                flags = flags.union(.maskControl)
-            case "alt", "option":
-                flags = flags.union(.maskAlternate)
-            case "shift":
-                flags = flags.union(.maskShift)
-            default:
-                keyCode = KeyCode.fromString(section)!
-            }
-        }
-        
-        print(keyCode)
-        return (flags, keyCode)
-    }
-    
     private func parse(config file: AppConfigFile) -> AppConfig? {
         do {
             let value = try Yaml.load(file.contents)
-            let operations = value.dictionary!["operations"]!.array!.map({
-                (operation: Yaml) -> AppOperation in
+            let operations = try value.dictionary!["operations"]!.array!.map({
+                (operation: Yaml) throws -> AppOperation in
                 let hotKey = operation.dictionary!["hotkey"]!.string!
-                parseOperationHotkey(from: hotKey)
+                let code = try KeyCode.fromString(hotKey)
                 return AppOperation(
                     name: operation.dictionary!["name"]!.string!,
-                    originalHotkey: hotKey//,
-                    //                    keyCode: KeyCode.
+                    originalHotkey: hotKey,
+                    keyCode: code.keyCode,
+                    flags: code.flags
                 )
             }).reduce([String: AppOperation]()) { accumulator, operation in
                 var dict = accumulator
