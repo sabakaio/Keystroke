@@ -44,10 +44,11 @@ class WindowController: NSWindowController, StoreSubscriber {
         if let window = window, let screen = NSScreen.main() {
             let screenRect = screen.visibleFrame
             let quaterWidth = screenRect.width / 4.0
+            let quaterHeight = screenRect.height / 4.0
             
             window.setFrame(
                 NSRect(x: screenRect.origin.x + (quaterWidth / 2.0),
-                       y: screenRect.origin.y + screenRect.height + 30,
+                       y: screenRect.origin.y + (quaterHeight * 3.0),
                        width: quaterWidth * 3.0,
                        height: 220
                 ),
