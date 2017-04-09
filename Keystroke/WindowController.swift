@@ -79,7 +79,7 @@ class WindowController: NSWindowController, StoreSubscriber {
             // Make window transparent
 //            window.isOpaque = false
             window.hasShadow = true
-            window.styleMask = .borderless
+//            window.styleMask = .borderless
             
             activateTheme(theme: DarkTheme)
             
