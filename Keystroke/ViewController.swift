@@ -17,9 +17,6 @@ class ViewController: NSViewController, StoreSubscriber {
 
     let bindingLoader = BindingLoader()
     
-    var windowVisible = true
-    var skip = false
-    
     private func configureCollectionView() {
         // Setup flow layout
         let flowLayout = NSCollectionViewFlowLayout()
@@ -38,26 +35,11 @@ class ViewController: NSViewController, StoreSubscriber {
     
     func newState(state: ViewState) {
         self.loadDataForAppWithName(state.appName)
-
-        if (state.windowVisible) {
-            showWindow()
-        } else {
-            hideWindow()
-        }
-    }
-    
-    func hideWindow() {
-        view.window?.orderOut(true)
-    }
-    
-    func showWindow() {
-        view.window?.orderFront(true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showWindow()
         
         mainStore.subscribe(self) { state in
             state.view

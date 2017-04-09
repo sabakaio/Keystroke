@@ -27,6 +27,19 @@ class WindowController: NSWindowController, StoreSubscriber {
     
     func newState(state: AppState) {
         activateTheme(theme: state.theme.theme)
+        if (state.view.windowVisible) {
+            showWindow()
+        } else {
+            hideWindow()
+        }
+    }
+    
+    func hideWindow() {
+        window!.orderOut(true)
+    }
+    
+    func showWindow() {
+        window!.orderFront(true)
     }
     
     override func windowDidLoad() {
