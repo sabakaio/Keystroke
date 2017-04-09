@@ -30,6 +30,7 @@ struct KeyEventBindingAction: Action {
 func handleKeyEvent(type: CGEventType, event: CGEvent) -> Action {
     let appName = NSWorkspace.shared().frontmostApplication?.localizedName
     
+    
     mainStore.dispatch(
         KeyEventWindowAction(appName: appName!, type: type, event: event)
     )

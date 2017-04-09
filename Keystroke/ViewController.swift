@@ -23,7 +23,7 @@ class ViewController: NSViewController, StoreSubscriber {
     private func configureCollectionView() {
         // Setup flow layout
         let flowLayout = NSCollectionViewFlowLayout()
-        flowLayout.itemSize = NSSize(width: 160.0, height: 40.0)
+        flowLayout.itemSize = NSSize(width: 180.0, height: 40.0)
         flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
         flowLayout.minimumInteritemSpacing = 20.0
         flowLayout.minimumLineSpacing = 20.0
