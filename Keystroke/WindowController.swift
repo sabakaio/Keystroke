@@ -77,7 +77,7 @@ class WindowController: NSWindowController, StoreSubscriber {
             window.isMovableByWindowBackground  = true;
             
             // Make window transparent
-            window.isOpaque = false
+//            window.isOpaque = false
             window.hasShadow = true
             window.styleMask = .borderless
             

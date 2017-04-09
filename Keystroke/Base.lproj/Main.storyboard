@@ -664,7 +664,8 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="Keystroke" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="none" id="IQv-IB-iLA">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="none" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" resizable="YES" fullSizeContentView="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES" fullScreenAuxiliary="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -707,7 +708,7 @@
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="7rg-97-Za6">
-                                    <rect key="frame" x="0.0" y="284" width="443" height="16"/>
+                                    <rect key="frame" x="0.0" y="284" width="410" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="bdn-py-2S6">
@@ -717,10 +718,10 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="leading" secondItem="6yC-uB-fF3" secondAttribute="leading" id="Jwc-70-4sK"/>
-                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="top" secondItem="6yC-uB-fF3" secondAttribute="top" id="OIe-9q-gNG"/>
-                            <constraint firstAttribute="trailing" secondItem="wAe-aL-Ipx" secondAttribute="trailing" id="aVl-bD-ZlO"/>
-                            <constraint firstAttribute="bottom" secondItem="wAe-aL-Ipx" secondAttribute="bottom" id="jHV-QY-UI1"/>
+                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="centerX" secondItem="6yC-uB-fF3" secondAttribute="centerX" id="Exd-Rc-TTF"/>
+                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="top" secondItem="6yC-uB-fF3" secondAttribute="top" id="Phc-k8-dlc"/>
+                            <constraint firstAttribute="bottom" secondItem="wAe-aL-Ipx" secondAttribute="bottom" id="XCZ-a7-JMA"/>
+                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="leading" secondItem="6yC-uB-fF3" secondAttribute="leading" id="lZV-4n-ITw"/>
                         </constraints>
                     </customView>
                     <connections>

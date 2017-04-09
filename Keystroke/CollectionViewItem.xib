@@ -21,7 +21,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWU-hR-eQs">
                     <rect key="frame" x="-2" y="0.0" width="484" height="23"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="3q9-gt-GCY">
-                        <font key="font" size="16" name=".SFNSText-Light"/>
+                        <font key="font" size="16" name=".SFNSText-Medium"/>
                         <color key="textColor" red="0.96524854274611394" green="0.82532477144071981" blue="0.50553732490241365" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </textFieldCell>

@@ -24,7 +24,7 @@ class CollectionViewItem: NSCollectionViewItem, StoreSubscriber {
     
     override func viewWillAppear() {
         view.wantsLayer = true
-        view.layer?.borderWidth = 2
+        view.layer?.borderWidth = 1.5
         view.layer?.borderColor = NSColor.gray.cgColor
         view.layer?.cornerRadius = 4
     }
