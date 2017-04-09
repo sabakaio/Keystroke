@@ -682,7 +682,7 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Keystroke" customModuleProvider="target" sceneMemberID="viewController">
-                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" material="appearanceBased" state="active" id="leA-Cf-hAe" customClass="VisualEffectView" customModule="Keystroke" customModuleProvider="target">
+                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" material="dark" state="active" id="leA-Cf-hAe" customClass="VisualEffectView" customModule="Keystroke" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>

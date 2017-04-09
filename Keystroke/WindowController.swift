@@ -49,7 +49,7 @@ class WindowController: NSWindowController, StoreSubscriber {
             
             window.setFrame(
                 NSRect(x: screenRect.origin.x + (quaterWidth / 2.0),
-                       y: screenRect.origin.y - (quaterHeight * 3.0) + 60,
+                       y: screenRect.origin.y - (quaterHeight * 3.0),
                        width: quaterWidth * 3.0,
                        height: quaterHeight
                 ),
@@ -60,7 +60,7 @@ class WindowController: NSWindowController, StoreSubscriber {
             window.level = Int(CGWindowLevelForKey(.maximumWindow))
             
             // A bad attemt to hide on startup
-            window.orderOut(true)
+//            window.orderOut(true)
             
             window.isMovableByWindowBackground  = true;
             
