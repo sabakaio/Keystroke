@@ -688,13 +688,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAe-aL-Ipx">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="20" y="20" width="410" height="260"/>
                                 <clipView key="contentView" drawsBackground="NO" id="Wz4-Ov-JmH">
-                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="410" height="260"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView id="uP0-fJ-6xM">
-                                            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="410" height="260"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="utW-5B-tBR">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -708,20 +708,20 @@
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="7rg-97-Za6">
-                                    <rect key="frame" x="0.0" y="284" width="410" height="16"/>
+                                    <rect key="frame" x="0.0" y="224" width="390" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="bdn-py-2S6">
-                                    <rect key="frame" x="568" y="0.0" width="16" height="188"/>
+                                    <rect key="frame" x="374" y="0.0" width="16" height="240"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="centerX" secondItem="6yC-uB-fF3" secondAttribute="centerX" id="Exd-Rc-TTF"/>
-                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="top" secondItem="6yC-uB-fF3" secondAttribute="top" id="Phc-k8-dlc"/>
-                            <constraint firstAttribute="bottom" secondItem="wAe-aL-Ipx" secondAttribute="bottom" id="XCZ-a7-JMA"/>
-                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="leading" secondItem="6yC-uB-fF3" secondAttribute="leading" id="lZV-4n-ITw"/>
+                            <constraint firstAttribute="bottom" secondItem="wAe-aL-Ipx" secondAttribute="bottom" constant="20" id="HGX-PR-dca"/>
+                            <constraint firstAttribute="trailing" secondItem="wAe-aL-Ipx" secondAttribute="trailing" constant="20" id="gQQ-zd-WIo"/>
+                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="leading" secondItem="6yC-uB-fF3" secondAttribute="leading" constant="20" id="shS-e3-xnN"/>
+                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="top" secondItem="6yC-uB-fF3" secondAttribute="top" constant="20" id="x5m-0s-rpD"/>
                         </constraints>
                     </customView>
                     <connections>

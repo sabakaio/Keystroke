@@ -19,16 +19,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWU-hR-eQs">
-                    <rect key="frame" x="-2" y="0.0" width="484" height="23"/>
+                    <rect key="frame" x="-2" y="-1" width="484" height="29"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="3q9-gt-GCY">
-                        <font key="font" size="16" name=".SFNSText-Medium"/>
+                        <font key="font" size="20" name=".SFNSText-Light"/>
                         <color key="textColor" red="0.96524854274611394" green="0.82532477144071981" blue="0.50553732490241365" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </textFieldCell>
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="RWU-hR-eQs" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="LDg-NN-Tzw"/>
+                <constraint firstItem="RWU-hR-eQs" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" constant="-2" id="LDg-NN-Tzw"/>
                 <constraint firstAttribute="trailing" secondItem="RWU-hR-eQs" secondAttribute="trailing" id="e77-fB-VeG"/>
                 <constraint firstItem="RWU-hR-eQs" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="qmD-cn-8p2"/>
                 <constraint firstItem="RWU-hR-eQs" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="zg7-8v-uJN"/>

@@ -10,8 +10,8 @@ import Cocoa
 
 class BindingLoader: NSObject {
     fileprivate var bindingSet = [Binding]()
-    fileprivate(set) var numberOfSections = 1 // Read by ViewController
-    var singleSectionMode = true // Read/Write by ViewController
+    fileprivate(set) var numberOfSections = 3 // Read by ViewController
+    var singleSectionMode = false // Read/Write by ViewController
     
     fileprivate struct SectionAttributes {
         var sectionOffset: Int  // the index of the first action of this section in the actions array
@@ -22,7 +22,7 @@ class BindingLoader: NSObject {
     // sectionLengthArray[0] is 7, i.e. put the first 7 images from the imageFiles array into section 0
     // sectionLengthArray[1] is 5, i.e. put the next 5 images from the imageFiles array into section 1
     // and so on...
-    fileprivate let sectionLengthArray = [5, 5]
+    fileprivate let sectionLengthArray = [10, 9, 9]
     fileprivate var sectionsAttributesArray = [SectionAttributes]()
     
     
@@ -36,7 +36,7 @@ class BindingLoader: NSObject {
             sectionsAttributesArray.removeAll()
         }
         
-        numberOfSections = 1
+        numberOfSections = 3
         
         if singleSectionMode {
             setupDataForSingleSectionMode()
@@ -95,10 +95,15 @@ class BindingLoader: NSObject {
         if (appName == "iTerm2") {
           return ["S - Split Horizontally", "V - Split Vertically"]
         }
-        return ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
+        return [
+            "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+            "A", "S", "D", "F", "G", "H", "J", "K", "L",
+            "Z", "X", "C", "V", "B", "N", "M"
+        ]
     }
     
-    func numberOfItemsInSection(_ section: Int) -> Int {
+    func numberOfItems(in section: Int) -> Int {
+        guard section <= (sectionsAttributesArray.count - 1) else { return 0 as Int }
         return sectionsAttributesArray[section].sectionLength
     }
     

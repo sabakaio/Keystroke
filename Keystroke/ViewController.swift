@@ -10,17 +10,17 @@ import Cocoa
 import ReSwift
 
 class ViewController: NSViewController, StoreSubscriber {
-    typealias StoreSubscriberStateType = ViewState
-
+    typealias StoreSubscriberStateType = AppState
+    
     @IBOutlet weak var collectionView: NSCollectionView!
-
+    
     let bindingLoader = BindingLoader()
     
     private func configureCollectionView() {
         // Setup flow layout
         let flowLayout = NSCollectionViewFlowLayout()
-        flowLayout.itemSize = NSSize(width: 60.0, height: 60.0)
-        flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        flowLayout.itemSize = NSSize(width: 50.0, height: 50.0)
+        flowLayout.sectionInset = EdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
         flowLayout.minimumInteritemSpacing = 10.0
         flowLayout.minimumLineSpacing = 10.0
         collectionView.collectionViewLayout = flowLayout
@@ -32,19 +32,32 @@ class ViewController: NSViewController, StoreSubscriber {
         collectionView.layer?.backgroundColor = NSColor.clear.cgColor
     }
     
-    func newState(state: ViewState) {
-        self.loadDataForAppWithName(state.appName)
+    func activateTheme(theme: Theme) {
+        guard let layer = view.layer else { return }
+        layer.backgroundColor = NSColor.init(
+            calibratedRed: theme.backgroundColor.calibratedRed,
+            green: theme.backgroundColor.green,
+            blue: theme.backgroundColor.blue,
+            alpha: theme.backgroundColor.alpha
+            ).cgColor;
+    }
+    
+    func newState(state: AppState) {
+        self.loadDataForAppWithName(state.view.appName)
+        self.activateTheme(theme: state.theme.theme)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainStore.subscribe(self) { state in
-            state.view
-        }
+        mainStore.subscribe(self)
         
         configureCollectionView()
         startKeyListener()
+        
+        view.wantsLayer = true
+        view.layer?.backgroundColor = NSColor.gray.cgColor
+        view.layer?.cornerRadius = 10
     }
     
     func startKeyListener() {
@@ -55,7 +68,7 @@ class ViewController: NSViewController, StoreSubscriber {
             refcon: UnsafeMutableRawPointer?
             ) -> Unmanaged<CGEvent>? {
             
-//            let viewController: ViewController = transfer(ptr: refcon!)
+            //            let viewController: ViewController = transfer(ptr: refcon!)
             mainStore.dispatch(handleKeyEvent(type: type, event: event))
             
             return Unmanaged.passRetained(mainStore.state.view.lastEvent!)
@@ -63,9 +76,9 @@ class ViewController: NSViewController, StoreSubscriber {
         
         let eventMask =
             (1 << CGEventType.keyDown.rawValue) |
-            (1 << CGEventType.keyUp.rawValue) |
-            (1 << CGEventType.flagsChanged.rawValue) |
-            (1 << CGEventType.leftMouseDown.rawValue)
+                (1 << CGEventType.keyUp.rawValue) |
+                (1 << CGEventType.flagsChanged.rawValue) |
+                (1 << CGEventType.leftMouseDown.rawValue)
         
         guard let eventTap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
@@ -99,14 +112,14 @@ class ViewController: NSViewController, StoreSubscriber {
 extension ViewController : NSCollectionViewDataSource {
     
     // Can be omitted for single section
-    func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
+    func numberOfSections(in collectionView: NSCollectionView) -> Int {
         return bindingLoader.numberOfSections
     }
     
     // This is one of two required methods for NSCollectionViewDataSource.
     // Here you return the number of items in the section specified by the section parameter.
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bindingLoader.numberOfItemsInSection(section)
+        return bindingLoader.numberOfItems(in: section)
     }
     
     // This is the second required method. It returns a collection view item for a given indexPath.

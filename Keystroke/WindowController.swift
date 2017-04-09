@@ -11,21 +11,8 @@ import ReSwift
 
 class WindowController: NSWindowController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
-    
-    func activateTheme(theme: Theme) {
-        if let window = window {
-            window.backgroundColor = NSColor.init(
-                calibratedRed: theme.backgroundColor.calibratedRed,
-                green: theme.backgroundColor.green,
-                blue: theme.backgroundColor.blue,
-                alpha: theme.backgroundColor.alpha
-            );
-        }
-        
-    }
-    
+       
     func newState(state: AppState) {
-        activateTheme(theme: state.theme.theme)
         if (state.view.windowVisible) {
             showWindow()
         } else {
@@ -57,22 +44,20 @@ class WindowController: NSWindowController, StoreSubscriber {
         if let window = window, let screen = NSScreen.main() {
             let screenRect = screen.visibleFrame
             let quaterWidth = screenRect.width / 4.0
-            let quaterHeight = screenRect.height / 4.0
             
             window.setFrame(
                 NSRect(x: screenRect.origin.x + (quaterWidth / 2.0),
-                       y: screenRect.origin.y - (quaterHeight * 3.0),
+                       y: screenRect.origin.y + screenRect.height + 30,
                        width: quaterWidth * 3.0,
-                       height: quaterHeight
+                       height: 220
                 ),
                 display: true
             )
             
+            window.backgroundColor = NSColor.clear
+            
             // Set window floating on top
             window.level = Int(CGWindowLevelForKey(.maximumWindow))
-            
-            // A bad attemt to hide on startup
-            //            window.orderOut(true)
             
             window.isMovableByWindowBackground  = true;
             
@@ -80,8 +65,6 @@ class WindowController: NSWindowController, StoreSubscriber {
 //            window.isOpaque = false
 //            window.hasShadow = true
 //            window.styleMask = .borderless
-            
-            activateTheme(theme: DarkTheme)
             
             
             // Try to move to active space, works for desktops
