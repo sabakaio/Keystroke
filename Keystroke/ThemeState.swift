@@ -10,8 +10,8 @@ import ReSwift
 
 let DarkTheme = Theme(
     name: "dark",
-    backgroundColor: RGBA(calibratedRed: 0.176, green: 0.176, blue: 0.176, alpha: 1),
-    actionColor: RGBA(calibratedRed: 0.964, green: 0.752, blue: 0.313, alpha: 1)
+    backgroundColor: RGBA(calibratedRed: 0.2, green: 0.2, blue: 0.2, alpha: 1),
+    actionColor: RGBA(calibratedRed: 0.607, green: 0.607, blue: 0.607, alpha: 1)
 )
 
 let LightTheme = Theme(

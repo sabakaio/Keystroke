@@ -22,6 +22,13 @@ class CollectionViewItem: NSCollectionViewItem, StoreSubscriber {
         }
     }
     
+    override func viewWillAppear() {
+        view.wantsLayer = true
+        view.layer?.borderWidth = 2
+        view.layer?.borderColor = NSColor.gray.cgColor
+        view.layer?.cornerRadius = 4
+    }
+    
     func activateTheme(theme: Theme) {
         textField?.textColor = NSColor.init(
             calibratedRed: theme.actionColor.calibratedRed,

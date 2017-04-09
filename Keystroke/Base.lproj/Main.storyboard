@@ -682,18 +682,18 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Keystroke" customModuleProvider="target" sceneMemberID="viewController">
-                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" material="dark" state="active" id="leA-Cf-hAe" customClass="VisualEffectView" customModule="Keystroke" customModuleProvider="target">
+                    <customView key="view" id="6yC-uB-fF3">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAe-aL-Ipx">
-                                <rect key="frame" x="10" y="10" width="430" height="280"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                 <clipView key="contentView" drawsBackground="NO" id="Wz4-Ov-JmH">
-                                    <rect key="frame" x="0.0" y="0.0" width="430" height="280"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView id="uP0-fJ-6xM">
-                                            <rect key="frame" x="0.0" y="0.0" width="430" height="280"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="utW-5B-tBR">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -707,25 +707,24 @@
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="7rg-97-Za6">
-                                    <rect key="frame" x="0.0" y="264" width="430" height="16"/>
+                                    <rect key="frame" x="0.0" y="284" width="443" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="bdn-py-2S6">
-                                    <rect key="frame" x="424" y="0.0" width="16" height="280"/>
+                                    <rect key="frame" x="568" y="0.0" width="16" height="188"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="top" secondItem="leA-Cf-hAe" secondAttribute="top" constant="10" id="edI-fy-NWH"/>
-                            <constraint firstAttribute="trailing" secondItem="wAe-aL-Ipx" secondAttribute="trailing" constant="10" id="i7V-td-C9G"/>
-                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="leading" secondItem="leA-Cf-hAe" secondAttribute="leading" constant="10" id="iJ7-8m-9m3"/>
-                            <constraint firstAttribute="bottom" secondItem="wAe-aL-Ipx" secondAttribute="bottom" constant="10" id="kc3-Qs-FWP"/>
+                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="leading" secondItem="6yC-uB-fF3" secondAttribute="leading" id="Jwc-70-4sK"/>
+                            <constraint firstItem="wAe-aL-Ipx" firstAttribute="top" secondItem="6yC-uB-fF3" secondAttribute="top" id="OIe-9q-gNG"/>
+                            <constraint firstAttribute="trailing" secondItem="wAe-aL-Ipx" secondAttribute="trailing" id="aVl-bD-ZlO"/>
+                            <constraint firstAttribute="bottom" secondItem="wAe-aL-Ipx" secondAttribute="bottom" id="jHV-QY-UI1"/>
                         </constraints>
-                    </visualEffectView>
+                    </customView>
                     <connections>
                         <outlet property="collectionView" destination="uP0-fJ-6xM" id="nnD-jR-h0q"/>
-                        <outlet property="visualEffectView" destination="leA-Cf-hAe" id="Mqo-Kl-MNO"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

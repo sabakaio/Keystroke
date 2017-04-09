@@ -95,7 +95,7 @@ class BindingLoader: NSObject {
         if (appName == "iTerm2") {
           return ["S - Split Horizontally", "V - Split Vertically"]
         }
-        return ["Action one", "Action Two", "Action Three"]
+        return ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     }
     
     func numberOfItemsInSection(_ section: Int) -> Int {

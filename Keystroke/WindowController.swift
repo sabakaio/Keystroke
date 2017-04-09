@@ -14,13 +14,12 @@ class WindowController: NSWindowController, StoreSubscriber {
     
     func activateTheme(theme: Theme) {
         if let window = window {
-            //            window.backgroundColor = NSColor.clear
-            //            window.backgroundColor = NSColor.init(
-            //                calibratedRed: theme.backgroundColor.calibratedRed,
-            //                green: theme.backgroundColor.green,
-            //                blue: theme.backgroundColor.blue,
-            //                alpha: theme.backgroundColor.alpha
-            //            );
+            window.backgroundColor = NSColor.init(
+                calibratedRed: theme.backgroundColor.calibratedRed,
+                green: theme.backgroundColor.green,
+                blue: theme.backgroundColor.blue,
+                alpha: theme.backgroundColor.alpha
+            );
         }
         
     }
@@ -79,10 +78,9 @@ class WindowController: NSWindowController, StoreSubscriber {
             
             // Make window transparent
             window.isOpaque = false
-            window.backgroundColor = NSColor.clear
             window.hasShadow = true
             window.styleMask = .borderless
-    
+            
             activateTheme(theme: DarkTheme)
             
             

@@ -13,17 +13,16 @@ class ViewController: NSViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = ViewState
 
     @IBOutlet weak var collectionView: NSCollectionView!
-    @IBOutlet var visualEffectView: VisualEffectView!
 
     let bindingLoader = BindingLoader()
     
     private func configureCollectionView() {
         // Setup flow layout
         let flowLayout = NSCollectionViewFlowLayout()
-        flowLayout.itemSize = NSSize(width: 180.0, height: 40.0)
-        flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
-        flowLayout.minimumInteritemSpacing = 20.0
-        flowLayout.minimumLineSpacing = 20.0
+        flowLayout.itemSize = NSSize(width: 40.0, height: 40.0)
+        flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        flowLayout.minimumInteritemSpacing = 10.0
+        flowLayout.minimumLineSpacing = 10.0
         collectionView.collectionViewLayout = flowLayout
         
         // For optimal performance, NSCollectionView is designed to be layer-backed.
@@ -44,10 +43,6 @@ class ViewController: NSViewController, StoreSubscriber {
         mainStore.subscribe(self) { state in
             state.view
         }
-        
-        visualEffectView.wantsLayer = true
-        visualEffectView.layer!.cornerRadius = 10
-        visualEffectView.layer!.masksToBounds = true
         
         configureCollectionView()
         startKeyListener()
@@ -123,7 +118,7 @@ extension ViewController : NSCollectionViewDataSource {
         
         let action = bindingLoader.bindingForIndexPath(indexPath)
         
-        collectionViewItem.actionText = "\(action.bindingKey) - \(action.descriptionText)"
+        collectionViewItem.actionText = "\(action.descriptionText)"
         return item
     }
     
