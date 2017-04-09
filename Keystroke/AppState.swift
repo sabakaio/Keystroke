@@ -9,9 +9,10 @@
 import ReSwift
 
 struct AppState: StateType {
-    var theme: ThemeState = ThemeState()
-    var bindings: BindingsState = BindingsState()
-    var view: ViewState = ViewState()
+    var theme = ThemeState()
+    var bindings = BindingsState()
+    var view = ViewState()
+    var keyboard = KeyboardState()
 }
 
 struct KeyEvent {

@@ -33,6 +33,8 @@
 		68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068321E96F6F700C186F5 /* BindingLoader.swift */; };
 		68B068351E96F8BC00C186F5 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068341E96F8BC00C186F5 /* Binding.swift */; };
 		68B068371E97160400C186F5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 68B068361E97160400C186F5 /* Podfile */; };
+		984122481E9AA98D00705FC3 /* KeyboardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122471E9AA98D00705FC3 /* KeyboardState.swift */; };
+		9841224A1E9AAA7900705FC3 /* KeyboardReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122491E9AAA7900705FC3 /* KeyboardReducer.swift */; };
 		987C99AA1E98008E00A2D8E0 /* BindingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C99A91E98008E00A2D8E0 /* BindingsState.swift */; };
 		987C99AC1E980BC100A2D8E0 /* BindingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C99AB1E980BC100A2D8E0 /* BindingsReducer.swift */; };
 		A0D24D9DB58A047FC3145879 /* Pods_Keystroke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBBCA4FF38376FF21463B87 /* Pods_Keystroke.framework */; };
@@ -92,6 +94,8 @@
 		68B068321E96F6F700C186F5 /* BindingLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingLoader.swift; sourceTree = "<group>"; };
 		68B068341E96F8BC00C186F5 /* Binding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		68B068361E97160400C186F5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		984122471E9AA98D00705FC3 /* KeyboardState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardState.swift; sourceTree = "<group>"; };
+		984122491E9AAA7900705FC3 /* KeyboardReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardReducer.swift; sourceTree = "<group>"; };
 		987C99A91E98008E00A2D8E0 /* BindingsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingsState.swift; sourceTree = "<group>"; };
 		987C99AB1E980BC100A2D8E0 /* BindingsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingsReducer.swift; sourceTree = "<group>"; };
 		A77D4E848E1D7CAE1F7AA666 /* Pods_KeystrokeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeystrokeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +161,7 @@
 				987C99AB1E980BC100A2D8E0 /* BindingsReducer.swift */,
 				685CB4CE1E97F44B00C92195 /* AppReducer.swift */,
 				685CB4DF1E9802BB00C92195 /* ViewReducer.swift */,
+				984122491E9AAA7900705FC3 /* KeyboardReducer.swift */,
 			);
 			name = Reducers;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				685CB4C01E97A06F00C92195 /* AppState.swift */,
+				984122471E9AA98D00705FC3 /* KeyboardState.swift */,
 				685CB4D01E97F49400C92195 /* ThemeState.swift */,
 				987C99A91E98008E00A2D8E0 /* BindingsState.swift */,
 				685CB4DD1E98020F00C92195 /* ViewState.swift */,
@@ -592,11 +598,13 @@
 				987C99AC1E980BC100A2D8E0 /* BindingsReducer.swift in Sources */,
 				68B068351E96F8BC00C186F5 /* Binding.swift in Sources */,
 				685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */,
+				9841224A1E9AAA7900705FC3 /* KeyboardReducer.swift in Sources */,
 				987C99AA1E98008E00A2D8E0 /* BindingsState.swift in Sources */,
 				685CB4C11E97A06F00C92195 /* AppState.swift in Sources */,
 				685CB4CD1E97F2E400C92195 /* Utils.swift in Sources */,
 				685CB4E21E981EF200C92195 /* AppConfigManager.swift in Sources */,
 				68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */,
+				984122481E9AA98D00705FC3 /* KeyboardState.swift in Sources */,
 				68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */,
 				685CB4DE1E98020F00C92195 /* ViewState.swift in Sources */,
 				685CB4E01E9802BB00C92195 /* ViewReducer.swift in Sources */,

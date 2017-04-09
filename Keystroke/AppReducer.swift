@@ -17,7 +17,8 @@ struct AppReducer: Reducer {
         return AppState(
             theme: themeReducer(state: state?.theme, action),
             bindings: bindingsReducer(state: state?.bindings, action),
-            view: viewReducer(state: state?.view, action)
+            view: viewReducer(state: state?.view, action),
+            keyboard: keyboardReducer(state: state?.keyboard, action)
         )
     }
 }
