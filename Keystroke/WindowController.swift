@@ -78,7 +78,7 @@ class WindowController: NSWindowController, StoreSubscriber {
             
             // Make window transparent
 //            window.isOpaque = false
-            window.hasShadow = true
+//            window.hasShadow = true
 //            window.styleMask = .borderless
             
             activateTheme(theme: DarkTheme)
@@ -88,7 +88,7 @@ class WindowController: NSWindowController, StoreSubscriber {
             // but doesnt work for fullscreen apps :(
             // see http://stackoverflow.com/questions/1740412/how-to-bring-nswindow-to-front-and-to-the-current-space
             NSApp.activate(ignoringOtherApps: true)
-            window.collectionBehavior = .canJoinAllSpaces
+//            window.collectionBehavior = .canJoinAllSpaces
         }
     }
 }

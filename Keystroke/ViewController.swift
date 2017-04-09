@@ -39,7 +39,6 @@ class ViewController: NSViewController, StoreSubscriber {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         mainStore.subscribe(self) { state in
             state.view
         }
