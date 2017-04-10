@@ -21,7 +21,6 @@ class KeyView: NSTextField {
         view.usesSingleLineMode = true
         
         view.backgroundColor = NSColor.clear
-        view.textColor = mainStore.state.theme.theme.actionColor.asNSColor()
         
         let layer = view.layer!
         layer.borderWidth = 1.5

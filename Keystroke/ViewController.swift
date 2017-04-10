@@ -123,6 +123,16 @@ class ViewController: NSViewController, StoreSubscriber {
                 keyView.stringValue = key.title
                 
                 keyView.font = keyFont!
+                
+                switch key.type {
+                case .Folder:
+                    keyView.textColor = mainStore.state.theme.theme.folderColor.asNSColor()
+                case .Operation:
+                    keyView.textColor = mainStore.state.theme.theme.operationColor.asNSColor()
+                default:
+                    keyView.textColor = mainStore.state.theme.theme.emptyColor.asNSColor()
+                }
+                
                 keyViews[rowIndex].append(keyView)
                 rowView.addSubview(keyView)
                 
