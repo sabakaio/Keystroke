@@ -9,15 +9,17 @@
 import ReSwift
 
 struct KeyboardState: StateType {
-    var keys: [KeyboardKey]
+    var keys: [String: KeyboardKey]
     
     init() {
         keys = [
             "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
             "a", "s", "d", "f", "g", "h", "j", "k", "l",
             "z", "x", "c", "v", "b", "n", "m"
-            ].map({ key in
-                KeyboardKey(name: key, title: key, type: KeyboardKeyType.Empty)
+            ].reduce([String: KeyboardKey](), { result, key in
+                var result = result
+                result[key] = KeyboardKey(name: key, title: key, type: KeyboardKeyType.Empty)
+                return result
             })
     }
 }
