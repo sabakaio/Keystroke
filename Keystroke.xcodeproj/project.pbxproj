@@ -20,6 +20,7 @@
 		685CB4DE1E98020F00C92195 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4DD1E98020F00C92195 /* ViewState.swift */; };
 		685CB4E01E9802BB00C92195 /* ViewReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4DF1E9802BB00C92195 /* ViewReducer.swift */; };
 		685CB4E21E981EF200C92195 /* AppConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4E11E981EF200C92195 /* AppConfigManager.swift */; };
+		687C595F1E9BF13D00E491BF /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687C595E1E9BF13D00E491BF /* KeyView.swift */; };
 		6885D4B21E99381E00681A4B /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6885D4B11E99381E00681A4B /* VisualEffectView.swift */; };
 		68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */; };
 		68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FF1E96EE7A00C186F5 /* ViewController.swift */; };
@@ -75,6 +76,7 @@
 		685CB4DD1E98020F00C92195 /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		685CB4DF1E9802BB00C92195 /* ViewReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewReducer.swift; sourceTree = "<group>"; };
 		685CB4E11E981EF200C92195 /* AppConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfigManager.swift; sourceTree = "<group>"; };
+		687C595E1E9BF13D00E491BF /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		6885D4B11E99381E00681A4B /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		68B067FA1E96EE7A00C186F5 /* Keystroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystroke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,9 +159,9 @@
 		685CB4BE1E97A04700C92195 /* Reducers */ = {
 			isa = PBXGroup;
 			children = (
+				685CB4CE1E97F44B00C92195 /* AppReducer.swift */,
 				685CB4C41E97A15E00C92195 /* ThemeReducer.swift */,
 				987C99AB1E980BC100A2D8E0 /* BindingsReducer.swift */,
-				685CB4CE1E97F44B00C92195 /* AppReducer.swift */,
 				685CB4DF1E9802BB00C92195 /* ViewReducer.swift */,
 				984122491E9AAA7900705FC3 /* KeyboardReducer.swift */,
 			);
@@ -269,6 +271,7 @@
 		68B068291E96EEC800C186F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				687C595E1E9BF13D00E491BF /* KeyView.swift */,
 				6885D4B11E99381E00681A4B /* VisualEffectView.swift */,
 				685289361E9A9BAE00641994 /* KeyboardLayout.swift */,
 			);
@@ -593,6 +596,7 @@
 				685CB4CF1E97F44B00C92195 /* AppReducer.swift in Sources */,
 				685289371E9A9BAE00641994 /* KeyboardLayout.swift in Sources */,
 				685CB4C31E97A12C00C92195 /* Actions.swift in Sources */,
+				687C595F1E9BF13D00E491BF /* KeyView.swift in Sources */,
 				685CB4D11E97F49400C92195 /* ThemeState.swift in Sources */,
 				6822E6AC1E99520400C38260 /* KeyCode.swift in Sources */,
 				987C99AC1E980BC100A2D8E0 /* BindingsReducer.swift in Sources */,

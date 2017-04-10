@@ -13,20 +13,88 @@ import PureLayout
 class ViewController: NSViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
     
-    @IBOutlet weak var collectionView: NSCollectionView!
+    @IBOutlet var keyboardView: NSView!
     
     let bindingLoader = BindingLoader()
+    var rowViews: [NSView] = []
+    var keyViews: [[NSView]] = [[], [], []]
+    let keyFont = NSFont(name: "San Francisco Display Light", size: 20.0)
     
-    private func configureCollectionView() {
+    var keyRows: [[KeyboardKey]] = [
+        "qwertyuiop".characters.map({ char in
+            mainStore.state.keyboard.keys[String(char)]!
+        }),
+        "asdfghjkl".characters.map({ char in
+            mainStore.state.keyboard.keys[String(char)]!
+        }),
+        "zxcvbnm".characters.map({ char in
+            mainStore.state.keyboard.keys[String(char)]!
+        })
+    ]
+    
+    private func configureKeyboardView() {
         // Setup flow layout
-        let flowLayout = KeyboardLayout()
-        collectionView.collectionViewLayout = flowLayout
         
-        // For optimal performance, NSCollectionView is designed to be layer-backed.
-        collectionView.wantsLayer = true
+        if rowViews.count > 0 {
+            rowViews.removeAll()
+        }
         
-        // Transparent background
-        collectionView.layer?.backgroundColor = NSColor.clear.cgColor
+        //        if keyViews.count > 0 {
+        //            keyViews.removeAll()
+        //        }
+        
+        let containerView = NSView.newAutoLayout()
+        view.addSubview(containerView)
+        containerView.autoAlignAxis(.vertical, toSameAxisOf: view)
+        containerView.autoPinEdgesToSuperviewEdges(with: EdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0))
+        
+        for (rowIndex, row) in keyRows.enumerated() {
+            let rowView = NSView.newAutoLayout()
+            rowViews.append(rowView)
+            containerView.addSubview(rowView)
+            rowView.autoSetDimensions(to: CGSize(width: 800.0, height: 50.0))
+            rowView.wantsLayer = true
+            rowView.layer?.borderWidth = 2
+            rowView.layer?.borderColor = NSColor.red.cgColor
+            if rowIndex < 1 {
+                rowView.autoPinEdge(toSuperviewEdge: .top)
+            } else {
+                rowView.autoPinEdge(.top, to: .bottom, of: rowViews[rowIndex - 1], withOffset: 10.0)
+                //rowView.autoPinEdge(.top, to: .bottom, of: rowViews[rowIndex - 1])
+            }
+            
+            for (keyIndex, key) in row.enumerated() {
+                let keyView = NSTextField.newAutoLayout()
+                keyView.stringValue = key.title.uppercased()
+                keyView.font = keyFont!
+                keyViews[rowIndex].append(keyView)
+                rowView.addSubview(keyView)
+                keyView.wantsLayer = true
+                keyView.alignment = .center
+                
+                let textSize = calculateSize(of: keyView.stringValue, using: keyFont!)
+                print(textSize)
+        
+                keyView.layer?.borderWidth = 1.5
+                keyView.layer?.borderColor = NSColor.green.cgColor
+                keyView.layer?.cornerRadius = 4
+                keyView.autoSetDimensions(to: CGSize(
+                    width: max(textSize.width + 20.0, 50.0),
+                    height: 50.0
+                ))
+
+                if keyIndex < 1 {
+                    keyView.autoPinEdge(toSuperviewEdge: .left)
+                } else {
+                    keyView.autoPinEdge(.left, to: .right, of: keyViews[rowIndex][keyIndex - 1], withOffset: 10.0)
+                }
+            }
+            
+//            (keyViews[rowIndex] as NSArray).autoDistributeViews(along: .horizontal, alignedTo: .baseline, withFixedSpacing: 10.0)
+            //(keyViews[rowIndex] as NSArray).autoDistributeViews(along: .horizontal, alignedTo: .horizontal, withFixedSize: 10.0)
+            
+            //(keyViews[rowIndex] as NSArray).autoDistributeViews(along: .horizontal, alignedTo: .horizontal, withFixedSize: 50.0)
+        }
     }
     
     func activateTheme(theme: Theme) {
@@ -49,7 +117,7 @@ class ViewController: NSViewController, StoreSubscriber {
         
         mainStore.subscribe(self)
         
-        configureCollectionView()
+        configureKeyboardView()
         startKeyListener()
         
         view.wantsLayer = true
@@ -96,7 +164,7 @@ class ViewController: NSViewController, StoreSubscriber {
     
     func loadDataForAppWithName(_ appName: String?) {
         bindingLoader.loadDataForAppWithName(appName ?? "")
-        collectionView.reloadData()
+        // collectionView.reloadData()
     }
     
     override var representedObject: Any? {
