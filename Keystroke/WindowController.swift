@@ -9,7 +9,7 @@
 import Cocoa
 import ReSwift
 
-let WINDOW_SIZE = NSSize(width: 1000.0, height: 190.0)
+let WINDOW_SIZE = NSSize(width: 1000.0, height: 175.0)
 let WINDOW_PADDING_FROM_BOTTOM: CGFloat = 20.0
 
 class WindowController: NSWindowController, StoreSubscriber {
