@@ -22,11 +22,6 @@ class KeyView: NSTextField {
         
         view.backgroundColor = NSColor.clear
         
-        let layer = view.layer!
-        layer.borderWidth = 1.5
-        layer.borderColor = KEY_BORDER_COLOR.cgColor
-        layer.cornerRadius = 4
-
         return view
     }
     

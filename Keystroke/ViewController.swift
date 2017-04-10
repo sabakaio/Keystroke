@@ -14,7 +14,7 @@ let KEY_SIZE = NSSize(width: 50.0, height: 50.0)
 let CONTAINER_VIEW_INSETS = EdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
 let KEY_FONT_SIZE: CGFloat = 20.0
 let KEY_SPACING: CGFloat = 10.0
-let KEY_TEXT_PADDING: CGFloat = 20.0
+let KEY_TEXT_PADDING: CGFloat = 30.0
 let KEY_BORDER_COLOR = NSColor.init(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
 
 class ViewController: NSViewController, StoreSubscriber {
@@ -119,6 +119,8 @@ class ViewController: NSViewController, StoreSubscriber {
             }
             
             for (keyIndex, key) in row.enumerated() {
+                let keyContainerView = NSView.newAutoLayout()
+                keyContainerView.wantsLayer = true
                 let keyView = KeyView.create()
                 keyView.stringValue = key.title
                 
@@ -134,21 +136,35 @@ class ViewController: NSViewController, StoreSubscriber {
                     keyView.textColor = mainStore.state.theme.theme.emptyColor.asNSColor()
                 }
                 
-                keyViews[rowIndex].append(keyView)
-                rowView.addSubview(keyView)
+                keyViews[rowIndex].append(keyContainerView)
+                keyContainerView.addSubview(keyView)
+                rowView.addSubview(keyContainerView)
+                keyView.lineBreakMode = .byClipping
+                
+                let layer = keyContainerView.layer!
+                layer.borderWidth = 1.5
+                layer.borderColor = KEY_BORDER_COLOR.cgColor
+                layer.cornerRadius = 4
                 
                 let textSize = calculateSize(of: keyView.stringValue, using: keyFont!)
                 let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
                 
+                keyView.autoPinEdge(
+                    toSuperviewEdge: .top,
+                    withInset: (KEY_SIZE.height - textSize.height) - 2
+                )
+                
+                keyView.autoMatch(.width, to: .width, of: keyView.superview!, withOffset: 0.0)
+                
                 keyViewsWidths[rowIndex] = keyViewsWidths[rowIndex] + keyWidthWithPadding
                 
-                keyView.autoSetDimensions(to: CGSize(
+                keyContainerView.autoSetDimensions(to: CGSize(
                     width: keyWidthWithPadding,
                     height: KEY_SIZE.height
                 ))
                 
                 if keyIndex >= 1, keyIndex < keyRows[rowIndex].count {
-                    keyView.autoPinEdge(.left, to: .right, of: keyViews[rowIndex][keyIndex - 1], withOffset: KEY_SPACING)
+                    keyContainerView.autoPinEdge(.left, to: .right, of: keyViews[rowIndex][keyIndex - 1], withOffset: KEY_SPACING)
                 }
             }
             

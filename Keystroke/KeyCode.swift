@@ -218,7 +218,7 @@ public enum KeyCode: UInt64 {
         case .Key_m:
             return "m"
         case .Key_n:
-            return "m"
+            return "n"
         case .Key_o:
             return "o"
         case .Key_p:

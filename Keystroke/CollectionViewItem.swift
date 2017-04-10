@@ -32,7 +32,6 @@ class CollectionViewItem: NSCollectionViewItem, StoreSubscriber {
     func newState(state: AppState) {
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.wantsLayer = true
