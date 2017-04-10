@@ -88,7 +88,7 @@ struct KeyboardKey {
     init(code: KeyCode, keyTitle: String? = nil, type keyType: KeyboardKeyType = KeyboardKeyType.Empty) {
         name = try! code.toLetter()
         if keyTitle == nil {
-            title = name
+            title = name.uppercased()
         } else {
             title = keyTitle!
         }

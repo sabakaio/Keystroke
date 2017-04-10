@@ -27,62 +27,82 @@ class ViewController: NSViewController, StoreSubscriber {
     private var keyViews: [[NSView]] = [[], [], []]
     private var keyViewsWidths: [CGFloat] = [0.0, 0.0, 0.0]
     private var keyFont: NSFont? = nil
+    private var containerView: NSView? = nil
     
-    var keyRows: [[KeyboardKey]] = [
-        [KeyCode.Key_q,
-         KeyCode.Key_w,
-         KeyCode.Key_e,
-         KeyCode.Key_r,
-         KeyCode.Key_t,
-         KeyCode.Key_y,
-         KeyCode.Key_u,
-         KeyCode.Key_i,
-         KeyCode.Key_o,
-         KeyCode.Key_p].map({ keyCode in
-            mainStore.state.keyboard.keys[keyCode]!
-        }),
-        [KeyCode.Key_a,
-         KeyCode.Key_s,
-         KeyCode.Key_d,
-         KeyCode.Key_f,
-         KeyCode.Key_g,
-         KeyCode.Key_h,
-         KeyCode.Key_j,
-         KeyCode.Key_k,
-         KeyCode.Key_l].map({ keyCode in
-            mainStore.state.keyboard.keys[keyCode]!
-        }),
-        [KeyCode.Key_z,
-         KeyCode.Key_x,
-         KeyCode.Key_c,
-         KeyCode.Key_v,
-         KeyCode.Key_b,
-         KeyCode.Key_n,
-         KeyCode.Key_m].map({ keyCode in
-            mainStore.state.keyboard.keys[keyCode]!
-        })
-    ]
+    var keyRows: [[KeyboardKey]] = []
+    
+    private func configureKeyRows() {
+        if keyRows.count > 0 {
+            keyRows.removeAll()
+        }
+        
+        keyRows = [
+            [KeyCode.Key_q,
+             KeyCode.Key_w,
+             KeyCode.Key_e,
+             KeyCode.Key_r,
+             KeyCode.Key_t,
+             KeyCode.Key_y,
+             KeyCode.Key_u,
+             KeyCode.Key_i,
+             KeyCode.Key_o,
+             KeyCode.Key_p].map({ keyCode in
+                mainStore.state.keyboard.keys[keyCode]!
+             }),
+            [KeyCode.Key_a,
+             KeyCode.Key_s,
+             KeyCode.Key_d,
+             KeyCode.Key_f,
+             KeyCode.Key_g,
+             KeyCode.Key_h,
+             KeyCode.Key_j,
+             KeyCode.Key_k,
+             KeyCode.Key_l].map({ keyCode in
+                mainStore.state.keyboard.keys[keyCode]!
+             }),
+            [KeyCode.Key_z,
+             KeyCode.Key_x,
+             KeyCode.Key_c,
+             KeyCode.Key_v,
+             KeyCode.Key_b,
+             KeyCode.Key_n,
+             KeyCode.Key_m].map({ keyCode in
+                mainStore.state.keyboard.keys[keyCode]!
+             })
+        ]
+
+    }
     
     private func configureKeyboardView() {
         // Setup flow layout
         
         if rowViews.count > 0 {
             rowViews.removeAll()
+            keyViews.removeAll()
+            keyViews = [[], [], []]
+            keyViewsWidths = [0.0, 0.0, 0.0]
         }
         
         if keyFont == nil {
             keyFont = NSFont(name: "San Francisco Display Light", size: KEY_FONT_SIZE)
         }
         
-        let containerView = NSView.newAutoLayout()
-        view.addSubview(containerView)
-        containerView.autoAlignAxis(.vertical, toSameAxisOf: view)
-        containerView.autoPinEdgesToSuperviewEdges(with: CONTAINER_VIEW_INSETS)
+        if self.containerView != nil {
+            self.containerView!.removeFromSuperview()
+        }
+        
+        self.containerView = NSView.newAutoLayout()
+        
+        let container = self.containerView!
+        
+        view.addSubview(container)
+        container.autoAlignAxis(.vertical, toSameAxisOf: view)
+        container.autoPinEdgesToSuperviewEdges(with: CONTAINER_VIEW_INSETS)
         
         for (rowIndex, row) in keyRows.enumerated() {
             let rowView = NSView.newAutoLayout()
             rowViews.append(rowView)
-            containerView.addSubview(rowView)
+            container.addSubview(rowView)
             rowView.autoPinEdge(toSuperviewEdge: .left)
             rowView.autoPinEdge(toSuperviewEdge: .right)
             rowView.autoSetDimension(.height, toSize: KEY_SIZE.height)
@@ -100,7 +120,7 @@ class ViewController: NSViewController, StoreSubscriber {
             
             for (keyIndex, key) in row.enumerated() {
                 let keyView = KeyView.create()
-                keyView.stringValue = key.title.uppercased()
+                keyView.stringValue = key.title
                 
                 keyView.font = keyFont!
                 keyViews[rowIndex].append(keyView)
@@ -142,8 +162,11 @@ class ViewController: NSViewController, StoreSubscriber {
     }
     
     func newState(state: AppState) {
-        self.loadDataForAppWithName(state.view.appName)
+        // self.loadDataForAppWithName(state.view.appName)
         self.activateTheme(theme: state.theme.theme)
+        
+        configureKeyRows()
+        configureKeyboardView()
     }
     
     override func viewDidLoad() {
@@ -151,6 +174,7 @@ class ViewController: NSViewController, StoreSubscriber {
         
         mainStore.subscribe(self)
         
+        configureKeyRows()
         configureKeyboardView()
         startKeyListener()
         
