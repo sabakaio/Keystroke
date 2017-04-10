@@ -29,14 +29,37 @@ class ViewController: NSViewController, StoreSubscriber {
     private var keyFont: NSFont? = nil
     
     var keyRows: [[KeyboardKey]] = [
-        "qwertyuiop".characters.map({ char in
-            mainStore.state.keyboard.keys[String(char)]!
+        [KeyCode.Key_q,
+         KeyCode.Key_w,
+         KeyCode.Key_e,
+         KeyCode.Key_r,
+         KeyCode.Key_t,
+         KeyCode.Key_y,
+         KeyCode.Key_u,
+         KeyCode.Key_i,
+         KeyCode.Key_o,
+         KeyCode.Key_p].map({ keyCode in
+            mainStore.state.keyboard.keys[keyCode]!
         }),
-        "asdfghjkl".characters.map({ char in
-            mainStore.state.keyboard.keys[String(char)]!
+        [KeyCode.Key_a,
+         KeyCode.Key_s,
+         KeyCode.Key_d,
+         KeyCode.Key_f,
+         KeyCode.Key_g,
+         KeyCode.Key_h,
+         KeyCode.Key_j,
+         KeyCode.Key_k,
+         KeyCode.Key_l].map({ keyCode in
+            mainStore.state.keyboard.keys[keyCode]!
         }),
-        "zxcvbnm".characters.map({ char in
-            mainStore.state.keyboard.keys[String(char)]!
+        [KeyCode.Key_z,
+         KeyCode.Key_x,
+         KeyCode.Key_c,
+         KeyCode.Key_v,
+         KeyCode.Key_b,
+         KeyCode.Key_n,
+         KeyCode.Key_m].map({ keyCode in
+            mainStore.state.keyboard.keys[keyCode]!
         })
     ]
     
