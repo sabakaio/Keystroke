@@ -12,8 +12,24 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
     var state = state ?? KeyboardState()
     
     switch action {
+        
+    case let action as KeyboardInitAction:
+        let appName = action.appName
+        // Reset strokes sequence and keyboard layout if current app changed
+        if state.appName != appName {
+            state.appName = appName
+            state.strokes = []
+            
+            // Get app specific bindings or reset
+            guard let config = mainStore.state.bindings.apps[appName] else {
+                state.updateWith(bindings: nil)
+                return state
+            }
+            state.updateWith(bindings: config.bindings)
+        }
+        
     case let action as KeyEventBindingAction:
-        let appName = action.appName, type = action.type, event = action.event
+        let type = action.type, event = action.event
         
         // Remember latest event to pass through
         state.lastEvent = event
@@ -31,19 +47,6 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
         let keyCode = KeyCode.from(event: event)
         guard [.keyDown].contains(type) && keyCode != nil else {
             return state
-        }
-        
-        // Reset strokes sequence and keyboard layout if current app changed
-        if state.appName != appName {
-            state.appName = appName
-            state.strokes = []
-            
-            // Get app specific bindings or reset
-            guard let config = mainStore.state.bindings.apps[appName] else {
-                state.bindings = nil
-                return state
-            }
-            state.bindings = config.bindings
         }
         
         // Get to next level, if exists
@@ -65,10 +68,11 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
             state.lastEvent = newEvent
             return state
         }
-        state.bindings = nextLevelFolder
+        state.updateWith(bindings: nextLevelFolder)
         
-        return state
     default:
-        return state
+        break
     }
+    
+    return state
 }

@@ -10,13 +10,14 @@ import ReSwift
 
 struct KeyboardState: StateType {
     var keys: [KeyCode: KeyboardKey]
+    var initialKeys: [KeyCode: KeyboardKey]
     var appName: String? = nil
     var strokes: [KeyCode] = [KeyCode]()
     var bindings: AppBindingsConfigFolder? = nil
     var lastEvent: CGEvent? = nil
     
     init() {
-        keys = [
+        initialKeys = [
             KeyCode.Key_q,
             KeyCode.Key_w,
             KeyCode.Key_e,
@@ -48,6 +49,28 @@ struct KeyboardState: StateType {
                 result[key] = KeyboardKey(code: key)
                 return result
             })
+        keys = initialKeys
+    }
+    
+    mutating func updateWith(bindings bindingsConfig: AppBindingsConfigFolder?) {
+        bindings = bindingsConfig
+        
+        // Reset current keyboard keys
+        keys = initialKeys
+        guard bindings != nil else { return }
+        
+        // Go through bindings configuration to update key title and type
+        for (code, config) in bindingsConfig!.bindings {
+            keys[code]!.title = config.name
+            switch config {
+            case _ as AppBindingsConfigFolder:
+                keys[code]!.type = .Folder
+            case _ as AppBindingsConfigOperation:
+                keys[code]!.type = .Operation
+            default:
+                break
+            }
+        }
     }
 }
 

@@ -24,19 +24,27 @@ struct KeyEventWindowAction: Action {
 }
 
 struct KeyEventBindingAction: Action {
-    let appName: String
     let type: CGEventType
     let event: CGEvent
 }
 
+struct KeyboardInitAction: Action {
+    let appName: String
+}
+
 func handleKeyEvent(type: CGEventType, event: CGEvent) {
     let appName = NSWorkspace.shared().frontmostApplication?.localizedName
+    let windowVisible = mainStore.state.view.windowVisible
     
     mainStore.dispatch(
         KeyEventWindowAction(appName: appName!, type: type, event: event)
     )
     
+    if !windowVisible && mainStore.state.view.windowVisible {
+        mainStore.dispatch(KeyboardInitAction(appName: appName!))
+    }
+    
     mainStore.dispatch(
-        KeyEventBindingAction(appName: appName!, type: type, event: event)
+        KeyEventBindingAction(type: type, event: event)
     )
 }
