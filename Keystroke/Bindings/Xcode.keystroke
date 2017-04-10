@@ -1,0 +1,13 @@
+name: XCode
+
+operations:
+  - name: Show Debug Area
+    hotkey: cmd-shift-y
+
+bindings:
+  - key: v
+    name: view
+    bindings:
+      - key: d
+        name: debug
+        operation: Show Debug Area

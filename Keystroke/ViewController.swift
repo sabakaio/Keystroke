@@ -64,17 +64,21 @@ class ViewController: NSViewController, StoreSubscriber {
             refcon: UnsafeMutableRawPointer?
             ) -> Unmanaged<CGEvent>? {
             
-            //            let viewController: ViewController = transfer(ptr: refcon!)
-            mainStore.dispatch(handleKeyEvent(type: type, event: event))
+            handleKeyEvent(type: type, event: event)
             
-            return Unmanaged.passRetained(mainStore.state.view.lastEvent!)
+            // Check event to popagate
+            guard let newEvent = mainStore.state.keyboard.lastEvent else { return nil }
+            // Hide main window
+            mainStore.dispatch(WindowHideAction())
+            
+            return Unmanaged.passRetained(newEvent)
         }
         
         let eventMask =
-            (1 << CGEventType.keyDown.rawValue) |
-                (1 << CGEventType.keyUp.rawValue) |
-                (1 << CGEventType.flagsChanged.rawValue) |
-                (1 << CGEventType.leftMouseDown.rawValue)
+            (1 << CGEventType.keyDown.rawValue)
+                | (1 << CGEventType.keyUp.rawValue)
+                | (1 << CGEventType.flagsChanged.rawValue)
+                | (1 << CGEventType.leftMouseDown.rawValue)
         
         guard let eventTap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
@@ -82,7 +86,7 @@ class ViewController: NSViewController, StoreSubscriber {
             options: .defaultTap,
             eventsOfInterest: CGEventMask(eventMask),
             callback: callback,
-            userInfo: bridge(obj: self)) else {
+            userInfo: nil) else {
                 print("failed to create event tap")
                 exit(1)
         }

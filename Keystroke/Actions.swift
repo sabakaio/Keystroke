@@ -10,6 +10,8 @@ import ReSwift
 
 struct ThemeActionToggle: Action {}
 
+struct WindowHideAction: Action {}
+
 struct AppBindingsSetAction: Action {
     let appName: String
     let config: AppConfig
@@ -22,19 +24,27 @@ struct KeyEventWindowAction: Action {
 }
 
 struct KeyEventBindingAction: Action {
-    let appName: String
     let type: CGEventType
     let event: CGEvent
 }
 
-func handleKeyEvent(type: CGEventType, event: CGEvent) -> Action {
+struct KeyboardInitAction: Action {
+    let appName: String
+}
+
+func handleKeyEvent(type: CGEventType, event: CGEvent) {
     let appName = NSWorkspace.shared().frontmostApplication?.localizedName
-    
+    let windowVisible = mainStore.state.view.windowVisible
     
     mainStore.dispatch(
         KeyEventWindowAction(appName: appName!, type: type, event: event)
     )
     
+    if !windowVisible && mainStore.state.view.windowVisible {
+        mainStore.dispatch(KeyboardInitAction(appName: appName!))
+    }
     
-    return KeyEventBindingAction(appName: appName!, type: type, event: event)
+    mainStore.dispatch(
+        KeyEventBindingAction(type: type, event: event)
+    )
 }

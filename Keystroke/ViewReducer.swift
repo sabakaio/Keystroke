@@ -14,6 +14,8 @@ func viewReducer(state: ViewState?, _ action: Action) -> ViewState {
     var state = state ?? ViewState()
     
     switch action {
+    case _ as WindowHideAction:
+        state.windowVisible = false
     case let action as KeyEventWindowAction:
         if [.leftMouseDown].contains(action.type) {
             if state.windowVisible {
@@ -26,7 +28,6 @@ func viewReducer(state: ViewState?, _ action: Action) -> ViewState {
         let keyCode = action.event.getIntegerValueField(.keyboardEventKeycode)
         let flags = action.event.flags
         let hasCommand = flags.contains(CGEventFlags.maskCommand)
-        // print(action.appName, keyCode.description, hasCommand)
         
         state.appName = action.appName
         
@@ -56,33 +57,6 @@ func viewReducer(state: ViewState?, _ action: Action) -> ViewState {
                 }
             }
         }
-    case let action as KeyEventBindingAction:
-        let event = action.event, appName = action.appName, type = action.type
-        let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
-        
-        //let letter = String(describing: UnicodeScalar(UInt32(truncatingBitPattern: keyCode)))
-        
-        
-        state.lastEvent = event
-        guard let bindings = mainStore.state.bindings.apps[appName] else { return state }
-        
-        if state.windowVisible && [.keyDown].contains(type) {
-            print(keyCode.description)
-            if keyCode == 9 {
-                // replace mnemonic cmd - v with cmd+shift+d, split
-                event.setIntegerValueField(.keyboardEventKeycode, value: 2)
-                event.flags = event.flags.union(CGEventFlags.maskCommand)
-            } else if keyCode == 1 {
-                // replace mnemonic cmd - s with cmd+d, vetical split
-                event.setIntegerValueField(.keyboardEventKeycode, value: 2)
-                event.flags = event.flags.union(CGEventFlags.maskCommand)
-                event.flags = event.flags.union(CGEventFlags.maskShift)
-            }
-            
-            //state.windowVisible = false
-        }
-        
-        // state.lastEvent = event
     default:
         break
     }
