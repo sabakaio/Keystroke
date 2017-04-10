@@ -31,6 +31,47 @@ class WindowController: NSWindowController, StoreSubscriber {
         window!.orderFront(true)
     }
     
+    func startKeyListener() {
+        func callback(
+            proxy: OpaquePointer,
+            type: CGEventType,
+            event: CGEvent,
+            refcon: UnsafeMutableRawPointer?
+            ) -> Unmanaged<CGEvent>? {
+            
+            handleKeyEvent(type: type, event: event)
+            
+            // Check event to popagate
+            guard let newEvent = mainStore.state.keyboard.lastEvent else { return nil }
+            // Hide main window
+            mainStore.dispatch(WindowHideAction())
+            
+            return Unmanaged.passRetained(newEvent)
+        }
+        
+        let eventMask =
+            (1 << CGEventType.keyDown.rawValue)
+                | (1 << CGEventType.keyUp.rawValue)
+                | (1 << CGEventType.flagsChanged.rawValue)
+                | (1 << CGEventType.leftMouseDown.rawValue)
+        
+        guard let eventTap = CGEvent.tapCreate(
+            tap: .cgSessionEventTap,
+            place: .headInsertEventTap,
+            options: .defaultTap,
+            eventsOfInterest: CGEventMask(eventMask),
+            callback: callback,
+            userInfo: nil) else {
+                print("failed to create event tap")
+                exit(1)
+        }
+        
+        let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
+        CGEvent.tapEnable(tap: eventTap, enable: true)
+        //CFRunLoopRun()
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         
@@ -42,6 +83,7 @@ class WindowController: NSWindowController, StoreSubscriber {
         print("Accessibility enabled: \(accessibilityEnabled)")
         
         mainStore.subscribe(self)
+        startKeyListener()
         
         // Position window
         if let window = window, let screen = NSScreen.main() {
