@@ -9,7 +9,7 @@
 import ReSwift
 
 struct KeyboardState: StateType {
-    var keys: [String: KeyboardKey]
+    var keys: [KeyCode: KeyboardKey]
     var appName: String? = nil
     var strokes: [KeyCode] = [KeyCode]()
     var bindings: AppBindingsConfigFolder? = nil
@@ -17,12 +17,35 @@ struct KeyboardState: StateType {
     
     init() {
         keys = [
-            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-            "a", "s", "d", "f", "g", "h", "j", "k", "l",
-            "z", "x", "c", "v", "b", "n", "m"
-            ].reduce([String: KeyboardKey](), { result, key in
+            KeyCode.Key_q,
+            KeyCode.Key_w,
+            KeyCode.Key_e,
+            KeyCode.Key_r,
+            KeyCode.Key_t,
+            KeyCode.Key_y,
+            KeyCode.Key_u,
+            KeyCode.Key_i,
+            KeyCode.Key_o,
+            KeyCode.Key_p,
+            KeyCode.Key_a,
+            KeyCode.Key_s,
+            KeyCode.Key_d,
+            KeyCode.Key_f,
+            KeyCode.Key_g,
+            KeyCode.Key_h,
+            KeyCode.Key_j,
+            KeyCode.Key_k,
+            KeyCode.Key_l,
+            KeyCode.Key_z,
+            KeyCode.Key_x,
+            KeyCode.Key_c,
+            KeyCode.Key_v,
+            KeyCode.Key_b,
+            KeyCode.Key_n,
+            KeyCode.Key_m
+            ].reduce([KeyCode: KeyboardKey](), { result, key in
                 var result = result
-                result[key] = KeyboardKey(name: key, title: key, type: KeyboardKeyType.Empty)
+                result[key] = KeyboardKey(code: key)
                 return result
             })
     }
@@ -38,4 +61,14 @@ struct KeyboardKey {
     var name: String
     var title: String
     var type: KeyboardKeyType
+    
+    init(code: KeyCode, keyTitle: String? = nil, type keyType: KeyboardKeyType = KeyboardKeyType.Empty) {
+        name = try! code.toLetter()
+        if keyTitle == nil {
+            title = name
+        } else {
+            title = keyTitle!
+        }
+        type = keyType
+    }
 }

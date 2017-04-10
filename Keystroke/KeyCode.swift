@@ -12,6 +12,7 @@ public enum KeyCodeError: Error {
     case MultipleKeys(value: String)
     case UnknownFlag(value: String)
     case UnknownKey(value: String)
+    case CannotConvertToString(value: KeyCode)
 }
 
 public enum KeyCode: UInt64 {
@@ -186,5 +187,64 @@ public enum KeyCode: UInt64 {
         
         let keyCode = try self.from(letter: letter!)
         return (flags, keyCode)
+    }
+    
+    func toLetter() throws -> String {
+        switch self {
+        case .Key_a:
+            return "a"
+        case .Key_b:
+            return "b"
+        case .Key_c:
+            return "c"
+        case .Key_d:
+            return "d"
+        case .Key_e:
+            return "e"
+        case .Key_f:
+            return "f"
+        case .Key_g:
+            return "g"
+        case .Key_h:
+            return "h"
+        case .Key_i:
+            return "i"
+        case .Key_j:
+            return "j"
+        case .Key_k:
+            return "k"
+        case .Key_l:
+            return "l"
+        case .Key_m:
+            return "m"
+        case .Key_n:
+            return "m"
+        case .Key_o:
+            return "o"
+        case .Key_p:
+            return "p"
+        case .Key_q:
+            return "q"
+        case .Key_r:
+            return "r"
+        case .Key_s:
+            return "s"
+        case .Key_t:
+            return "t"
+        case .Key_u:
+            return "u"
+        case .Key_v:
+            return "v"
+        case .Key_w:
+            return "w"
+        case .Key_x:
+            return "x"
+        case .Key_y:
+            return "y"
+        case .Key_z:
+            return "z"
+        default:
+            throw KeyCodeError.CannotConvertToString(value: self)
+        }
     }
 }
