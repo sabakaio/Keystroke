@@ -63,7 +63,8 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
             // This is an operation, mutate event
             let operation = (nextLevel as! AppBindingsConfigOperation).operation
             let newEvent = event.copy()
-            newEvent!.setIntegerValueField(.keyboardEventKeycode, value: Int64(operation.keyCode!.rawValue))
+            let newCode = Int64(operation.keyCode!.rawValue)
+            newEvent!.setIntegerValueField(.keyboardEventKeycode, value: newCode)
             newEvent!.flags = operation.flags
             state.lastEvent = newEvent
             return state
