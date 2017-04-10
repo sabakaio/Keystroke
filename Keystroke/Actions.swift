@@ -27,14 +27,14 @@ struct KeyEventBindingAction: Action {
     let event: CGEvent
 }
 
-func handleKeyEvent(type: CGEventType, event: CGEvent) -> Action {
+func handleKeyEvent(type: CGEventType, event: CGEvent) {
     let appName = NSWorkspace.shared().frontmostApplication?.localizedName
-    
     
     mainStore.dispatch(
         KeyEventWindowAction(appName: appName!, type: type, event: event)
     )
     
-    
-    return KeyEventBindingAction(appName: appName!, type: type, event: event)
+    mainStore.dispatch(
+        KeyEventBindingAction(appName: appName!, type: type, event: event)
+    )
 }

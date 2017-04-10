@@ -65,7 +65,7 @@ class ViewController: NSViewController, StoreSubscriber {
             ) -> Unmanaged<CGEvent>? {
             
             //            let viewController: ViewController = transfer(ptr: refcon!)
-            mainStore.dispatch(handleKeyEvent(type: type, event: event))
+            handleKeyEvent(type: type, event: event)
             
             return Unmanaged.passRetained(mainStore.state.view.lastEvent!)
         }
