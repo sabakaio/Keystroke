@@ -1,15 +1,18 @@
 PODS:
+  - PureLayout (3.0.2)
   - ReSwift (3.0.0)
   - Yaml (3.3.1)
 
 DEPENDENCIES:
+  - PureLayout
   - ReSwift
   - Yaml
 
 SPEC CHECKSUMS:
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   ReSwift: f0255f4b4f2dacd12c5d97d34d13fc5dad6d6371
   Yaml: 18b2cf7301c4132e2bbb508a6921d2637ed3046c
 
-PODFILE CHECKSUM: cb230e164ee4535b3f4d0d11792b50db9c3c5374
+PODFILE CHECKSUM: 2c00c33efb43daa49a7053ad6e7342cf7fe9fe7c
 
 COCOAPODS: 1.2.0

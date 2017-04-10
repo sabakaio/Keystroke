@@ -29,17 +29,7 @@ class CollectionViewItem: NSCollectionViewItem, StoreSubscriber {
         view.layer?.cornerRadius = 4
     }
     
-    func activateTheme(theme: Theme) {
-        textField?.textColor = NSColor.init(
-            calibratedRed: theme.actionColor.calibratedRed,
-            green: theme.actionColor.green,
-            blue: theme.actionColor.blue,
-            alpha: theme.actionColor.alpha
-        );
-    }
-    
     func newState(state: AppState) {
-        activateTheme(theme: state.theme.theme)
     }
     
     

@@ -8,24 +8,157 @@
 
 import Cocoa
 import ReSwift
+import PureLayout
+
+let KEY_SIZE = NSSize(width: 50.0, height: 50.0)
+let CONTAINER_VIEW_INSETS = EdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+let KEY_FONT_SIZE: CGFloat = 20.0
+let KEY_SPACING: CGFloat = 10.0
+let KEY_TEXT_PADDING: CGFloat = 20.0
+let KEY_BORDER_COLOR = NSColor.init(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
 
 class ViewController: NSViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
     
-    @IBOutlet weak var collectionView: NSCollectionView!
+    @IBOutlet var keyboardView: NSView!
     
     let bindingLoader = BindingLoader()
+    private var rowViews: [NSView] = []
+    private var keyViews: [[NSView]] = [[], [], []]
+    private var keyViewsWidths: [CGFloat] = [0.0, 0.0, 0.0]
+    private var keyFont: NSFont? = nil
+    private var containerView: NSView? = nil
     
-    private func configureCollectionView() {
+    var keyRows: [[KeyboardKey]] = []
+    
+    private func configureKeyRows() {
+        if keyRows.count > 0 {
+            keyRows.removeAll()
+        }
+        
+        keyRows = [
+            [KeyCode.Key_q,
+             KeyCode.Key_w,
+             KeyCode.Key_e,
+             KeyCode.Key_r,
+             KeyCode.Key_t,
+             KeyCode.Key_y,
+             KeyCode.Key_u,
+             KeyCode.Key_i,
+             KeyCode.Key_o,
+             KeyCode.Key_p].map({ keyCode in
+                mainStore.state.keyboard.keys[keyCode]!
+             }),
+            [KeyCode.Key_a,
+             KeyCode.Key_s,
+             KeyCode.Key_d,
+             KeyCode.Key_f,
+             KeyCode.Key_g,
+             KeyCode.Key_h,
+             KeyCode.Key_j,
+             KeyCode.Key_k,
+             KeyCode.Key_l].map({ keyCode in
+                mainStore.state.keyboard.keys[keyCode]!
+             }),
+            [KeyCode.Key_z,
+             KeyCode.Key_x,
+             KeyCode.Key_c,
+             KeyCode.Key_v,
+             KeyCode.Key_b,
+             KeyCode.Key_n,
+             KeyCode.Key_m].map({ keyCode in
+                mainStore.state.keyboard.keys[keyCode]!
+             })
+        ]
+
+    }
+    
+    private func configureKeyboardView() {
         // Setup flow layout
-        let flowLayout = KeyboardLayout()
-        collectionView.collectionViewLayout = flowLayout
         
-        // For optimal performance, NSCollectionView is designed to be layer-backed.
-        collectionView.wantsLayer = true
+        if rowViews.count > 0 {
+            rowViews.removeAll()
+            keyViews.removeAll()
+            keyViews = [[], [], []]
+            keyViewsWidths = [0.0, 0.0, 0.0]
+        }
         
-        // Transparent background
-        collectionView.layer?.backgroundColor = NSColor.clear.cgColor
+        if keyFont == nil {
+            keyFont = NSFont(name: "San Francisco Display Light", size: KEY_FONT_SIZE)
+        }
+        
+        if self.containerView != nil {
+            self.containerView!.removeFromSuperview()
+        }
+        
+        self.containerView = NSView.newAutoLayout()
+        
+        let container = self.containerView!
+        
+        view.addSubview(container)
+        container.autoAlignAxis(.vertical, toSameAxisOf: view)
+        container.autoPinEdgesToSuperviewEdges(with: CONTAINER_VIEW_INSETS)
+        
+        for (rowIndex, row) in keyRows.enumerated() {
+            let rowView = NSView.newAutoLayout()
+            rowViews.append(rowView)
+            container.addSubview(rowView)
+            rowView.autoPinEdge(toSuperviewEdge: .left)
+            rowView.autoPinEdge(toSuperviewEdge: .right)
+            rowView.autoSetDimension(.height, toSize: KEY_SIZE.height)
+            rowView.wantsLayer = true
+            if rowIndex < 1 {
+                rowView.autoPinEdge(toSuperviewEdge: .top)
+            } else {
+                rowView.autoPinEdge(.top, to: .bottom, of: rowViews[rowIndex - 1], withOffset: KEY_SPACING)
+            }
+            
+            // Clean views array
+            if keyViews[rowIndex].count > 0 {
+                keyViews[rowIndex].removeAll()
+            }
+            
+            for (keyIndex, key) in row.enumerated() {
+                let keyView = KeyView.create()
+                keyView.stringValue = key.title
+                
+                keyView.font = keyFont!
+                
+                switch key.type {
+                case .Folder:
+                    keyView.textColor = mainStore.state.theme.theme.folderColor.asNSColor()
+                case .Operation:
+                    keyView.textColor = mainStore.state.theme.theme.operationColor.asNSColor()
+                default:
+                    keyView.textColor = mainStore.state.theme.theme.emptyColor.asNSColor()
+                }
+                
+                keyViews[rowIndex].append(keyView)
+                rowView.addSubview(keyView)
+                
+                let textSize = calculateSize(of: keyView.stringValue, using: keyFont!)
+                let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
+                
+                keyViewsWidths[rowIndex] = keyViewsWidths[rowIndex] + keyWidthWithPadding
+                
+                keyView.autoSetDimensions(to: CGSize(
+                    width: keyWidthWithPadding,
+                    height: KEY_SIZE.height
+                ))
+                
+                if keyIndex >= 1, keyIndex < keyRows[rowIndex].count {
+                    keyView.autoPinEdge(.left, to: .right, of: keyViews[rowIndex][keyIndex - 1], withOffset: KEY_SPACING)
+                }
+            }
+            
+            let rowWidth = keyViewsWidths[rowIndex] + (CGFloat(keyViews[rowIndex].count - 1) * KEY_SPACING)
+            let firstKeyViewInRow = keyViews[rowIndex][0]
+            
+            firstKeyViewInRow.autoPinEdge(
+                toSuperviewEdge: .left,
+                withInset: (WINDOW_SIZE.width - CONTAINER_VIEW_INSETS.left - CONTAINER_VIEW_INSETS.right - rowWidth) / 2
+            )
+        }
     }
     
     func activateTheme(theme: Theme) {
@@ -39,8 +172,11 @@ class ViewController: NSViewController, StoreSubscriber {
     }
     
     func newState(state: AppState) {
-        self.loadDataForAppWithName(state.view.appName)
+        // self.loadDataForAppWithName(state.view.appName)
         self.activateTheme(theme: state.theme.theme)
+        
+        configureKeyRows()
+        configureKeyboardView()
     }
     
     override func viewDidLoad() {
@@ -48,7 +184,8 @@ class ViewController: NSViewController, StoreSubscriber {
         
         mainStore.subscribe(self)
         
-        configureCollectionView()
+        configureKeyRows()
+        configureKeyboardView()
         startKeyListener()
         
         view.wantsLayer = true
@@ -99,7 +236,7 @@ class ViewController: NSViewController, StoreSubscriber {
     
     func loadDataForAppWithName(_ appName: String?) {
         bindingLoader.loadDataForAppWithName(appName ?? "")
-        collectionView.reloadData()
+        // collectionView.reloadData()
     }
     
     override var representedObject: Any? {
