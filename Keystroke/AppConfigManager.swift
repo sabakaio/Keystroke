@@ -32,14 +32,19 @@ public protocol AppBindingsConfig {
     var name: String { get set }
 }
 
+public struct AppBindingsConfigOperation: AppBindingsConfig {
+    public var name: String
+    let operation: AppOperation
+}
+
 public struct AppBindingsConfigFolder: AppBindingsConfig {
     public var name: String
-    let bindings: [String: AppBindingsConfig]
+    let bindings: [KeyCode: AppBindingsConfig]
     
     public func printTree(level: Int = 0) {
         let indent = level * 4
         for (key, config) in bindings {
-            let prefix = String(repeating: " ", count: indent) + key + ":"
+            let prefix = String(repeating: " ", count: indent) + String(describing: key) + ":"
             guard let subfolder = config as? AppBindingsConfigFolder else {
                 let operation = config as! AppBindingsConfigOperation
                 print(prefix + " " + operation.name)
@@ -49,11 +54,6 @@ public struct AppBindingsConfigFolder: AppBindingsConfig {
             subfolder.printTree(level: level + 1)
         }
     }
-}
-
-public struct AppBindingsConfigOperation: AppBindingsConfig {
-    public var name: String
-    let operation: AppOperation
 }
 
 class AppConfigManager: NSObject {
@@ -96,25 +96,39 @@ class AppConfigManager: NSObject {
             }
             
             // Create a bindings tree
-            func toBindingsConfig(name: String, value: [Yaml: Yaml]) -> AppBindingsConfig {
-                let currentLevel = value.reduce([String: AppBindingsConfig](), {
-                    (accumulator, nextValue) -> [String: AppBindingsConfig] in
-                    var result = accumulator
-                    let letter = nextValue.key.string!
-                    // TODO guard letter.characters.count == 1
-                    guard let subfolder = nextValue.value.dictionary else {
-                        let operation = nextValue.value.string!
-                        result[letter] = AppBindingsConfigOperation(name: operation, operation: operations[operation]!)
+            func toBindingsConfig(name: String, value: [Yaml]) throws -> AppBindingsConfig {
+                let currentLevel = try value.reduce([KeyCode: AppBindingsConfig](), {
+                    (result, value) throws -> [KeyCode: AppBindingsConfig] in
+                    var result = result
+                    
+                    // Parse key config, extract a name and a key code
+                    let config = value.dictionary!
+                    let letter = config["key"]!.string!
+                    let name = config["name"]!.string!
+                    let keyCode = try KeyCode.from(letter: letter)
+
+                    // Is it a folder? Treat as an operation otherwise
+                    guard let subfolder = config["bindings"]?.array else {
+                        let operation = config["operation"]!.string!
+                        result[keyCode] = AppBindingsConfigOperation(
+                            name: name,
+                            operation: operations[operation]!
+                        )
                         return result
                     }
-                    result[letter] = toBindingsConfig(name: letter, value: subfolder)
+                    
+                    // Go to a recursion to parse next level
+                    result[keyCode] = try toBindingsConfig(name: name, value: subfolder)
                     return result
                 })
-                return AppBindingsConfigFolder(name: name, bindings: currentLevel)
+                return AppBindingsConfigFolder(
+                    name: name,
+                    bindings: currentLevel
+                )
             }
-            let bindings = toBindingsConfig(
+            let bindings = try toBindingsConfig(
                 name: file.appName,
-                value: value.dictionary!["bindings"]!.dictionary!
+                value: value.dictionary!["bindings"]!.array!
             ) as! AppBindingsConfigFolder
             
             bindings.printTree()

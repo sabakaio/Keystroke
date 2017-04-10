@@ -6,7 +6,15 @@ operations:
     hotkey: cmd-shift-d
 
 bindings:
-  s:
-    s: Split Vertically
-    v: Split Vertically
-    h: Split Horizontally
+  - key: s
+    name: split
+    bindings:
+      - key: s
+        name: vertically
+        operation: Split Vertically
+      - key: v
+        name: vertically
+        operation: Split Vertically
+      - key: h
+        name: horizontally
+        operation: Split Horizontally
