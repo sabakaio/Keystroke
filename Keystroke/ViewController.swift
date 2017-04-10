@@ -8,6 +8,7 @@
 
 import Cocoa
 import ReSwift
+import PureLayout
 
 class ViewController: NSViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
