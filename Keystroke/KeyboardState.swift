@@ -10,6 +10,8 @@ import ReSwift
 
 struct KeyboardState: StateType {
     var keys: [String: KeyboardKey]
+    var appName: String?
+    var strokes: [KeyCode]
     
     init() {
         keys = [
@@ -21,6 +23,8 @@ struct KeyboardState: StateType {
                 result[key] = KeyboardKey(name: key, title: key, type: KeyboardKeyType.Empty)
                 return result
             })
+        appName = nil
+        strokes = [KeyCode]()
     }
 }
 

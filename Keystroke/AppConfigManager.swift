@@ -82,7 +82,7 @@ class AppConfigManager: NSObject {
             let operations = try value.dictionary!["operations"]!.array!.map({
                 (operation: Yaml) throws -> AppOperation in
                 let hotKey = operation.dictionary!["hotkey"]!.string!
-                let code = try KeyCode.fromString(hotKey)
+                let code = try KeyCode.from(config: hotKey)
                 return AppOperation(
                     name: operation.dictionary!["name"]!.string!,
                     originalHotkey: hotKey,

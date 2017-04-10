@@ -92,8 +92,13 @@ enum KeyCode: UInt64 {
     
     case Key_FN = 63
     
-    static func fromString(_ value: String) throws -> (flags: CGEventFlags, keyCode: KeyCode?) {
-        let sections = value.components(separatedBy: "-")
+    static func from(event: CGEvent) -> KeyCode? {
+        let eventCode = event.getIntegerValueField(.keyboardEventKeycode)
+        return KeyCode(rawValue: UInt64(eventCode))
+    }
+    
+    static func from(config: String) throws -> (flags: CGEventFlags, keyCode: KeyCode?) {
+        let sections = config.components(separatedBy: "-")
         var flags = CGEventFlags()
         var letter: String? = nil
         var code: KeyCode? = nil
@@ -113,7 +118,7 @@ enum KeyCode: UInt64 {
                     throw KeyCodeError.UnknownFlag(value: section)
                 }
                 guard letter == nil else {
-                    throw KeyCodeError.MultipleKeys(value: value)
+                    throw KeyCodeError.MultipleKeys(value: config)
                 }
                 letter = section
             }

@@ -60,9 +60,6 @@ func viewReducer(state: ViewState?, _ action: Action) -> ViewState {
         let event = action.event, appName = action.appName, type = action.type
         let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
         
-        //let letter = String(describing: UnicodeScalar(UInt32(truncatingBitPattern: keyCode)))
-        
-        
         state.lastEvent = event
         guard let bindings = mainStore.state.bindings.apps[appName] else { return state }
         
