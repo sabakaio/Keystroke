@@ -8,13 +8,14 @@
 
 import Cocoa
 
-enum KeyCodeError: Error {
+public enum KeyCodeError: Error {
     case MultipleKeys(value: String)
     case UnknownFlag(value: String)
     case UnknownKey(value: String)
+    case CannotConvertToString(value: KeyCode)
 }
 
-enum KeyCode: UInt64 {
+public enum KeyCode: UInt64 {
     // Row 1
     case Key_BACKTICK = 50
     case Key_1 = 18
@@ -92,11 +93,74 @@ enum KeyCode: UInt64 {
     
     case Key_FN = 63
     
-    static func fromString(_ value: String) throws -> (flags: CGEventFlags, keyCode: KeyCode?) {
-        let sections = value.components(separatedBy: "-")
+    static func from(event: CGEvent) -> KeyCode? {
+        let eventCode = event.getIntegerValueField(.keyboardEventKeycode)
+        return KeyCode(rawValue: UInt64(eventCode))
+    }
+    
+    static func from(letter: String) throws -> KeyCode {
+        switch letter {
+        case "a":
+            return .Key_a
+        case "b":
+            return .Key_b
+        case "c":
+            return .Key_c
+        case "d":
+            return .Key_d
+        case "e":
+            return .Key_e
+        case "f":
+            return .Key_f
+        case "g":
+            return .Key_g
+        case "h":
+            return .Key_h
+        case "i":
+            return .Key_i
+        case "j":
+            return .Key_j
+        case "k":
+            return .Key_k
+        case "l":
+            return .Key_l
+        case "m":
+            return .Key_m
+        case "n":
+            return .Key_n
+        case "o":
+            return .Key_o
+        case "p":
+            return .Key_p
+        case "q":
+            return .Key_q
+        case "r":
+            return .Key_r
+        case "s":
+            return .Key_s
+        case "t":
+            return .Key_t
+        case "u":
+            return .Key_u
+        case "v":
+            return .Key_v
+        case "w":
+            return .Key_w
+        case "x":
+            return .Key_x
+        case "y":
+            return .Key_y
+        case "z":
+            return .Key_z
+        default:
+            throw KeyCodeError.UnknownKey(value: letter)
+        }
+    }
+    
+    static func from(config: String) throws -> (flags: CGEventFlags, keyCode: KeyCode?) {
+        let sections = config.components(separatedBy: "-")
         var flags = CGEventFlags()
         var letter: String? = nil
-        var code: KeyCode? = nil
         
         for section in sections {
             switch section {
@@ -113,7 +177,7 @@ enum KeyCode: UInt64 {
                     throw KeyCodeError.UnknownFlag(value: section)
                 }
                 guard letter == nil else {
-                    throw KeyCodeError.MultipleKeys(value: value)
+                    throw KeyCodeError.MultipleKeys(value: config)
                 }
                 letter = section
             }
@@ -121,63 +185,66 @@ enum KeyCode: UInt64 {
         
         guard letter != nil else { return (flags, nil) }
         
-        switch letter! {
-        case "a":
-            code = .Key_a
-        case "b":
-            code = .Key_b
-        case "c":
-            code = .Key_c
-        case "d":
-            code = .Key_d
-        case "e":
-            code = .Key_e
-        case "f":
-            code = .Key_f
-        case "g":
-            code = .Key_g
-        case "h":
-            code = .Key_h
-        case "i":
-            code = .Key_i
-        case "j":
-            code = .Key_j
-        case "k":
-            code = .Key_k
-        case "l":
-            code = .Key_l
-        case "m":
-            code = .Key_m
-        case "n":
-            code = .Key_n
-        case "o":
-            code = .Key_o
-        case "p":
-            code = .Key_p
-        case "q":
-            code = .Key_q
-        case "r":
-            code = .Key_r
-        case "s":
-            code = .Key_s
-        case "t":
-            code = .Key_t
-        case "u":
-            code = .Key_u
-        case "v":
-            code = .Key_v
-        case "w":
-            code = .Key_w
-        case "x":
-            code = .Key_x
-        case "y":
-            code = .Key_y
-        case "z":
-            code = .Key_z
+        let keyCode = try self.from(letter: letter!)
+        return (flags, keyCode)
+    }
+    
+    func toLetter() throws -> String {
+        switch self {
+        case .Key_a:
+            return "a"
+        case .Key_b:
+            return "b"
+        case .Key_c:
+            return "c"
+        case .Key_d:
+            return "d"
+        case .Key_e:
+            return "e"
+        case .Key_f:
+            return "f"
+        case .Key_g:
+            return "g"
+        case .Key_h:
+            return "h"
+        case .Key_i:
+            return "i"
+        case .Key_j:
+            return "j"
+        case .Key_k:
+            return "k"
+        case .Key_l:
+            return "l"
+        case .Key_m:
+            return "m"
+        case .Key_n:
+            return "m"
+        case .Key_o:
+            return "o"
+        case .Key_p:
+            return "p"
+        case .Key_q:
+            return "q"
+        case .Key_r:
+            return "r"
+        case .Key_s:
+            return "s"
+        case .Key_t:
+            return "t"
+        case .Key_u:
+            return "u"
+        case .Key_v:
+            return "v"
+        case .Key_w:
+            return "w"
+        case .Key_x:
+            return "x"
+        case .Key_y:
+            return "y"
+        case .Key_z:
+            return "z"
         default:
-            throw KeyCodeError.UnknownKey(value: letter!)
+            throw KeyCodeError.CannotConvertToString(value: self)
         }
-        
-        return (flags, code)
     }
 }
