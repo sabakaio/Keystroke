@@ -95,7 +95,7 @@ class ViewController: NSViewController, StoreSubscriber {
         
         let container = self.containerView!
         
-        view.addSubview(container)
+        keyboardView.addSubview(container)
         container.autoAlignAxis(.vertical, toSameAxisOf: view)
         container.autoPinEdgesToSuperviewEdges(with: CONTAINER_VIEW_INSETS)
         
@@ -178,6 +178,7 @@ class ViewController: NSViewController, StoreSubscriber {
                     width: keyWidthWithPadding,
                     height: KEY_SIZE.height
                 ))
+                keyContainerView.autoPinEdge(toSuperviewEdge: .top)
                 
                 if keyIndex >= 1, keyIndex < keyRows[rowIndex].count {
                     keyContainerView.autoPinEdge(.left, to: .right, of: keyViews[rowIndex][keyIndex - 1], withOffset: KEY_SPACING)

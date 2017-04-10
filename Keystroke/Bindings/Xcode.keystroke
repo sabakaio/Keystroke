@@ -3,6 +3,8 @@ name: XCode
 operations:
   - name: Show Debug Area
     hotkey: cmd-shift-y
+  - name: Find in Workspace
+    hotkey: cmd-shift-f
 
 bindings:
   - key: v
@@ -11,3 +13,9 @@ bindings:
       - key: d
         name: debug
         operation: Show Debug Area
+  - key: f
+    name: find
+    bindings:
+      - key: w
+        name: in Workspace
+        operation: Find in Workspace
