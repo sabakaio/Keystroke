@@ -29,6 +29,15 @@ struct RGBA {
     public var green: CGFloat
     public var blue: CGFloat
     public var alpha: CGFloat
+    
+    func asNSColor() -> NSColor {
+        return NSColor.init(
+            calibratedRed: self.calibratedRed,
+            green: self.green,
+            blue: self.blue,
+            alpha: self.alpha
+        )
+    }
 }
 
 struct Theme {

@@ -18,7 +18,7 @@ struct KeyboardState: StateType {
             "z", "x", "c", "v", "b", "n", "m"
             ].reduce([String: KeyboardKey](), { result, key in
                 var result = result
-                result[key] = KeyboardKey(name: key, title: "split", type: KeyboardKeyType.Empty)
+                result[key] = KeyboardKey(name: key, title: key, type: KeyboardKeyType.Empty)
                 return result
             })
     }

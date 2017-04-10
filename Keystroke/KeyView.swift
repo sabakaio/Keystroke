@@ -9,15 +9,29 @@
 import Cocoa
 
 class KeyView: NSTextField {
-    var padding: CGFloat = 10.0
+    static func create() -> KeyView {
+        let view = KeyView.newAutoLayout()
+        
+        view.isEditable = false
+        view.isBezeled = false
+        view.drawsBackground = false
+        view.translatesAutoresizingMaskIntoConstraints = true
+        view.wantsLayer = true
+        view.alignment = .center
+        view.usesSingleLineMode = true
+        
+        view.backgroundColor = NSColor.clear
+        view.textColor = mainStore.state.theme.theme.actionColor.asNSColor()
+        
+        let layer = view.layer!
+        layer.borderWidth = 1.5
+        layer.borderColor = KEY_BORDER_COLOR.cgColor
+        layer.cornerRadius = 4
+
+        return view
+    }
     
     override func draw(_ dirtyRect: NSRect) {
-        let rect = NSRect(
-            x: dirtyRect.origin.x + padding,
-            y: dirtyRect.origin.y + padding,
-            width: dirtyRect.size.width + padding,
-            height: dirtyRect.size.height + padding
-        )
-        super.draw(rect)
+        super.draw(dirtyRect)
     }
 }

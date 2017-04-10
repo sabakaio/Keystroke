@@ -9,6 +9,9 @@
 import Cocoa
 import ReSwift
 
+let WINDOW_SIZE = NSSize(width: 1000.0, height: 190.0)
+let WINDOW_PADDING_FROM_BOTTOM: CGFloat = 20.0
+
 class WindowController: NSWindowController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
        
@@ -43,17 +46,18 @@ class WindowController: NSWindowController, StoreSubscriber {
         // Position window
         if let window = window, let screen = NSScreen.main() {
             let screenRect = screen.visibleFrame
-            let quaterWidth = screenRect.width / 4.0
-            let quaterHeight = screenRect.height / 4.0
             
             window.setFrame(
-                NSRect(x: screenRect.origin.x + (quaterWidth / 2.0),
-                       y: screenRect.origin.y + (quaterHeight * 3.0),
-                       width: quaterWidth * 3.0,
-                       height: 220
+                NSRect(x: screenRect.origin.x + ((screenRect.width - WINDOW_SIZE.width) / 2),
+                       y: screenRect.origin.y + WINDOW_PADDING_FROM_BOTTOM,
+                       width: WINDOW_SIZE.width,
+                       height: WINDOW_SIZE.height
                 ),
                 display: true
             )
+            
+            window.minSize = NSSize(width: WINDOW_SIZE.width, height: WINDOW_SIZE.height)
+            window.maxSize = NSSize(width: WINDOW_SIZE.width, height: WINDOW_SIZE.height)
             
             window.backgroundColor = NSColor.clear
             
