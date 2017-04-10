@@ -10,7 +10,7 @@ import Cocoa
 
 class KeyView: NSTextField {
     static func create() -> KeyView {
-        let view = KeyView.newAutoLayout()
+        let view = KeyView(labelWithString: "")
         
         view.isEditable = false
         view.isBezeled = false

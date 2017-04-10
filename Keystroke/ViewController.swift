@@ -10,7 +10,7 @@ import Cocoa
 import ReSwift
 import PureLayout
 
-let KEY_SIZE = NSSize(width: 50.0, height: 50.0)
+let KEY_SIZE = NSSize(width: 45.0, height: 45.0)
 let CONTAINER_VIEW_INSETS = EdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
 let KEY_FONT_SIZE: CGFloat = 20.0
 let KEY_SPACING: CGFloat = 10.0
@@ -122,10 +122,28 @@ class ViewController: NSViewController, StoreSubscriber {
                 let keyContainerView = NSView.newAutoLayout()
                 keyContainerView.wantsLayer = true
                 let keyView = KeyView.create()
-                keyView.stringValue = key.title
-                
                 // TODO check fonts exists
-                keyView.font = keyFont!
+//                keyView.font = keyFont!
+                
+                let style = NSMutableParagraphStyle()
+                style.lineSpacing = 100.0
+                style.alignment = .center
+                let attributes = [
+                    NSParagraphStyleAttributeName: style,
+                    NSFontAttributeName: keyFont!,
+                ] as [String : Any]
+//                let highlightAttibutes = [
+//                    NSParagraphStyleAttributeName: style,
+//                    NSFontAttributeName: keyFont!,
+//                    NSForegroundColorAttributeName: NSColor.red
+//                ] as [String : Any]
+                
+                let keyText = NSMutableAttributedString()
+//                keyText.append(NSAttributedString(string: "x", attributes: highlightAttibutes))
+                keyText.append(NSAttributedString(string: key.title, attributes: attributes))
+                keyView.attributedStringValue = keyText
+                    
+                
                 
                 switch key.type {
                 case .Folder:
@@ -139,20 +157,18 @@ class ViewController: NSViewController, StoreSubscriber {
                 keyViews[rowIndex].append(keyContainerView)
                 keyContainerView.addSubview(keyView)
                 rowView.addSubview(keyContainerView)
-                keyView.lineBreakMode = .byClipping
                 
                 let layer = keyContainerView.layer!
                 layer.borderWidth = 1.5
-                layer.borderColor = KEY_BORDER_COLOR.cgColor
+                layer.borderColor = mainStore.state.theme.theme.emptyColor.asNSColor().cgColor
                 layer.cornerRadius = 4
                 
                 let textSize = calculateSize(of: keyView.stringValue, using: keyFont!)
                 let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
-                
-                keyView.autoPinEdge(
-                    toSuperviewEdge: .top,
-                    withInset: (KEY_SIZE.height - textSize.height) - 2
-                )
+
+//                keyView.autoAlignAxis(toSuperviewAxis: .horizontal)
+                keyView.autoPinEdge(toSuperviewEdge: .top, withInset: 15.0)
+                keyView.autoAlignAxis(toSuperviewAxis: .vertical)
                 
                 keyView.autoMatch(.width, to: .width, of: keyView.superview!, withOffset: 0.0)
                 
