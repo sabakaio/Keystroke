@@ -10,6 +10,8 @@ import ReSwift
 
 struct ThemeActionToggle: Action {}
 
+struct WindowHideAction: Action {}
+
 struct AppBindingsSetAction: Action {
     let appName: String
     let config: AppConfig

@@ -1,3 +1,5 @@
+name: iTerm2
+
 operations:
   - name: Split Vertically
     hotkey: cmd-d
