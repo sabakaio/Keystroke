@@ -122,6 +122,7 @@ class ViewController: NSViewController, StoreSubscriber {
                 let keyView = KeyView.create()
                 keyView.stringValue = key.title
                 
+                // TODO check fonts exists
                 keyView.font = keyFont!
                 
                 switch key.type {
