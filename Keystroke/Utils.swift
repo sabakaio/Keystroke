@@ -15,9 +15,3 @@ func bridge<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer {
 func transfer<T : AnyObject>(ptr : UnsafeMutableRawPointer) -> T {
     return Unmanaged<T>.fromOpaque(ptr).takeUnretainedValue()
 }
-
-func calculateSize(of text: String, using font: NSFont) -> NSSize {
-    let attributes = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
-    let sizeOfText = text.size(withAttributes: attributes as! [String : Any])
-    return sizeOfText
-}
