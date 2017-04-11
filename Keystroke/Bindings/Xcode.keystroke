@@ -5,6 +5,8 @@ operations:
     hotkey: cmd-shift-y
   - name: Find in Workspace
     hotkey: cmd-shift-f
+  - name: Open Quickly
+    hotkey: cmd-shift-o
 
 bindings:
   - key: v
@@ -19,3 +21,6 @@ bindings:
       - key: w
         name: in Workspace
         operation: Find in Workspace
+      - key: f
+        name: fuzzy
+        operation: Open Quickly
