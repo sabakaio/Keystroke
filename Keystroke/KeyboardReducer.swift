@@ -13,6 +13,10 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
     
     switch action {
         
+    case _ as WindowHideAction:
+        state.lastEvent = nil
+        state.strokes = []
+        
     case let action as InitKeyboardForApp:
         let appName = action.appName
         // Reset strokes sequence and keyboard layout if current app changed
