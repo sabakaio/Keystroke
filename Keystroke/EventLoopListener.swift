@@ -10,12 +10,11 @@ import Foundation
 import Cocoa
 
 fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGEvent>? {
-    let appName = NSWorkspace.shared().frontmostApplication!.localizedName!
     let windowWasVisible = mainStore.state.window.visible
     
-    // Process event to update window state (e.g. visibility)
+    // Process event to update window visibility state
     mainStore.dispatch(
-        ComputeWindowStateForIOEvent(appName: appName, type: type, event: event)
+        ComputeWindowStateForIOEvent(type: type, event: event)
     )
     
     // Bypass event if window is not active
@@ -31,6 +30,7 @@ fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGE
     
     // Init a keyboard on become visible and start blocking event propagation
     if !windowWasVisible, windowShouldBecomeVisible {
+        let appName = NSWorkspace.shared().frontmostApplication!.localizedName!
         mainStore.dispatch(InitKeyboardForApp(appName: appName))
         return nil
     }

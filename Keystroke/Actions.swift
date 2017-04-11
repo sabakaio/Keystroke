@@ -18,7 +18,6 @@ struct AppBindingsSetAction: Action {
 }
 
 struct ComputeWindowStateForIOEvent: Action {
-    let appName: String
     let type: CGEventType
     let event: CGEvent
 }
