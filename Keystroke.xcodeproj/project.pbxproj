@@ -31,8 +31,6 @@
 		68B068101E96EE7A00C186F5 /* KeystrokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0680F1E96EE7A00C186F5 /* KeystrokeTests.swift */; };
 		68B0681B1E96EE7A00C186F5 /* KeystrokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0681A1E96EE7A00C186F5 /* KeystrokeUITests.swift */; };
 		68B0682D1E96EF7200C186F5 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0682C1E96EF7200C186F5 /* WindowController.swift */; };
-		68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0682E1E96F41B00C186F5 /* CollectionViewItem.swift */; };
-		68B068311E96F41B00C186F5 /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B0682F1E96F41B00C186F5 /* CollectionViewItem.xib */; };
 		984122481E9AA98D00705FC3 /* KeyboardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122471E9AA98D00705FC3 /* KeyboardState.swift */; };
 		9841224A1E9AAA7900705FC3 /* KeyboardReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122491E9AAA7900705FC3 /* KeyboardReducer.swift */; };
 		984122501E9BD43F00705FC3 /* Xcode.keystroke in Resources */ = {isa = PBXBuildFile; fileRef = 9841224F1E9BD43F00705FC3 /* Xcode.keystroke */; };
@@ -94,8 +92,6 @@
 		68B0681A1E96EE7A00C186F5 /* KeystrokeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystrokeUITests.swift; sourceTree = "<group>"; };
 		68B0681C1E96EE7A00C186F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68B0682C1E96EF7200C186F5 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
-		68B0682E1E96F41B00C186F5 /* CollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewItem.swift; sourceTree = "<group>"; };
-		68B0682F1E96F41B00C186F5 /* CollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewItem.xib; sourceTree = "<group>"; };
 		68B068361E97160400C186F5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		984122471E9AA98D00705FC3 /* KeyboardState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardState.swift; sourceTree = "<group>"; };
 		984122491E9AAA7900705FC3 /* KeyboardReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardReducer.swift; sourceTree = "<group>"; };
@@ -264,8 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				68B0682C1E96EF7200C186F5 /* WindowController.swift */,
-				68B0682E1E96F41B00C186F5 /* CollectionViewItem.swift */,
-				68B0682F1E96F41B00C186F5 /* CollectionViewItem.xib */,
 				68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */,
 				68B067FF1E96EE7A00C186F5 /* ViewController.swift */,
 			);
@@ -425,7 +419,6 @@
 				685CB4CA1E97C4DE00C92195 /* iTerm2.keystroke in Resources */,
 				68B068021E96EE7A00C186F5 /* Assets.xcassets in Resources */,
 				68B068051E96EE7A00C186F5 /* Main.storyboard in Resources */,
-				68B068311E96F41B00C186F5 /* CollectionViewItem.xib in Resources */,
 				984122501E9BD43F00705FC3 /* Xcode.keystroke in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,7 +599,6 @@
 				685CB4CD1E97F2E400C92195 /* Utils.swift in Sources */,
 				685CB4E21E981EF200C92195 /* AppConfigManager.swift in Sources */,
 				984122481E9AA98D00705FC3 /* KeyboardState.swift in Sources */,
-				68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */,
 				685CB4DE1E98020F00C92195 /* WindowState.swift in Sources */,
 				686E659A1E9D1E5500F513CC /* RowView.swift in Sources */,
 				685CB4E01E9802BB00C92195 /* WindowReducer.swift in Sources */,
