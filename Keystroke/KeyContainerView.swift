@@ -8,6 +8,8 @@
 
 import Cocoa
 
+let ANIMATION_DURATION = 0.1
+
 class KeyContainerView: NSView {
     private var widthDimensionReference: NSLayoutConstraint? = nil
     private var centerPinReference: NSLayoutConstraint? = nil
@@ -16,7 +18,10 @@ class KeyContainerView: NSView {
         if widthDimensionReference == nil {
             widthDimensionReference = self.autoSetDimension(.width, toSize: width)
         } else {
-            widthDimensionReference!.constant = width
+            NSAnimationContext.runAnimationGroup({ context in
+                context.duration = ANIMATION_DURATION
+                widthDimensionReference!.animator().constant = width
+            })
         }
     }
     
@@ -24,7 +29,10 @@ class KeyContainerView: NSView {
         if centerPinReference == nil {
             centerPinReference = self.autoPinEdge(toSuperviewEdge: .left, withInset: inset)
         } else {
-            centerPinReference!.constant = inset
+            NSAnimationContext.runAnimationGroup({ context in
+                context.duration = ANIMATION_DURATION
+                centerPinReference!.animator().constant = inset
+            })
         }
     }
     
