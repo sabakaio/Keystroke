@@ -97,7 +97,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
         CGEvent.tapEnable(tap: eventTap, enable: true)
         keyListener = eventTap
-        //CFRunLoopRun()
+        CFRunLoopRun()
     }
 }
 
