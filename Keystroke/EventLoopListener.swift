@@ -9,53 +9,53 @@
 import Foundation
 import Cocoa
 
+fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGEvent>? {
+    let appName = NSWorkspace.shared().frontmostApplication!.localizedName!
+    let windowWasVisible = mainStore.state.window.visible
+    
+    // Process event to update window state (e.g. visibility)
+    mainStore.dispatch(
+        ComputeWindowStateForIOEvent(appName: appName, type: type, event: event)
+    )
+    
+    // Bypass event if window is not active
+    let windowShouldBecomeVisible = mainStore.state.window.visible
+    if !windowShouldBecomeVisible {
+        return Unmanaged.passRetained(event)
+    }
+    
+    // Do not lock mouse
+    if type == .leftMouseDown {
+        return Unmanaged.passRetained(event)
+    }
+    
+    // Init a keyboard on become visible and start blocking event propagation
+    if !windowWasVisible, windowShouldBecomeVisible {
+        mainStore.dispatch(InitKeyboardForApp(appName: appName))
+        return nil
+    }
+    
+    // Update keyboad layout with next level or get an oparation to perform
+    mainStore.dispatch(
+        KeyEventBindingAction(type: type, event: event)
+    )
+    
+    guard let operation = mainStore.state.keyboard.operation else { return nil }
+    
+    // Create new event based on requested operation
+    let newEvent = event.copy()
+    let newCode = Int64(operation.keyCode!.rawValue)
+    newEvent!.setIntegerValueField(.keyboardEventKeycode, value: newCode)
+    newEvent!.flags = operation.flags
+    
+    // Hide main window, all done
+    mainStore.dispatch(WindowHideAction())
+    
+    return Unmanaged.passRetained(newEvent!)
+}
+
 public class EventLoopListener: NSObject {
     private var keyListener: CFMachPort? = nil
-    
-    private func handleKeyEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGEvent>? {
-        let appName = NSWorkspace.shared().frontmostApplication!.localizedName!
-        let windowWasVisible = mainStore.state.window.visible
-        
-        // Process event to update window state (e.g. visibility)
-        mainStore.dispatch(
-            ComputeWindowStateForIOEvent(appName: appName, type: type, event: event)
-        )
-        
-        // Bypass event if window is not active
-        let windowShouldBecomeVisible = mainStore.state.window.visible
-        if !windowShouldBecomeVisible {
-            return Unmanaged.passRetained(event)
-        }
-        
-        // Do not lock mouse
-        if type == .leftMouseDown {
-            return Unmanaged.passRetained(event)
-        }
-        
-        // Init a keyboard on become visible and start blocking event propagation
-        if !windowWasVisible, windowShouldBecomeVisible {
-            mainStore.dispatch(InitKeyboardForApp(appName: appName))
-            return nil
-        }
-        
-        // Update keyboad layout with next level or get an oparation to perform
-        mainStore.dispatch(
-            KeyEventBindingAction(type: type, event: event)
-        )
-        
-        guard let operation = mainStore.state.keyboard.operation else { return nil }
-        
-        // Create new event based on requested operation
-        let newEvent = event.copy()
-        let newCode = Int64(operation.keyCode!.rawValue)
-        newEvent!.setIntegerValueField(.keyboardEventKeycode, value: newCode)
-        newEvent!.flags = operation.flags
-        
-        // Hide main window, all done
-        mainStore.dispatch(WindowHideAction())
-        
-        return Unmanaged.passRetained(newEvent!)
-    }
     
     public func start() {
         func callback(
@@ -65,23 +65,21 @@ public class EventLoopListener: NSObject {
             refcon: UnsafeMutableRawPointer?
             ) -> Unmanaged<CGEvent>? {
 
-            let listener: EventLoopListener = transfer(ptr: refcon!)
-            
             switch type {
             case .keyDown:
                 print("keyDown")
-            case .keyUp:
-                print("keyUp")
+//            case .keyUp:
+//                print("keyUp")
             case .flagsChanged:
                 print("flagsChanged")
             case .leftMouseDown:
                 print("leftMouseDown")
-            case .tapDisabledByTimeout:
-                print("tapDisabledByTimeout")
-                return listener.restart(for: event)
-            case .tapDisabledByUserInput:
-                print("tapDisabledByUserInput")
-                return listener.restart(for: event)
+//            case .tapDisabledByTimeout:
+//                print("tapDisabledByTimeout")
+//                return listener.restart(for: event)
+//            case .tapDisabledByUserInput:
+//                print("tapDisabledByUserInput")
+//                return listener.restart(for: event)
             default:
                 // The mask accepts all events so we need to pass
                 // the events we don't care about as early as possible.
@@ -89,11 +87,16 @@ public class EventLoopListener: NSObject {
                 return Unmanaged.passRetained(event)
             }
             
-            return listener.handleKeyEvent(type: type, event: event)
+            return handleEvent(type: type, event: event)
         }
         
         // All events
-        let eventMask = ~CGEventMask.allZeros
+        // let eventMask = ~CGEventMask.allZeros
+        let eventMask = CGEventMask(0
+            | (1 << CGEventType.flagsChanged.rawValue)
+            | (1 << CGEventType.keyDown.rawValue)
+            //| (1 << CGEventType.keyUp.rawValue)
+            | (1 << CGEventType.leftMouseDown.rawValue))
         
         guard let eventTap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
