@@ -11,5 +11,4 @@ import ReSwift
 struct WindowState: StateType {
     var visible: Bool = false
     var skipNextShowTrigger: Bool = false
-    var appName: String? = nil
 }

@@ -29,8 +29,6 @@ func windowReducer(state: WindowState?, _ action: Action) -> WindowState {
         let flags = action.event.flags
         let hasCommand = flags.contains(CGEventFlags.maskCommand)
         
-        state.appName = action.appName
-        
         if keyCode == 53 && state.visible {
             // hide with escape
             state.visible = false
