@@ -35,7 +35,7 @@ import PureLayout
 import BonMot
 
 let KEY_SIZE = NSSize(width: 45.0, height: 45.0)
-let CONTAINER_VIEW_INSETS = EdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+let CONTAINER_VIEW_INSETS = EdgeInsets(top: 35.0, left: 10.0, bottom: 20.0, right: 10.0)
 let KEY_FONT_SIZE: CGFloat = 20.0
 let KEY_SPACING: CGFloat = 10.0
 let KEY_TEXT_PADDING: CGFloat = 30.0
@@ -45,6 +45,7 @@ public struct KeyStyles {
     let empty: StringStyle
     let plaintext: StringStyle
     let highlight: StringStyle
+    let breadcrumbs: StringStyle
 }
 
 class ViewController: NSViewController, StoreSubscriber {
@@ -56,7 +57,9 @@ class ViewController: NSViewController, StoreSubscriber {
     private var keyContainerViews: [[KeyContainerView]] = [[], [], []]
     private var keyContainerTotalWidths: [CGFloat] = [0.0, 0.0, 0.0]
     private var keyFont: NSFont = NSFont(name: "San Francisco Display Light", size: KEY_FONT_SIZE)!
+    private var breadcrumbsFont: NSFont = NSFont(name: "San Francisco Display Medium", size: 14.0)!
     private var containerView: NSView? = nil
+    private var breadcrumbsView: NSTextField? = nil
     private var keyStyles: KeyStyles? = nil
     
     var keyRows: [[KeyboardKey]] = []
@@ -65,7 +68,7 @@ class ViewController: NSViewController, StoreSubscriber {
         if keyRows.count > 0 {
             keyRows.removeAll()
         }
-        
+
         keyRows = [
             [KeyCode.Key_q,
              KeyCode.Key_w,
@@ -119,7 +122,13 @@ class ViewController: NSViewController, StoreSubscriber {
             .color(theme.emptyColor.asNSColor())
         )
         
-        keyStyles = KeyStyles(empty: empty, plaintext: plaintext, highlight: highlight)
+        let breadcrumbs = empty.byAdding(
+            .alignment(.left),
+            .font(breadcrumbsFont),
+            .lineSpacing(15.0)
+        )
+        
+        keyStyles = KeyStyles(empty: empty, plaintext: plaintext, highlight: highlight, breadcrumbs: breadcrumbs)
     }
 
     private func setupKeyboardView() {
@@ -193,6 +202,22 @@ class ViewController: NSViewController, StoreSubscriber {
         }
     }
     
+    private func setupBreadcrumbsView() {
+        let appName = mainStore.state.keyboard.appName ?? ""
+        breadcrumbsView = NSTextField(labelWithAttributedString: appName.styled(with: keyStyles!.breadcrumbs))
+        let breadcrumbs = breadcrumbsView!
+        keyboardView.addSubview(breadcrumbs)
+        breadcrumbs.autoPinEdge(toSuperviewEdge: .top, withInset: 8.0)
+        breadcrumbs.autoPinEdge(.bottom, to: .top, of: containerView!, withOffset: 10.0)
+        breadcrumbs.autoPinEdge(.left, to: .left, of: keyContainerViews.first!.first!)
+        breadcrumbs.autoPinEdge(.right, to: .right, of: keyContainerViews.first!.last!)
+    }
+    
+    private func updateBreadcrumbsView() {
+        let appName = mainStore.state.keyboard.appName ?? ""
+        breadcrumbsView!.attributedStringValue = appName.styled(with: keyStyles!.breadcrumbs)
+    }
+    
     func activateTheme(theme: Theme) {
         guard let layer = view.layer else { return }
         layer.backgroundColor = NSColor.init(
@@ -208,6 +233,7 @@ class ViewController: NSViewController, StoreSubscriber {
         
         configureKeyRows()
         updateKeyboardView()
+        updateBreadcrumbsView()
     }
     
     override func viewDidLoad() {
@@ -215,6 +241,7 @@ class ViewController: NSViewController, StoreSubscriber {
         
         configureKeyRows()
         setupKeyboardView()
+        setupBreadcrumbsView()
 
         mainStore.subscribe(self)
         
