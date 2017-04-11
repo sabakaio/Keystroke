@@ -54,10 +54,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 print("tapDisabledByTimeout")
                 let application: AppDelegate = transfer(ptr: refcon!)
                 application.startKeyListener()
+                return Unmanaged.passRetained(event)
             case .tapDisabledByUserInput:
                 print("tapDisabledByUserInput")
                 let application: AppDelegate = transfer(ptr: refcon!)
                 application.startKeyListener()
+                return Unmanaged.passRetained(event)
             default:
                 // The mask accepts all events so we need to pass 
                 // the events we don't care about as early as possible.
@@ -65,10 +67,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 return Unmanaged.passRetained(event)
             }
             
-            handleKeyEvent(type: type, event: event)
+            try! handleKeyEvent(type: type, event: event)
             
             // Check event to popagate
-            guard let newEvent = mainStore.state.keyboard.lastEvent else { return nil }
+            guard let newEvent = mainStore.state.keyboard.lastEvent?.copy() else { return nil }
             // Hide main window
             mainStore.dispatch(WindowHideAction())
             

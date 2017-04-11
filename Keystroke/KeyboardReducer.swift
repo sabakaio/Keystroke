@@ -13,6 +13,13 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
     
     switch action {
         
+    case _ as WindowHideAction:
+        state.lastEvent = nil
+        state.strokes = []
+        
+    case let action as PassEventUnchanged:
+        state.lastEvent = action.event.copy()
+        
     case let action as InitKeyboardForApp:
         let appName = action.appName
         // Reset strokes sequence and keyboard layout if current app changed
@@ -34,7 +41,7 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
         let type = action.type, event = action.event
         
         // Remember latest event to pass through
-        state.lastEvent = event
+        state.lastEvent = event.copy()
         
         // Do nothing if Keystroke main window is inactive
         guard mainStore.state.window.visible else {

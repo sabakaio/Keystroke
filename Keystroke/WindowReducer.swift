@@ -16,6 +16,7 @@ func windowReducer(state: WindowState?, _ action: Action) -> WindowState {
     switch action {
     case _ as WindowHideAction:
         state.visible = false
+
     case let action as ComputeWindowStateForIOEvent:
         if [.leftMouseDown].contains(action.type) {
             if state.visible {
@@ -27,7 +28,7 @@ func windowReducer(state: WindowState?, _ action: Action) -> WindowState {
         
         let keyCode = action.event.getIntegerValueField(.keyboardEventKeycode)
         let flags = action.event.flags
-        let hasCommand = flags.contains(CGEventFlags.maskCommand)
+        let eventHasCommand = flags.contains(CGEventFlags.maskCommand)
         
         state.appName = action.appName
         
@@ -36,7 +37,7 @@ func windowReducer(state: WindowState?, _ action: Action) -> WindowState {
             state.visible = false
         }
         
-        if keyCode != 53 && keyCode != 55 && !state.visible && hasCommand {
+        if keyCode != 53 && keyCode != 55 && !state.visible {
             // Skip on cmd+something (e.g cmd+tab)
             state.skipNextShowTrigger = true
             return state
@@ -44,11 +45,11 @@ func windowReducer(state: WindowState?, _ action: Action) -> WindowState {
         
         if keyCode == 55 {
             if state.visible {
-                if !hasCommand {
+                if !eventHasCommand {
                     state.visible = false
                 }
             } else {
-                if !hasCommand {
+                if !eventHasCommand || [.keyUp].contains(action.type) {
                     if !state.skipNextShowTrigger {
                         state.visible = true
                     } else {
