@@ -16,6 +16,8 @@ public enum KeyCodeError: Error {
 }
 
 public enum KeyCode: UInt64 {
+    case Key_ESC = 53
+    
     // Row 1
     case Key_BACKTICK = 50
     case Key_1 = 18

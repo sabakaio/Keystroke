@@ -12,12 +12,17 @@ struct ThemeActionToggle: Action {}
 
 struct WindowHideAction: Action {}
 
+struct PassEventUnchanged: Action {
+    let type: CGEventType
+    let event: CGEvent
+}
+
 struct AppBindingsSetAction: Action {
     let appName: String
     let config: AppConfig
 }
 
-struct KeyEventWindowAction: Action {
+struct ComputeWindowStateForIOEvent: Action {
     let appName: String
     let type: CGEventType
     let event: CGEvent
@@ -28,23 +33,55 @@ struct KeyEventBindingAction: Action {
     let event: CGEvent
 }
 
-struct KeyboardInitAction: Action {
+struct InitKeyboardForApp: Action {
     let appName: String
 }
 
-func handleKeyEvent(type: CGEventType, event: CGEvent) {
-    let appName = NSWorkspace.shared().frontmostApplication?.localizedName
-    let windowVisible = mainStore.state.view.windowVisible
+enum HandleKeyError: Error {
+    case UnsupportedEventType(type: CGEventType)
+}
+
+func handleKeyEvent(type: CGEventType, event: CGEvent) throws {
+    let appName = NSWorkspace.shared().frontmostApplication!.localizedName!
+    let windowWasVisible = mainStore.state.window.visible
+    let skipNextShowTrigger = mainStore.state.window.skipNextShowTrigger
     
     mainStore.dispatch(
-        KeyEventWindowAction(appName: appName!, type: type, event: event)
+        ComputeWindowStateForIOEvent(appName: appName, type: type, event: event)
     )
     
-    if !windowVisible && mainStore.state.view.windowVisible {
-        mainStore.dispatch(KeyboardInitAction(appName: appName!))
+    let windowShouldBecomeVisible = mainStore.state.window.visible
+    let shouldSkipThisTrigger = mainStore.state.window.skipNextShowTrigger
+    
+    if skipNextShowTrigger || shouldSkipThisTrigger {
+        mainStore.dispatch(
+            PassEventUnchanged(type: type, event: event)
+        )
+        return
     }
     
-    mainStore.dispatch(
-        KeyEventBindingAction(type: type, event: event)
-    )
+    switch type {
+    case .leftMouseDown:
+        mainStore.dispatch(
+            PassEventUnchanged(type: type, event: event)
+        )
+    case .flagsChanged, .keyUp, .keyDown:
+        print("Window was visible: \(windowWasVisible), Window should become visible: \(windowShouldBecomeVisible), Skip: \(shouldSkipThisTrigger)")
+        
+        if !windowWasVisible, windowShouldBecomeVisible {
+            mainStore.dispatch(InitKeyboardForApp(appName: appName))
+        } else {
+            mainStore.dispatch(
+                PassEventUnchanged(type: type, event: event)
+            )
+        }
+        
+        if windowWasVisible {
+            mainStore.dispatch(
+                KeyEventBindingAction(type: type, event: event)
+            )
+        }
+    default:
+        throw HandleKeyError.UnsupportedEventType(type: type)
+    }
 }

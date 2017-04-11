@@ -16,7 +16,7 @@ class WindowController: NSWindowController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
        
     func newState(state: AppState) {
-        if (state.view.windowVisible) {
+        if (state.window.visible) {
             showWindow()
         } else {
             hideWindow()

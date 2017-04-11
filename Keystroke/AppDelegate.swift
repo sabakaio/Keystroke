@@ -24,16 +24,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // First load configurations from files
         appConfigManager.loadConfigurationsFromBundle()
-        keyListener = startKeyListener()
+        startKeyListener()
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
         CGEvent.tapEnable(tap: keyListener!, enable: false)
     }
     
     
-    func startKeyListener() -> CFMachPort {
+    func startKeyListener() {
         func callback(
             proxy: OpaquePointer,
             type: CGEventType,
@@ -41,29 +41,52 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             refcon: UnsafeMutableRawPointer?
             ) -> Unmanaged<CGEvent>? {
             
-            handleKeyEvent(type: type, event: event)
+            switch type {
+            case .keyDown:
+                print("keyDown")
+            case .keyUp:
+                print("keyUp")
+            case .flagsChanged:
+                print("flagsChanged")
+            case .leftMouseDown:
+                print("leftMouseDown")
+            case .tapDisabledByTimeout:
+                print("tapDisabledByTimeout")
+                let application: AppDelegate = transfer(ptr: refcon!)
+                application.startKeyListener()
+                return Unmanaged.passRetained(event)
+            case .tapDisabledByUserInput:
+                print("tapDisabledByUserInput")
+                let application: AppDelegate = transfer(ptr: refcon!)
+                application.startKeyListener()
+                return Unmanaged.passRetained(event)
+            default:
+                // The mask accepts all events so we need to pass 
+                // the events we don't care about as early as possible.
+                // Not even register them in our state
+                return Unmanaged.passRetained(event)
+            }
+            
+            try! handleKeyEvent(type: type, event: event)
             
             // Check event to popagate
-            guard let newEvent = mainStore.state.keyboard.lastEvent else { return nil }
+            guard let newEvent = mainStore.state.keyboard.lastEvent?.copy() else { return nil }
             // Hide main window
             mainStore.dispatch(WindowHideAction())
             
             return Unmanaged.passRetained(newEvent)
         }
         
-        let eventMask =
-            (1 << CGEventType.keyDown.rawValue)
-                | (1 << CGEventType.keyUp.rawValue)
-                | (1 << CGEventType.flagsChanged.rawValue)
-                | (1 << CGEventType.leftMouseDown.rawValue)
+        // All events
+        let eventMask = ~CGEventMask.allZeros
         
         guard let eventTap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
             options: .defaultTap,
-            eventsOfInterest: CGEventMask(eventMask),
+            eventsOfInterest: eventMask,
             callback: callback,
-            userInfo: nil) else {
+            userInfo: bridge(obj: self)) else {
                 print("failed to create event tap")
                 exit(1)
         }
@@ -71,7 +94,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
         CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
         CGEvent.tapEnable(tap: eventTap, enable: true)
-        return eventTap
+        keyListener = eventTap
         //CFRunLoopRun()
     }
 }

@@ -11,7 +11,7 @@ import ReSwift
 struct AppState: StateType {
     var theme = ThemeState()
     var bindings = BindingsState()
-    var view = ViewState()
+    var window = WindowState()
     var keyboard = KeyboardState()
 }
 

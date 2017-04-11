@@ -13,12 +13,21 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
     
     switch action {
         
-    case let action as KeyboardInitAction:
+    case _ as WindowHideAction:
+        state.lastEvent = nil
+        state.strokes = []
+        
+    case let action as PassEventUnchanged:
+        state.lastEvent = action.event.copy()
+        
+    case let action as InitKeyboardForApp:
         let appName = action.appName
         // Reset strokes sequence and keyboard layout if current app changed
+        // TODO: Maybe our cmd-tab bug is here?
         if state.appName != appName {
             state.appName = appName
             state.strokes = []
+            state.lastEvent = nil
             
             // Get app specific bindings or reset
             guard let config = mainStore.state.bindings.apps[appName] else {
@@ -32,15 +41,15 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
         let type = action.type, event = action.event
         
         // Remember latest event to pass through
-        state.lastEvent = event
+        state.lastEvent = event.copy()
         
         // Do nothing if Keystroke main window is inactive
-        guard mainStore.state.view.windowVisible else {
+        guard mainStore.state.window.visible else {
             guard state.appName == nil else { return KeyboardState() }
             return state
         }
         
-        // Dont propagate event while going throuth bindings tree
+        // Dont propagate event while going through bindings tree
         state.lastEvent = nil
         
         // Should handle 'key down' events with a proper key code only
