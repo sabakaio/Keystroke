@@ -17,7 +17,7 @@ struct AppBindingsSetAction: Action {
     let config: AppConfig
 }
 
-struct KeyEventWindowAction: Action {
+struct ComputeWindowStateForIOEvent: Action {
     let appName: String
     let type: CGEventType
     let event: CGEvent
@@ -28,20 +28,22 @@ struct KeyEventBindingAction: Action {
     let event: CGEvent
 }
 
-struct KeyboardInitAction: Action {
+struct InitKeyboardForApp: Action {
     let appName: String
 }
 
 func handleKeyEvent(type: CGEventType, event: CGEvent) {
-    let appName = NSWorkspace.shared().frontmostApplication?.localizedName
-    let windowVisible = mainStore.state.view.windowVisible
+    let appName = NSWorkspace.shared().frontmostApplication!.localizedName!
+    let windowWasVisible = mainStore.state.window.visible
     
     mainStore.dispatch(
-        KeyEventWindowAction(appName: appName!, type: type, event: event)
+        ComputeWindowStateForIOEvent(appName: appName, type: type, event: event)
     )
-    
-    if !windowVisible && mainStore.state.view.windowVisible {
-        mainStore.dispatch(KeyboardInitAction(appName: appName!))
+
+    let windowShouldBecomeVisible = mainStore.state.window.visible
+
+    if !windowWasVisible, windowShouldBecomeVisible {
+        mainStore.dispatch(InitKeyboardForApp(appName: appName))
     }
     
     mainStore.dispatch(

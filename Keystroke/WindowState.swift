@@ -1,5 +1,5 @@
 //
-//  ViewState.swift
+//  WindowState.swift
 //  Keystroke
 //
 //  Created by Arseny Zarechnev on 07/04/2017.
@@ -8,8 +8,8 @@
 
 import ReSwift
 
-struct ViewState: StateType {
-    var windowVisible: Bool = true
+struct WindowState: StateType {
+    var visible: Bool = true
     var skipNextShowTrigger: Bool = false
     var appName: String? = nil
 }
