@@ -36,6 +36,7 @@
 		984122481E9AA98D00705FC3 /* KeyboardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122471E9AA98D00705FC3 /* KeyboardState.swift */; };
 		9841224A1E9AAA7900705FC3 /* KeyboardReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122491E9AAA7900705FC3 /* KeyboardReducer.swift */; };
 		984122501E9BD43F00705FC3 /* Xcode.keystroke in Resources */ = {isa = PBXBuildFile; fileRef = 9841224F1E9BD43F00705FC3 /* Xcode.keystroke */; };
+		986A37141E9D33000028D9B3 /* EventLoopListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986A37131E9D33000028D9B3 /* EventLoopListener.swift */; };
 		987C99AA1E98008E00A2D8E0 /* BindingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C99A91E98008E00A2D8E0 /* BindingsState.swift */; };
 		987C99AC1E980BC100A2D8E0 /* BindingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C99AB1E980BC100A2D8E0 /* BindingsReducer.swift */; };
 		A0D24D9DB58A047FC3145879 /* Pods_Keystroke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBBCA4FF38376FF21463B87 /* Pods_Keystroke.framework */; };
@@ -99,6 +100,7 @@
 		984122471E9AA98D00705FC3 /* KeyboardState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardState.swift; sourceTree = "<group>"; };
 		984122491E9AAA7900705FC3 /* KeyboardReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardReducer.swift; sourceTree = "<group>"; };
 		9841224F1E9BD43F00705FC3 /* Xcode.keystroke */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Xcode.keystroke; path = Bindings/Xcode.keystroke; sourceTree = "<group>"; };
+		986A37131E9D33000028D9B3 /* EventLoopListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoopListener.swift; sourceTree = "<group>"; };
 		987C99A91E98008E00A2D8E0 /* BindingsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingsState.swift; sourceTree = "<group>"; };
 		987C99AB1E980BC100A2D8E0 /* BindingsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingsReducer.swift; sourceTree = "<group>"; };
 		A77D4E848E1D7CAE1F7AA666 /* Pods_KeystrokeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeystrokeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +197,7 @@
 			children = (
 				685CB4CC1E97F2E400C92195 /* Utils.swift */,
 				685CB4E11E981EF200C92195 /* AppConfigManager.swift */,
+				986A37131E9D33000028D9B3 /* EventLoopListener.swift */,
 				6822E6AB1E99520400C38260 /* KeyCode.swift */,
 			);
 			name = Utils;
@@ -602,6 +605,7 @@
 				685CB4D11E97F49400C92195 /* ThemeState.swift in Sources */,
 				6822E6AC1E99520400C38260 /* KeyCode.swift in Sources */,
 				987C99AC1E980BC100A2D8E0 /* BindingsReducer.swift in Sources */,
+				986A37141E9D33000028D9B3 /* EventLoopListener.swift in Sources */,
 				68B068351E96F8BC00C186F5 /* Binding.swift in Sources */,
 				685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */,
 				9841224A1E9AAA7900705FC3 /* KeyboardReducer.swift in Sources */,

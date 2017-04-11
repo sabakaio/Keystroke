@@ -14,7 +14,7 @@ struct KeyboardState: StateType {
     var appName: String? = nil
     var strokes: [KeyCode] = [KeyCode]()
     var bindings: AppBindingsConfigFolder? = nil
-    var lastEvent: CGEvent? = nil
+    var operation: AppOperation? = nil
     
     init() {
         initialKeys = [
