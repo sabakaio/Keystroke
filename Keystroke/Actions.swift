@@ -12,11 +12,6 @@ struct ThemeActionToggle: Action {}
 
 struct WindowHideAction: Action {}
 
-struct PassEventUnchanged: Action {
-    let type: CGEventType
-    let event: CGEvent
-}
-
 struct AppBindingsSetAction: Action {
     let appName: String
     let config: AppConfig
@@ -37,28 +32,47 @@ struct InitKeyboardForApp: Action {
     let appName: String
 }
 
-func handleKeyEvent(type: CGEventType, event: CGEvent) {
+func handleKeyEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGEvent>? {
     let appName = NSWorkspace.shared().frontmostApplication!.localizedName!
     let windowWasVisible = mainStore.state.window.visible
     
+    // Process event to update window state (e.g. visibility)
     mainStore.dispatch(
         ComputeWindowStateForIOEvent(appName: appName, type: type, event: event)
     )
     
-    if type == .leftMouseDown {
-        mainStore.dispatch(
-            PassEventUnchanged(type: type, event: event)
-        )
-        return
+    // Bypass event if window is not active
+    let windowShouldBecomeVisible = mainStore.state.window.visible
+    if !windowShouldBecomeVisible {
+        return Unmanaged.passRetained(event)
     }
     
-    let windowShouldBecomeVisible = mainStore.state.window.visible
+    // Do not lock mouse
+    if type == .leftMouseDown {
+        return Unmanaged.passRetained(event)
+    }
     
+    // Init a keyboard on become visible and start blocking event propagation
     if !windowWasVisible, windowShouldBecomeVisible {
         mainStore.dispatch(InitKeyboardForApp(appName: appName))
+        return nil
     }
     
+    // Update keyboad layout with next level or get an oparation to perform
     mainStore.dispatch(
         KeyEventBindingAction(type: type, event: event)
     )
+    
+    guard let operation = mainStore.state.keyboard.operation else { return nil }
+    
+    // Create new event based on requested operation
+    let newEvent = event.copy()
+    let newCode = Int64(operation.keyCode!.rawValue)
+    newEvent!.setIntegerValueField(.keyboardEventKeycode, value: newCode)
+    newEvent!.flags = operation.flags
+    
+    // Hide main window, all done
+    mainStore.dispatch(WindowHideAction())
+    
+    return Unmanaged.passRetained(newEvent!)
 }

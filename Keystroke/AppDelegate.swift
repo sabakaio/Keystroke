@@ -69,14 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 return Unmanaged.passRetained(event)
             }
             
-            handleKeyEvent(type: type, event: event)
-            
-            // Check event to popagate
-            guard let newEvent = mainStore.state.keyboard.lastEvent else { return nil }
-            // Hide main window
-            mainStore.dispatch(WindowHideAction())
-            
-            return Unmanaged.passRetained(newEvent)
+            return handleKeyEvent(type: type, event: event)
         }
         
         // All events
