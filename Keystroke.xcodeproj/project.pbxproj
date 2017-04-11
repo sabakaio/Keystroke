@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3197424C3BDD56670DB9065B /* Pods_KeystrokeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D486EDF65295482F2913AC7 /* Pods_KeystrokeUITests.framework */; };
 		6822E6AC1E99520400C38260 /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6822E6AB1E99520400C38260 /* KeyCode.swift */; };
-		685289371E9A9BAE00641994 /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685289361E9A9BAE00641994 /* KeyboardLayout.swift */; };
 		685CB4C11E97A06F00C92195 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4C01E97A06F00C92195 /* AppState.swift */; };
 		685CB4C31E97A12C00C92195 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4C21E97A12C00C92195 /* Actions.swift */; };
 		685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4C41E97A15E00C92195 /* ThemeReducer.swift */; };
@@ -23,7 +22,6 @@
 		686E659A1E9D1E5500F513CC /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E65991E9D1E5500F513CC /* RowView.swift */; };
 		686E659C1E9D43E700F513CC /* KeyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E659B1E9D43E700F513CC /* KeyContainerView.swift */; };
 		687C595F1E9BF13D00E491BF /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687C595E1E9BF13D00E491BF /* KeyView.swift */; };
-		6885D4B21E99381E00681A4B /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6885D4B11E99381E00681A4B /* VisualEffectView.swift */; };
 		68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */; };
 		68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FF1E96EE7A00C186F5 /* ViewController.swift */; };
 		68B068021E96EE7A00C186F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B068011E96EE7A00C186F5 /* Assets.xcassets */; };
@@ -64,7 +62,6 @@
 		5D486EDF65295482F2913AC7 /* Pods_KeystrokeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeystrokeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6822E6AB1E99520400C38260 /* KeyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		68368F5436C8A0E2C208CD52 /* Pods-Keystroke.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keystroke.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keystroke/Pods-Keystroke.release.xcconfig"; sourceTree = "<group>"; };
-		685289361E9A9BAE00641994 /* KeyboardLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
 		685CB4C01E97A06F00C92195 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		685CB4C21E97A12C00C92195 /* Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		685CB4C41E97A15E00C92195 /* ThemeReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeReducer.swift; sourceTree = "<group>"; };
@@ -78,7 +75,6 @@
 		686E65991E9D1E5500F513CC /* RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 		686E659B1E9D43E700F513CC /* KeyContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyContainerView.swift; sourceTree = "<group>"; };
 		687C595E1E9BF13D00E491BF /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
-		6885D4B11E99381E00681A4B /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		68B067FA1E96EE7A00C186F5 /* Keystroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystroke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68B067FF1E96EE7A00C186F5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -270,8 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				687C595E1E9BF13D00E491BF /* KeyView.swift */,
-				6885D4B11E99381E00681A4B /* VisualEffectView.swift */,
-				685289361E9A9BAE00641994 /* KeyboardLayout.swift */,
 				686E65991E9D1E5500F513CC /* RowView.swift */,
 				686E659B1E9D43E700F513CC /* KeyContainerView.swift */,
 			);
@@ -585,7 +579,6 @@
 				686E659C1E9D43E700F513CC /* KeyContainerView.swift in Sources */,
 				68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */,
 				685CB4CF1E97F44B00C92195 /* AppReducer.swift in Sources */,
-				685289371E9A9BAE00641994 /* KeyboardLayout.swift in Sources */,
 				685CB4C31E97A12C00C92195 /* Actions.swift in Sources */,
 				687C595F1E9BF13D00E491BF /* KeyView.swift in Sources */,
 				685CB4D11E97F49400C92195 /* ThemeState.swift in Sources */,
@@ -602,7 +595,6 @@
 				685CB4DE1E98020F00C92195 /* WindowState.swift in Sources */,
 				686E659A1E9D1E5500F513CC /* RowView.swift in Sources */,
 				685CB4E01E9802BB00C92195 /* WindowReducer.swift in Sources */,
-				6885D4B21E99381E00681A4B /* VisualEffectView.swift in Sources */,
 				68B0682D1E96EF7200C186F5 /* WindowController.swift in Sources */,
 				68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */,
 			);
