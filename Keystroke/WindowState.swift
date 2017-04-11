@@ -9,7 +9,7 @@
 import ReSwift
 
 struct WindowState: StateType {
-    var visible: Bool = true
+    var visible: Bool = false
     var skipNextShowTrigger: Bool = false
     var appName: String? = nil
 }
