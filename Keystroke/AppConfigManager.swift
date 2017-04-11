@@ -24,8 +24,7 @@ public struct AppConfig {
 public struct AppOperation {
     let name: String
     let originalHotkey: String
-    let keyCode: KeyCode?
-    let flags: CGEventFlags
+    let keystroke: Keystroke
 }
 
 public protocol AppBindingsConfig {
@@ -82,12 +81,10 @@ class AppConfigManager: NSObject {
             let operations = try value.dictionary!["operations"]!.array!.map({
                 (operation: Yaml) throws -> AppOperation in
                 let hotKey = operation.dictionary!["hotkey"]!.string!
-                let code = try KeyCode.from(config: hotKey)
                 return AppOperation(
                     name: operation.dictionary!["name"]!.string!,
                     originalHotkey: hotKey,
-                    keyCode: code.keyCode,
-                    flags: code.flags
+                    keystroke: try Keystroke(from: hotKey)
                 )
             }).reduce([String: AppOperation]()) { accumulator, operation in
                 var dict = accumulator

@@ -44,9 +44,9 @@ fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGE
     
     // Create new event based on requested operation
     let newEvent = event.copy()
-    let newCode = Int64(operation.keyCode!.rawValue)
-    newEvent!.setIntegerValueField(.keyboardEventKeycode, value: newCode)
-    newEvent!.flags = operation.flags
+    let keystroke = operation.keystroke
+    newEvent!.setIntegerValueField(.keyboardEventKeycode, value: keystroke.getEventKeycode())
+    newEvent!.flags = keystroke.flags
     
     // Hide main window, all done
     mainStore.dispatch(WindowHideAction())

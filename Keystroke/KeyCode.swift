@@ -8,10 +8,11 @@
 
 import Cocoa
 
-public enum KeyCodeError: Error {
+public enum KeystrokeError: Error {
     case MultipleKeys(value: String)
     case UnknownFlag(value: String)
     case UnknownKey(value: String)
+    case NoKey(value: String)
     case CannotConvertToString(value: KeyCode)
 }
 
@@ -153,40 +154,8 @@ public enum KeyCode: UInt64 {
         case "z":
             return .Key_z
         default:
-            throw KeyCodeError.UnknownKey(value: letter)
+            throw KeystrokeError.UnknownKey(value: letter)
         }
-    }
-    
-    static func from(config: String) throws -> (flags: CGEventFlags, keyCode: KeyCode?) {
-        let sections = config.components(separatedBy: "-")
-        var flags = CGEventFlags()
-        var letter: String? = nil
-        
-        for section in sections {
-            switch section {
-            case "cmd", "command":
-                flags = flags.union(.maskCommand)
-            case "ctrl", "control":
-                flags = flags.union(.maskControl)
-            case "alt", "option":
-                flags = flags.union(.maskAlternate)
-            case "shift":
-                flags = flags.union(.maskShift)
-            default:
-                guard section.characters.count == 1 else {
-                    throw KeyCodeError.UnknownFlag(value: section)
-                }
-                guard letter == nil else {
-                    throw KeyCodeError.MultipleKeys(value: config)
-                }
-                letter = section
-            }
-        }
-        
-        guard letter != nil else { return (flags, nil) }
-        
-        let keyCode = try self.from(letter: letter!)
-        return (flags, keyCode)
     }
     
     func toLetter() throws -> String {
@@ -244,7 +213,66 @@ public enum KeyCode: UInt64 {
         case .Key_z:
             return "z"
         default:
-            throw KeyCodeError.CannotConvertToString(value: self)
+            throw KeystrokeError.CannotConvertToString(value: self)
         }
+    }
+}
+
+struct Keystroke {
+    private(set) var flags: CGEventFlags
+    private(set) var keyCode: KeyCode
+    
+    func containsCommandFlag() -> Bool {
+        return flags.contains(.maskCommand)
+    }
+    
+    func containsControlFlag() -> Bool {
+        return flags.contains(.maskControl)
+    }
+    
+    func containsShiftFlag() -> Bool {
+        return flags.contains(.maskShift)
+    }
+    
+    func containsAltFlag() -> Bool {
+        return flags.contains(.maskAlternate)
+    }
+    
+    init(from config: String) throws {
+        flags = CGEventFlags()
+        
+        let sections = config.components(separatedBy: "-")
+        var letter: String? = nil
+        
+        for section in sections {
+            switch section {
+            case "cmd", "command":
+                flags = flags.union(.maskCommand)
+            case "ctrl", "control":
+                flags = flags.union(.maskControl)
+            case "alt", "option":
+                flags = flags.union(.maskAlternate)
+            case "shift":
+                flags = flags.union(.maskShift)
+            default:
+                guard section.characters.count == 1 else {
+                    throw KeystrokeError.UnknownFlag(value: section)
+                }
+                guard letter == nil else {
+                    throw KeystrokeError.MultipleKeys(value: config)
+                }
+                letter = section
+            }
+        }
+        
+        guard letter != nil else {
+            throw KeystrokeError.NoKey(value: config)
+        }
+        
+        keyCode = try KeyCode.from(letter: letter!)
+    }
+    
+    func getEventKeycode() -> Int64 {
+        return Int64(keyCode.rawValue)
     }
 }
