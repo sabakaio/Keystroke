@@ -17,6 +17,9 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
         state.lastEvent = nil
         state.strokes = []
         
+    case let action as PassEventUnchanged:
+        state.lastEvent = action.event
+        
     case let action as InitKeyboardForApp:
         let appName = action.appName
         // Reset strokes sequence and keyboard layout if current app changed
