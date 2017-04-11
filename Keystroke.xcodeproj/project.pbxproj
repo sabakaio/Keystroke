@@ -33,7 +33,6 @@
 		68B068311E96F41B00C186F5 /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B0682F1E96F41B00C186F5 /* CollectionViewItem.xib */; };
 		68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068321E96F6F700C186F5 /* BindingLoader.swift */; };
 		68B068351E96F8BC00C186F5 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068341E96F8BC00C186F5 /* Binding.swift */; };
-		68B068371E97160400C186F5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 68B068361E97160400C186F5 /* Podfile */; };
 		984122481E9AA98D00705FC3 /* KeyboardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122471E9AA98D00705FC3 /* KeyboardState.swift */; };
 		9841224A1E9AAA7900705FC3 /* KeyboardReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122491E9AAA7900705FC3 /* KeyboardReducer.swift */; };
 		984122501E9BD43F00705FC3 /* Xcode.keystroke in Resources */ = {isa = PBXBuildFile; fileRef = 9841224F1E9BD43F00705FC3 /* Xcode.keystroke */; };
@@ -431,7 +430,6 @@
 				685CB4CA1E97C4DE00C92195 /* iTerm2.keystroke in Resources */,
 				68B068021E96EE7A00C186F5 /* Assets.xcassets in Resources */,
 				68B068051E96EE7A00C186F5 /* Main.storyboard in Resources */,
-				68B068371E97160400C186F5 /* Podfile in Resources */,
 				68B068311E96F41B00C186F5 /* CollectionViewItem.xib in Resources */,
 				984122501E9BD43F00705FC3 /* Xcode.keystroke in Resources */,
 			);
