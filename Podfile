@@ -9,6 +9,7 @@ target 'Keystroke' do
   pod 'ReSwift'
   pod 'Yaml'
   pod 'PureLayout'
+  pod 'BonMot'
 
   target 'KeystrokeTests' do
     inherit! :search_paths
