@@ -21,6 +21,7 @@
 		685CB4E21E981EF200C92195 /* AppConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4E11E981EF200C92195 /* AppConfigManager.swift */; };
 		686E659A1E9D1E5500F513CC /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E65991E9D1E5500F513CC /* RowView.swift */; };
 		686E659C1E9D43E700F513CC /* KeyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E659B1E9D43E700F513CC /* KeyContainerView.swift */; };
+		686E659E1E9D960200F513CC /* Google Chrome.keystroke in Resources */ = {isa = PBXBuildFile; fileRef = 686E659D1E9D960200F513CC /* Google Chrome.keystroke */; };
 		687C595F1E9BF13D00E491BF /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687C595E1E9BF13D00E491BF /* KeyView.swift */; };
 		68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */; };
 		68B068001E96EE7A00C186F5 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FF1E96EE7A00C186F5 /* KeyboardViewController.swift */; };
@@ -74,6 +75,7 @@
 		685CB4E11E981EF200C92195 /* AppConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfigManager.swift; sourceTree = "<group>"; };
 		686E65991E9D1E5500F513CC /* RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 		686E659B1E9D43E700F513CC /* KeyContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyContainerView.swift; sourceTree = "<group>"; };
+		686E659D1E9D960200F513CC /* Google Chrome.keystroke */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Google Chrome.keystroke"; path = "Bindings/Google Chrome.keystroke"; sourceTree = "<group>"; };
 		687C595E1E9BF13D00E491BF /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		68B067FA1E96EE7A00C186F5 /* Keystroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystroke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 		685CB4C61E97C0B400C92195 /* Bindings */ = {
 			isa = PBXGroup;
 			children = (
+				686E659D1E9D960200F513CC /* Google Chrome.keystroke */,
 				9841224F1E9BD43F00705FC3 /* Xcode.keystroke */,
 				685CB4C91E97C4DE00C92195 /* iTerm2.keystroke */,
 			);
@@ -413,6 +416,7 @@
 				685CB4CA1E97C4DE00C92195 /* iTerm2.keystroke in Resources */,
 				68B068021E96EE7A00C186F5 /* Assets.xcassets in Resources */,
 				68B068051E96EE7A00C186F5 /* Main.storyboard in Resources */,
+				686E659E1E9D960200F513CC /* Google Chrome.keystroke in Resources */,
 				984122501E9BD43F00705FC3 /* Xcode.keystroke in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

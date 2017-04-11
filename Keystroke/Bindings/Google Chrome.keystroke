@@ -1,0 +1,141 @@
+name: Google Chrome
+
+operations:
+  # File
+  - name: New Tab
+    hotkey: cmd-t
+  - name: New Window
+    hotkey: cmd-n
+  - name: New Incognito Window
+    hotkey: cmd-shift-n
+  - name: Re-open Closed Tab
+    hotkey: cmd-shift-t
+  - name: Open file
+    hotkey: cmd-o
+  - name: Open location
+    hotkey: cmd-l
+  # ---
+  - name: Close Window
+    hotkey: cmd-shift-w
+  - name: Close Tab
+    hotkey: cmd-w
+  - name: Save Page As
+    hotkey: cmd-s
+  # ---
+  - name: Print
+    hotkey: cmd-p
+  # Edit
+  - name: Search the web
+    hotkey: alt-cmd-f
+  - name: Find
+    hotkey: cmd-f
+  - name: Find Next
+    hotkey: cmd-g
+  - name: Find Previous
+    hotkey: shift-cmd-g
+  - name: Use Selection for Find
+    hotkey: cmd-e
+  # View
+  - name: Always Show Bookmarks Bar
+    hotkey: shift-cmd-b
+  - name: Always Show Toolbar in Full Screen
+    hotkey: shift-cmd-f
+  - name: Force Reload This Page
+    hotkey: shift-cmd-r
+  - name: Enter Full Screen
+    hotkey: ctrl-cmd-f
+  # - name: Zoom In
+  #   hotkey: cmd-=
+  # - name: Zoom Out
+  #   hotkey: cmd--
+  # --- Developer
+  - name: View Source
+    hotkey: alt-command-u
+  - name: Developer Tools
+    hotkey: alt-command-i
+  - name: JavaScript Console
+    hotkey: alt-command-j
+  # History
+  - name: Home
+    hotkey: shift-cmd-h
+  # - name: Back
+  #   hotKey: cmd-[
+  # - name: Forward
+  #   hotKey: cmd-]
+  - name: Show Full History
+    hotkey: cmd-y
+  # Bookmarks
+  - name: Bookmark Manager
+    hotkey: alt-cmd-b
+  - name: Bookmark This Page
+    hotkey: cmd-d
+  - name: Bookmark All Tabs
+    hotkey: shift-cmd-d
+
+bindings:
+  - key: o
+    name: open
+    bindings:
+      - key: t
+        name: tab
+        operation: New Tab
+      - key: w
+        name: window
+        operation: New Window
+      - key: i
+        name: incognito window
+        operation: New Incognito Window
+      - key: c
+        name: closed tab
+        operation: Re-open Closed Tab
+      - key: f
+        name: file
+        operation: Open file
+      - key: l
+        name: url
+        operation: Open location
+  - key: s
+    name: search
+    bindings:
+      - key: w
+        name: web
+        operation: Search the web
+      - key: p
+        name: page
+        operation: Find
+      - key: f
+        name: page
+        operation: Find
+      - key: n
+        name: next
+        operation: Find Next
+      - key: s
+        name: use selection
+        operation: Use Selection for Find
+  - key: b
+    name: bookmarks
+    bindings:
+      - key: m
+        name: manager
+        operation: Bookmark Manager
+      - key: b
+        name: bookmark this page
+        operation: Bookmark This Page
+      - key: l
+        name: list
+        operation: Bookmark Manager
+      - key: p
+        name: bookmark this page
+        operation: Bookmark This Page
+  - key: d
+    name: developer
+    bindings:
+      - key: s
+        name: view source
+        operation: View Source
+      - key: j
+        name: javascript console
+        operation: JavaScript Console
+      - key: t
+        name: tools
+        operation: Developer Tools
