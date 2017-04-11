@@ -34,13 +34,13 @@ struct KeyboardInitAction: Action {
 
 func handleKeyEvent(type: CGEventType, event: CGEvent) {
     let appName = NSWorkspace.shared().frontmostApplication!.localizedName
-    let windowVisible = mainStore.state.view.windowVisible
+    let windowVisible = mainStore.state.window.visible
     
     mainStore.dispatch(
         KeyEventWindowAction(appName: appName!, type: type, event: event)
     )
     
-    if !windowVisible, mainStore.state.view.windowVisible {
+    if !windowVisible, mainStore.state.window.visible {
         mainStore.dispatch(KeyboardInitAction(appName: appName!))
     }
     

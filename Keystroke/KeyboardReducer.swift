@@ -35,7 +35,7 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
         state.lastEvent = event
         
         // Do nothing if Keystroke main window is inactive
-        guard mainStore.state.view.windowVisible else {
+        guard mainStore.state.window.visible else {
             guard state.appName == nil else { return KeyboardState() }
             return state
         }
