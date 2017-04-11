@@ -20,6 +20,8 @@
 		685CB4DE1E98020F00C92195 /* WindowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4DD1E98020F00C92195 /* WindowState.swift */; };
 		685CB4E01E9802BB00C92195 /* WindowReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4DF1E9802BB00C92195 /* WindowReducer.swift */; };
 		685CB4E21E981EF200C92195 /* AppConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685CB4E11E981EF200C92195 /* AppConfigManager.swift */; };
+		686E659A1E9D1E5500F513CC /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E65991E9D1E5500F513CC /* RowView.swift */; };
+		686E659C1E9D43E700F513CC /* KeyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E659B1E9D43E700F513CC /* KeyContainerView.swift */; };
 		687C595F1E9BF13D00E491BF /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687C595E1E9BF13D00E491BF /* KeyView.swift */; };
 		6885D4B21E99381E00681A4B /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6885D4B11E99381E00681A4B /* VisualEffectView.swift */; };
 		68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */; };
@@ -31,8 +33,6 @@
 		68B0682D1E96EF7200C186F5 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0682C1E96EF7200C186F5 /* WindowController.swift */; };
 		68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0682E1E96F41B00C186F5 /* CollectionViewItem.swift */; };
 		68B068311E96F41B00C186F5 /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68B0682F1E96F41B00C186F5 /* CollectionViewItem.xib */; };
-		68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068321E96F6F700C186F5 /* BindingLoader.swift */; };
-		68B068351E96F8BC00C186F5 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B068341E96F8BC00C186F5 /* Binding.swift */; };
 		984122481E9AA98D00705FC3 /* KeyboardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122471E9AA98D00705FC3 /* KeyboardState.swift */; };
 		9841224A1E9AAA7900705FC3 /* KeyboardReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984122491E9AAA7900705FC3 /* KeyboardReducer.swift */; };
 		984122501E9BD43F00705FC3 /* Xcode.keystroke in Resources */ = {isa = PBXBuildFile; fileRef = 9841224F1E9BD43F00705FC3 /* Xcode.keystroke */; };
@@ -76,6 +76,8 @@
 		685CB4DD1E98020F00C92195 /* WindowState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowState.swift; sourceTree = "<group>"; };
 		685CB4DF1E9802BB00C92195 /* WindowReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowReducer.swift; sourceTree = "<group>"; };
 		685CB4E11E981EF200C92195 /* AppConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfigManager.swift; sourceTree = "<group>"; };
+		686E65991E9D1E5500F513CC /* RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
+		686E659B1E9D43E700F513CC /* KeyContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyContainerView.swift; sourceTree = "<group>"; };
 		687C595E1E9BF13D00E491BF /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		6885D4B11E99381E00681A4B /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		68B067FA1E96EE7A00C186F5 /* Keystroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystroke.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,8 +95,6 @@
 		68B0682C1E96EF7200C186F5 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		68B0682E1E96F41B00C186F5 /* CollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewItem.swift; sourceTree = "<group>"; };
 		68B0682F1E96F41B00C186F5 /* CollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewItem.xib; sourceTree = "<group>"; };
-		68B068321E96F6F700C186F5 /* BindingLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingLoader.swift; sourceTree = "<group>"; };
-		68B068341E96F8BC00C186F5 /* Binding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		68B068361E97160400C186F5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		984122471E9AA98D00705FC3 /* KeyboardState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardState.swift; sourceTree = "<group>"; };
 		984122491E9AAA7900705FC3 /* KeyboardReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardReducer.swift; sourceTree = "<group>"; };
@@ -231,7 +231,6 @@
 				685CB4BE1E97A04700C92195 /* Reducers */,
 				685CB4BD1E97A03C00C92195 /* Actions */,
 				68B0682B1E96EED700C186F5 /* Resources */,
-				68B0682A1E96EECE00C186F5 /* Models */,
 				68B068291E96EEC800C186F5 /* Views */,
 				68B068281E96EE9300C186F5 /* Controllers */,
 				68B068011E96EE7A00C186F5 /* Assets.xcassets */,
@@ -276,17 +275,10 @@
 				687C595E1E9BF13D00E491BF /* KeyView.swift */,
 				6885D4B11E99381E00681A4B /* VisualEffectView.swift */,
 				685289361E9A9BAE00641994 /* KeyboardLayout.swift */,
+				686E65991E9D1E5500F513CC /* RowView.swift */,
+				686E659B1E9D43E700F513CC /* KeyContainerView.swift */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		68B0682A1E96EECE00C186F5 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				68B068321E96F6F700C186F5 /* BindingLoader.swift */,
-				68B068341E96F8BC00C186F5 /* Binding.swift */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		68B0682B1E96EED700C186F5 /* Resources */ = {
@@ -594,6 +586,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				686E659C1E9D43E700F513CC /* KeyContainerView.swift in Sources */,
 				68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */,
 				685CB4CF1E97F44B00C92195 /* AppReducer.swift in Sources */,
 				685289371E9A9BAE00641994 /* KeyboardLayout.swift in Sources */,
@@ -602,17 +595,16 @@
 				685CB4D11E97F49400C92195 /* ThemeState.swift in Sources */,
 				6822E6AC1E99520400C38260 /* KeyCode.swift in Sources */,
 				987C99AC1E980BC100A2D8E0 /* BindingsReducer.swift in Sources */,
-				68B068351E96F8BC00C186F5 /* Binding.swift in Sources */,
 				685CB4C51E97A15E00C92195 /* ThemeReducer.swift in Sources */,
 				9841224A1E9AAA7900705FC3 /* KeyboardReducer.swift in Sources */,
 				987C99AA1E98008E00A2D8E0 /* BindingsState.swift in Sources */,
 				685CB4C11E97A06F00C92195 /* AppState.swift in Sources */,
 				685CB4CD1E97F2E400C92195 /* Utils.swift in Sources */,
 				685CB4E21E981EF200C92195 /* AppConfigManager.swift in Sources */,
-				68B068331E96F6F700C186F5 /* BindingLoader.swift in Sources */,
 				984122481E9AA98D00705FC3 /* KeyboardState.swift in Sources */,
 				68B068301E96F41B00C186F5 /* CollectionViewItem.swift in Sources */,
 				685CB4DE1E98020F00C92195 /* WindowState.swift in Sources */,
+				686E659A1E9D1E5500F513CC /* RowView.swift in Sources */,
 				685CB4E01E9802BB00C92195 /* WindowReducer.swift in Sources */,
 				6885D4B21E99381E00681A4B /* VisualEffectView.swift in Sources */,
 				68B0682D1E96EF7200C186F5 /* WindowController.swift in Sources */,

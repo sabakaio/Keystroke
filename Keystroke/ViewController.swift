@@ -5,10 +5,34 @@
 //  Created by Arseny Zarechnev on 07/04/2017.
 //  Copyright © 2017 Sabaka. All rights reserved.
 //
+//
+//    ┌────────────────────────────────────────────────────────────────────────┐
+//    │KeyboardView                                                            │
+//    │ ┌────────────────────────────────────────────────────────────────────┐ │
+//    │ │ContainerView                                                       │ │
+//    │ │ ┌────────────────────────────────────────────────────────────────┐ │ │
+//    │ │ │RowView                                                         │ │ │
+//    │ │ │ ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐ │ │ │
+//    │ │ │ │KeyContainerView  │ │KeyContainerView  │ │KeyContainerView  │ │ │ │
+//    │ │ │ │   ┌─────────┐    │ │   ┌─────────┐    │ │   ┌─────────┐    │ │ │ │
+//    │ │ │ │   │ KeyView │    │ │   │ KeyView │    │ │   │ KeyView │    │ │ │ │
+//    │ │ │ │   └─────────┘    │ │   └─────────┘    │ │   └─────────┘    │ │ │ │
+//    │ │ │ └──────────────────┘ └──────────────────┘ └──────────────────┘ │ │ │
+//    │ │ └────────────────────────────────────────────────────────────────┘ │ │
+//    │ │ ┌────────────────────────────────────────────────────────────────┐ │ │
+//    │ │ │RowView                                                         │ │ │
+//    │ │ └────────────────────────────────────────────────────────────────┘ │ │
+//    │ │ ┌────────────────────────────────────────────────────────────────┐ │ │
+//    │ │ │RowView                                                         │ │ │
+//    │ │ └────────────────────────────────────────────────────────────────┘ │ │
+//    │ └────────────────────────────────────────────────────────────────────┘ │
+//    └────────────────────────────────────────────────────────────────────────┘
+//
 
 import Cocoa
 import ReSwift
 import PureLayout
+import BonMot
 
 let KEY_SIZE = NSSize(width: 45.0, height: 45.0)
 let CONTAINER_VIEW_INSETS = EdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -17,17 +41,23 @@ let KEY_SPACING: CGFloat = 10.0
 let KEY_TEXT_PADDING: CGFloat = 30.0
 let KEY_BORDER_COLOR = NSColor.init(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
 
+public struct KeyStyles {
+    let empty: StringStyle
+    let plaintext: StringStyle
+    let highlight: StringStyle
+}
+
 class ViewController: NSViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
     
     @IBOutlet var keyboardView: NSView!
     
-    let bindingLoader = BindingLoader()
-    private var rowViews: [NSView] = []
-    private var keyViews: [[NSView]] = [[], [], []]
-    private var keyViewsWidths: [CGFloat] = [0.0, 0.0, 0.0]
-    private var keyFont: NSFont? = nil
+    private var rowViews: [RowView] = []
+    private var keyContainerViews: [[KeyContainerView]] = [[], [], []]
+    private var keyContainerTotalWidths: [CGFloat] = [0.0, 0.0, 0.0]
+    private var keyFont: NSFont = NSFont(name: "San Francisco Display Light", size: KEY_FONT_SIZE)!
     private var containerView: NSView? = nil
+    private var keyStyles: KeyStyles? = nil
     
     var keyRows: [[KeyboardKey]] = []
     
@@ -70,128 +100,96 @@ class ViewController: NSViewController, StoreSubscriber {
                 mainStore.state.keyboard.keys[keyCode]!
              })
         ]
-
     }
     
-    private func configureKeyboardView() {
-        // Setup flow layout
+    private func setupKeyStyles() {
+        let theme = mainStore.state.theme.theme
+
+        let plaintext = StringStyle(
+            .alignment(.center),
+            .font(keyFont),
+            .color(theme.folderColor.asNSColor())
+        )
         
-        if rowViews.count > 0 {
-            rowViews.removeAll()
-            keyViews.removeAll()
-            keyViews = [[], [], []]
-            keyViewsWidths = [0.0, 0.0, 0.0]
-        }
+        let highlight = plaintext.byAdding(
+            .color(theme.operationColor.asNSColor())
+        )
         
-        if keyFont == nil {
-            keyFont = NSFont(name: "San Francisco Display Light", size: KEY_FONT_SIZE)
-        }
+        let empty = plaintext.byAdding(
+            .color(theme.emptyColor.asNSColor())
+        )
         
-        if self.containerView != nil {
-            self.containerView!.removeFromSuperview()
-        }
-        
+        keyStyles = KeyStyles(empty: empty, plaintext: plaintext, highlight: highlight)
+    }
+
+    private func setupKeyboardView() {
+        setupKeyStyles()
+
         self.containerView = NSView.newAutoLayout()
-        
         let container = self.containerView!
-        
         keyboardView.addSubview(container)
+        
         container.autoAlignAxis(.vertical, toSameAxisOf: view)
         container.autoPinEdgesToSuperviewEdges(with: CONTAINER_VIEW_INSETS)
         
         for (rowIndex, row) in keyRows.enumerated() {
-            let rowView = NSView.newAutoLayout()
-            rowViews.append(rowView)
-            container.addSubview(rowView)
-            rowView.autoPinEdge(toSuperviewEdge: .left)
-            rowView.autoPinEdge(toSuperviewEdge: .right)
-            rowView.autoSetDimension(.height, toSize: KEY_SIZE.height)
-            rowView.wantsLayer = true
+            // First create row view
+            let rowView: RowView
             if rowIndex < 1 {
-                rowView.autoPinEdge(toSuperviewEdge: .top)
+                rowView = RowView.createFirstRow(in: container)
             } else {
-                rowView.autoPinEdge(.top, to: .bottom, of: rowViews[rowIndex - 1], withOffset: KEY_SPACING)
+                rowView = RowView.createNextRow(in: container, after: rowViews[rowIndex - 1])
             }
-            
-            // Clean views array
-            if keyViews[rowIndex].count > 0 {
-                keyViews[rowIndex].removeAll()
-            }
-            
-            for (keyIndex, key) in row.enumerated() {
-                let keyContainerView = NSView.newAutoLayout()
-                keyContainerView.wantsLayer = true
-                let keyView = KeyView.create()
-                // TODO check fonts exists
-//                keyView.font = keyFont!
-                
-                let style = NSMutableParagraphStyle()
-                style.lineSpacing = 100.0
-                style.alignment = .center
-                let attributes = [
-                    NSParagraphStyleAttributeName: style,
-                    NSFontAttributeName: keyFont!,
-                ] as [String : Any]
-//                let highlightAttibutes = [
-//                    NSParagraphStyleAttributeName: style,
-//                    NSFontAttributeName: keyFont!,
-//                    NSForegroundColorAttributeName: NSColor.red
-//                ] as [String : Any]
-                
-                let keyText = NSMutableAttributedString()
-//                keyText.append(NSAttributedString(string: "x", attributes: highlightAttibutes))
-                keyText.append(NSAttributedString(string: key.title, attributes: attributes))
-                keyView.attributedStringValue = keyText
-                    
-                
-                
-                switch key.type {
-                case .Folder:
-                    keyView.textColor = mainStore.state.theme.theme.folderColor.asNSColor()
-                case .Operation:
-                    keyView.textColor = mainStore.state.theme.theme.operationColor.asNSColor()
-                default:
-                    keyView.textColor = mainStore.state.theme.theme.emptyColor.asNSColor()
-                }
-                
-                keyViews[rowIndex].append(keyContainerView)
-                keyContainerView.addSubview(keyView)
-                rowView.addSubview(keyContainerView)
-                
-                let layer = keyContainerView.layer!
-                layer.borderWidth = 1.5
-                layer.borderColor = mainStore.state.theme.theme.emptyColor.asNSColor().cgColor
-                layer.cornerRadius = 4
-                
-                let textSize = calculateSize(of: keyView.stringValue, using: keyFont!)
-                let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
 
-//                keyView.autoAlignAxis(toSuperviewAxis: .horizontal)
-                keyView.autoPinEdge(toSuperviewEdge: .top, withInset: 15.0)
-                keyView.autoAlignAxis(toSuperviewAxis: .vertical)
+            rowViews.append(rowView)
+            
+            // Then create views for keys in the row
+            for (keyIndex, key) in row.enumerated() {
+                let keyContainerView = KeyContainerView.create(
+                    in: rowView,
+                    after: keyIndex >= 1 ? keyContainerViews[rowIndex][keyIndex - 1] : nil // keyIndex < keyRows[rowIndex].count
+                )
                 
-                keyView.autoMatch(.width, to: .width, of: keyView.superview!, withOffset: 0.0)
+                let keyView = KeyView.create(
+                    in: keyContainerView,
+                    for: key,
+                    using: keyStyles!
+                )
+                keyContainerViews[rowIndex].append(keyContainerView)
                 
-                keyViewsWidths[rowIndex] = keyViewsWidths[rowIndex] + keyWidthWithPadding
-                
-                keyContainerView.autoSetDimensions(to: CGSize(
-                    width: keyWidthWithPadding,
-                    height: KEY_SIZE.height
-                ))
-                keyContainerView.autoPinEdge(toSuperviewEdge: .top)
-                
-                if keyIndex >= 1, keyIndex < keyRows[rowIndex].count {
-                    keyContainerView.autoPinEdge(.left, to: .right, of: keyViews[rowIndex][keyIndex - 1], withOffset: KEY_SPACING)
-                }
+                let textSize = keyView.attributedStringValue.size()
+                let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
+                keyContainerView.setOrUpdateWidthDimension(keyWidthWithPadding)
+                keyContainerTotalWidths[rowIndex] = keyContainerTotalWidths[rowIndex] + keyWidthWithPadding
             }
             
-            let rowWidth = keyViewsWidths[rowIndex] + (CGFloat(keyViews[rowIndex].count - 1) * KEY_SPACING)
-            let firstKeyViewInRow = keyViews[rowIndex][0]
+            let rowWidth = keyContainerTotalWidths[rowIndex] + (CGFloat(keyContainerViews[rowIndex].count - 1) * KEY_SPACING)
+            let firstKeyViewInRow = keyContainerViews[rowIndex].first!
             
-            firstKeyViewInRow.autoPinEdge(
-                toSuperviewEdge: .left,
-                withInset: (WINDOW_SIZE.width - CONTAINER_VIEW_INSETS.left - CONTAINER_VIEW_INSETS.right - rowWidth) / 2
-            )
+            firstKeyViewInRow.setOrUpdatePinForCentering(withInset: (WINDOW_SIZE.width - CONTAINER_VIEW_INSETS.left - CONTAINER_VIEW_INSETS.right - rowWidth) / 2)
+        }
+    }
+    
+    private func updateKeyboardView() {
+        // Setup flow layout
+        keyContainerTotalWidths = [0.0, 0.0, 0.0]
+        
+        for (rowIndex, row) in keyRows.enumerated() {
+            for (keyIndex, key) in row.enumerated() {
+                let keyContainerView = keyContainerViews[rowIndex][keyIndex]
+                let keyView = keyContainerView.subviews[0] as! KeyView
+                
+                keyView.setStringValue(for: key, using: keyStyles!)
+                
+                let textSize = keyView.attributedStringValue.size()
+                let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
+                keyContainerView.setOrUpdateWidthDimension(keyWidthWithPadding)
+                keyContainerTotalWidths[rowIndex] = keyContainerTotalWidths[rowIndex] + keyWidthWithPadding
+            }
+            
+            let rowWidth = keyContainerTotalWidths[rowIndex] + (CGFloat(keyContainerViews[rowIndex].count - 1) * KEY_SPACING)
+            let firstKeyViewInRow = keyContainerViews[rowIndex][0]
+            firstKeyViewInRow.setOrUpdatePinForCentering(withInset: (WINDOW_SIZE.width - CONTAINER_VIEW_INSETS.left - CONTAINER_VIEW_INSETS.right - rowWidth) / 2)
         }
     }
     
@@ -206,61 +204,22 @@ class ViewController: NSViewController, StoreSubscriber {
     }
     
     func newState(state: AppState) {
-        // self.loadDataForAppWithName(state.view.appName)
         self.activateTheme(theme: state.theme.theme)
         
         configureKeyRows()
-        configureKeyboardView()
+        updateKeyboardView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainStore.subscribe(self)
-        
         configureKeyRows()
-        configureKeyboardView()
+        setupKeyboardView()
+
+        mainStore.subscribe(self)
         
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.gray.cgColor
         view.layer?.cornerRadius = 10
     }
-    
-    func loadDataForAppWithName(_ appName: String?) {
-        bindingLoader.loadDataForAppWithName(appName ?? "")
-        // collectionView.reloadData()
-    }
-    
-    override var representedObject: Any? {
-        didSet {
-            // Update the view, if already loaded.
-        }
-    }
-}
-
-extension ViewController : NSCollectionViewDataSource {
-    
-    // Can be omitted for single section
-    func numberOfSections(in collectionView: NSCollectionView) -> Int {
-        return bindingLoader.numberOfSections
-    }
-    
-    // This is one of two required methods for NSCollectionViewDataSource.
-    // Here you return the number of items in the section specified by the section parameter.
-    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bindingLoader.numberOfItems(in: section)
-    }
-    
-    // This is the second required method. It returns a collection view item for a given indexPath.
-    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        
-        let item = collectionView.makeItem(withIdentifier: "CollectionViewItem", for: indexPath)
-        guard let collectionViewItem = item as? CollectionViewItem else {return item}
-        
-        let action = bindingLoader.bindingForIndexPath(indexPath)
-        
-        collectionViewItem.actionText = "\(action.descriptionText)"
-        return item
-    }
-    
 }
