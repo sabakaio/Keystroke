@@ -13,12 +13,14 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
     
     switch action {
         
-    case let action as KeyboardInitAction:
+    case let action as InitKeyboardForApp:
         let appName = action.appName
         // Reset strokes sequence and keyboard layout if current app changed
+        // TODO: Maybe our cmd-tab bug is here?
         if state.appName != appName {
             state.appName = appName
             state.strokes = []
+            state.lastEvent = nil
             
             // Get app specific bindings or reset
             guard let config = mainStore.state.bindings.apps[appName] else {
@@ -40,7 +42,7 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
             return state
         }
         
-        // Dont propagate event while going throuth bindings tree
+        // Dont propagate event while going through bindings tree
         state.lastEvent = nil
         
         // Should handle 'key down' events with a proper key code only

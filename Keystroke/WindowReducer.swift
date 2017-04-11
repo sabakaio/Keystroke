@@ -16,7 +16,7 @@ func windowReducer(state: WindowState?, _ action: Action) -> WindowState {
     switch action {
     case _ as WindowHideAction:
         state.visible = false
-    case let action as KeyEventWindowAction:
+    case let action as ComputeWindowStateForIOEvent:
         if [.leftMouseDown].contains(action.type) {
             if state.visible {
                 // Don't trigger on cmd+click
