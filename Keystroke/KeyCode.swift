@@ -238,7 +238,7 @@ struct Keystroke {
         return flags.contains(.maskAlternate)
     }
     
-    init(from config: String) throws {
+    init(for config: String) throws {
         flags = CGEventFlags()
         
         let sections = config.components(separatedBy: "-")

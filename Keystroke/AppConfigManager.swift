@@ -23,8 +23,14 @@ public struct AppConfig {
 
 public struct AppOperation {
     let name: String
-    let originalHotkey: String
     let keystroke: Keystroke
+    let appleScript: AppleScript?
+    
+    init(name operationName: String, originalKeystroke: String) throws {
+        name = operationName
+        keystroke = try Keystroke(for: originalKeystroke)
+        appleScript = AppleScript(to: keystroke)
+    }
 }
 
 public protocol AppBindingsConfig {
@@ -81,10 +87,9 @@ class AppConfigManager: NSObject {
             let operations = try value.dictionary!["operations"]!.array!.map({
                 (operation: Yaml) throws -> AppOperation in
                 let hotKey = operation.dictionary!["hotkey"]!.string!
-                return AppOperation(
+                return try AppOperation(
                     name: operation.dictionary!["name"]!.string!,
-                    originalHotkey: hotKey,
-                    keystroke: try Keystroke(from: hotKey)
+                    originalKeystroke: hotKey
                 )
             }).reduce([String: AppOperation]()) { accumulator, operation in
                 var dict = accumulator
