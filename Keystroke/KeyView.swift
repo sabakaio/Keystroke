@@ -12,16 +12,24 @@ import BonMot
 class KeyView: NSTextField {
     func setStringValue(for key: KeyboardKey, using styles: KeyStyles) {
         let highlightRange = key.title.lowercased().range(of: key.name.lowercased())
-        let stringStyle = styles.plaintext.byAdding(
-            .xmlRules([
-                .style("hl", styles.highlight),
-                ])
-        )
-        
+        let baseStyle: StringStyle
         var text = key.title
-        text.replaceSubrange(highlightRange!, with: "<hl>\(key.name)</hl>")
+
+        switch key.type {
+        case .Folder, .Operation:
+            baseStyle = styles.plaintext.byAdding(
+                .xmlRules([
+                    .style("hl", styles.highlight),
+                    ])
+            )
+            guard let range = highlightRange else { break }
+            text.replaceSubrange(range, with: "<hl>\(key.name)</hl>")
+        default:
+            // .Empty
+            baseStyle = styles.empty
+        }
         
-        self.attributedStringValue = text.styled(with: stringStyle)
+        self.attributedStringValue = text.styled(with: baseStyle)
     }
     
     static func create(in parentView: KeyContainerView, for key: KeyboardKey, using styles: KeyStyles) -> KeyView {
@@ -51,11 +59,3 @@ class KeyView: NSTextField {
     }
 }
 
-//    switch key.type {
-//    case .Folder:
-//        keyView.textColor = mainStore.state.theme.theme.folderColor.asNSColor()
-//    case .Operation:
-//        keyView.textColor = mainStore.state.theme.theme.operationColor.asNSColor()
-//    default:
-//        keyView.textColor = mainStore.state.theme.theme.emptyColor.asNSColor()
-//    }
