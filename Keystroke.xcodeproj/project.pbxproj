@@ -23,7 +23,7 @@
 		686E659C1E9D43E700F513CC /* KeyContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686E659B1E9D43E700F513CC /* KeyContainerView.swift */; };
 		687C595F1E9BF13D00E491BF /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687C595E1E9BF13D00E491BF /* KeyView.swift */; };
 		68B067FE1E96EE7A00C186F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */; };
-		68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FF1E96EE7A00C186F5 /* ViewController.swift */; };
+		68B068001E96EE7A00C186F5 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B067FF1E96EE7A00C186F5 /* KeyboardViewController.swift */; };
 		68B068021E96EE7A00C186F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B068011E96EE7A00C186F5 /* Assets.xcassets */; };
 		68B068051E96EE7A00C186F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68B068031E96EE7A00C186F5 /* Main.storyboard */; };
 		68B068101E96EE7A00C186F5 /* KeystrokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0680F1E96EE7A00C186F5 /* KeystrokeTests.swift */; };
@@ -77,7 +77,7 @@
 		687C595E1E9BF13D00E491BF /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		68B067FA1E96EE7A00C186F5 /* Keystroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keystroke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		68B067FF1E96EE7A00C186F5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		68B067FF1E96EE7A00C186F5 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		68B068011E96EE7A00C186F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68B068041E96EE7A00C186F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68B068061E96EE7A00C186F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -257,7 +257,7 @@
 			children = (
 				68B0682C1E96EF7200C186F5 /* WindowController.swift */,
 				68B067FD1E96EE7A00C186F5 /* AppDelegate.swift */,
-				68B067FF1E96EE7A00C186F5 /* ViewController.swift */,
+				68B067FF1E96EE7A00C186F5 /* KeyboardViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -577,7 +577,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				686E659C1E9D43E700F513CC /* KeyContainerView.swift in Sources */,
-				68B068001E96EE7A00C186F5 /* ViewController.swift in Sources */,
+				68B068001E96EE7A00C186F5 /* KeyboardViewController.swift in Sources */,
 				685CB4CF1E97F44B00C92195 /* AppReducer.swift in Sources */,
 				685CB4C31E97A12C00C92195 /* Actions.swift in Sources */,
 				687C595F1E9BF13D00E491BF /* KeyView.swift in Sources */,

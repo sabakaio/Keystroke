@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  KeyboardViewController.swift
 //  Keystroke
 //
 //  Created by Arseny Zarechnev on 07/04/2017.
