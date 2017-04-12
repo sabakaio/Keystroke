@@ -12,7 +12,7 @@ struct KeyboardState: StateType {
     var keys: [KeyCode: KeyboardKey]
     var initialKeys: [KeyCode: KeyboardKey]
     var appName: String? = nil
-    var strokes: [KeyCode] = [KeyCode]()
+    var strokes: [KeyboardKey] = [KeyboardKey]()
     var bindings: AppBindingsConfigFolder? = nil
     var operation: AppOperation? = nil
     

@@ -53,7 +53,7 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
         }
         
         // Breadcrumbs
-        state.strokes.append(keyCode!)
+        state.strokes.append(state.keys[keyCode!]!)
         
         // Check for next bindings level or get operation to perform
         guard let nextLevelFolder = nextLevel as? AppBindingsConfigFolder else {
@@ -62,7 +62,7 @@ func keyboardReducer(state: KeyboardState?, _ action: Action) -> KeyboardState {
             return state
         }
         state.updateWith(bindings: nextLevelFolder)
-        
+
     default:
         break
     }

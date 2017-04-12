@@ -215,7 +215,11 @@ class ViewController: NSViewController, StoreSubscriber {
     
     private func updateBreadcrumbsView() {
         let appName = mainStore.state.keyboard.appName ?? ""
-        breadcrumbsView!.attributedStringValue = appName.styled(with: keyStyles!.breadcrumbs)
+        var crumbs = appName
+        for stroke in mainStore.state.keyboard.strokes {
+            crumbs += "  ▸  \(stroke.title)"
+        }
+        breadcrumbsView!.attributedStringValue = crumbs.styled(with: keyStyles!.breadcrumbs)
     }
     
     func activateTheme(theme: Theme) {
