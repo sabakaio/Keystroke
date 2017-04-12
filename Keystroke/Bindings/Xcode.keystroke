@@ -1,6 +1,33 @@
 name: XCode
 
 operations:
+  # File
+  # --- New
+  - name: New Tab
+    hotkey: cmd-t
+  - name: New Window
+    hotkey: shift-cmd-t
+  - name: New File
+    hotkey: cmd-n
+  - name: New Playground
+    hotkey: alt-shift-cmd-n
+  - name: New Project
+    hotkey: shift-cmd-n
+  - name: New Workspace
+    hotkey: ctrl-cmd-n
+  - name: New Group
+    hotkey: alt-cmd-n
+  # Navigate
+  - name: Reveal in Project Navigator
+    hotkey: shift-cmd-j
+  - name: Reveal in Debug Navigator
+    hotkey: shift-cmd-d
+  # - name: Open in Assistant Editor
+  #   hotkey: shift-cmd-d
+  - name: Jump to Definition
+    hotkey: ctrl-cmd-j
+
+  # Rest
   - name: Show Debug Area
     hotkey: cmd-shift-y
   - name: Find in Workspace
@@ -24,3 +51,37 @@ bindings:
       - key: f
         name: fuzzy
         operation: Open Quickly
+  - key: n
+    name: new
+    bindings:
+      - key: t
+        name: tab
+        operation: New Tab
+      - key: w
+        name: window
+        operation: New Window
+      - key: f
+        name: file
+        operation: New File
+      - key: p
+        name: playground
+        operation: New Playground
+      - key: r
+        name: project
+        operation: New Project
+      - key: s
+        name: workspace
+        operation: New Workspace
+      - key: g
+        name: group
+        operation: New Group
+  - key: g
+    name: go to
+    bindings:
+      - key: d
+        name: definition
+        operation: Jump to Definition
+      - key: t
+        name: project tree
+        operation: Reveal in Project Navigator
+

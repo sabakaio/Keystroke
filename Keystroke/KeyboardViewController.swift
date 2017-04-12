@@ -68,7 +68,7 @@ class ViewController: NSViewController, StoreSubscriber {
         if keyRows.count > 0 {
             keyRows.removeAll()
         }
-
+        
         keyRows = [
             [KeyCode.Key_q,
              KeyCode.Key_w,
@@ -107,7 +107,7 @@ class ViewController: NSViewController, StoreSubscriber {
     
     private func setupKeyStyles() {
         let theme = mainStore.state.theme.theme
-
+        
         let plaintext = StringStyle(
             .alignment(.center),
             .font(keyFont),
@@ -130,10 +130,10 @@ class ViewController: NSViewController, StoreSubscriber {
         
         keyStyles = KeyStyles(empty: empty, plaintext: plaintext, highlight: highlight, breadcrumbs: breadcrumbs)
     }
-
+    
     private func setupKeyboardView() {
         setupKeyStyles()
-
+        
         self.containerView = NSView.newAutoLayout()
         let container = self.containerView!
         keyboardView.addSubview(container)
@@ -149,7 +149,7 @@ class ViewController: NSViewController, StoreSubscriber {
             } else {
                 rowView = RowView.createNextRow(in: container, after: rowViews[rowIndex - 1])
             }
-
+            
             rowViews.append(rowView)
             
             // Then create views for keys in the row
@@ -242,7 +242,7 @@ class ViewController: NSViewController, StoreSubscriber {
         configureKeyRows()
         setupKeyboardView()
         setupBreadcrumbsView()
-
+        
         mainStore.subscribe(self)
         
         view.wantsLayer = true
