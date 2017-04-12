@@ -85,12 +85,9 @@ public class EventLoopListener: NSObject {
             return handleEvent(type: type, event: event)
         }
         
-        // All events
-        // let eventMask = ~CGEventMask.allZeros
         let eventMask = CGEventMask(0
             | (1 << CGEventType.flagsChanged.rawValue)
             | (1 << CGEventType.keyDown.rawValue)
-            //| (1 << CGEventType.keyUp.rawValue)
             | (1 << CGEventType.leftMouseDown.rawValue))
         
         guard let eventTap = CGEvent.tapCreate(
