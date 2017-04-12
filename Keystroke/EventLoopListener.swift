@@ -41,6 +41,11 @@ fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGE
         return Unmanaged.passRetained(event)
     }
     
+    //
+    // Keystroke window is opened. Prevent key event propagating to original application.
+    // Handle key event code to get an operation to execute of change a keyboard layout.
+    //
+    
     // Init a keyboard on become visible and start blocking event propagation
     if !windowWasVisible, windowShouldBecomeVisible {
         let appName = NSWorkspace.shared().frontmostApplication!.localizedName!
@@ -58,17 +63,17 @@ fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGE
     )
     
     guard let operation = mainStore.state.keyboard.operation else { return nil }
-    
-    // Create new event based on requested operation
-    let newEvent = event.copy()
-    let keystroke = operation.keystroke
-    newEvent!.setIntegerValueField(.keyboardEventKeycode, value: keystroke.getEventKeycode())
-    newEvent!.flags = keystroke.flags
+    print("=> \(operation.name)")
     
     // Hide main window, all done
     mainStore.dispatch(WindowHideAction())
     
-    return Unmanaged.passRetained(newEvent!)
+    // Execute Apple Script for the operation, disable handling CMD temporary
+    mainStore.dispatch(WindowStopListenTrigger())
+    operation.appleScript!.execute()
+    mainStore.dispatch(WindowStartListenTrigger())
+    
+    return nil
 }
 
 public class EventLoopListener: NSObject {

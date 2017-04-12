@@ -14,8 +14,14 @@ func windowReducer(state: WindowState?, _ action: Action) -> WindowState {
     var state = state ?? WindowState()
     
     switch action {
+        
     case _ as WindowHideAction:
         state.visible = false
+        
+    case _ as WindowStopListenTrigger:
+        state.skipNextShowTrigger = true
+        
+    case _ as WindowStartListenTrigger:
         state.skipNextShowTrigger = false
         
     case let action as ComputeWindowStateForIOEvent:

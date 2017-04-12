@@ -11,6 +11,8 @@ import ReSwift
 struct ThemeActionToggle: Action {}
 
 struct WindowHideAction: Action {}
+struct WindowStopListenTrigger: Action {}
+struct WindowStartListenTrigger: Action {}
 
 struct AppBindingsSetAction: Action {
     let appName: String
