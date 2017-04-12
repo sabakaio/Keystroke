@@ -17,6 +17,9 @@ public enum KeystrokeError: Error {
 }
 
 public enum KeyCode: UInt64 {
+    // Row 0
+    case Key_ESC = 53
+    
     // Row 1
     case Key_BACKTICK = 50
     case Key_1 = 18
@@ -216,6 +219,10 @@ public enum KeyCode: UInt64 {
             throw KeystrokeError.CannotConvertToString(value: self)
         }
     }
+    
+    func toEventKeycode() -> Int64 {
+        return Int64(self.rawValue)
+    }
 }
 
 struct Keystroke {
@@ -273,6 +280,6 @@ struct Keystroke {
     }
     
     func getEventKeycode() -> Int64 {
-        return Int64(keyCode.rawValue)
+        return keyCode.toEventKeycode()
     }
 }
