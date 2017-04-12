@@ -35,6 +35,10 @@ fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGE
         return nil
     }
     
+    if type != .keyDown {
+        return nil
+    }
+    
     // Update keyboad layout with next level or get an oparation to perform
     mainStore.dispatch(
         KeyEventBindingAction(type: type, event: event)
