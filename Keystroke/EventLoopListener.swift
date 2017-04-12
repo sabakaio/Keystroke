@@ -10,6 +10,19 @@ import Foundation
 import Cocoa
 
 fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGEvent>? {
+    switch type {
+    case .keyDown:
+        let keyCode = KeyCode.from(event: event)
+        print("keyDown " + String(describing: keyCode))
+    case .flagsChanged:
+        print("flagsChanged")
+    case .leftMouseDown:
+        print("leftMouseDown")
+    default:
+        print("NOT EXPECTED EVENT TYPE", String(describing: type))
+        return Unmanaged.passRetained(event)
+    }
+    
     let windowWasVisible = mainStore.state.window.visible
     
     // Process event to update window visibility state
@@ -69,28 +82,6 @@ public class EventLoopListener: NSObject {
             refcon: UnsafeMutableRawPointer?
             ) -> Unmanaged<CGEvent>? {
 
-            switch type {
-            case .keyDown:
-                print("keyDown")
-//            case .keyUp:
-//                print("keyUp")
-            case .flagsChanged:
-                print("flagsChanged")
-            case .leftMouseDown:
-                print("leftMouseDown")
-//            case .tapDisabledByTimeout:
-//                print("tapDisabledByTimeout")
-//                return listener.restart(for: event)
-//            case .tapDisabledByUserInput:
-//                print("tapDisabledByUserInput")
-//                return listener.restart(for: event)
-            default:
-                // The mask accepts all events so we need to pass
-                // the events we don't care about as early as possible.
-                // Not even register them in our state
-                return Unmanaged.passRetained(event)
-            }
-            
             return handleEvent(type: type, event: event)
         }
         
