@@ -35,6 +35,10 @@ fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGE
         return nil
     }
     
+    if type != .keyDown {
+        return nil
+    }
+    
     // Update keyboad layout with next level or get an oparation to perform
     mainStore.dispatch(
         KeyEventBindingAction(type: type, event: event)
@@ -44,9 +48,9 @@ fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGE
     
     // Create new event based on requested operation
     let newEvent = event.copy()
-    let newCode = Int64(operation.keyCode!.rawValue)
-    newEvent!.setIntegerValueField(.keyboardEventKeycode, value: newCode)
-    newEvent!.flags = operation.flags
+    let keystroke = operation.keystroke
+    newEvent!.setIntegerValueField(.keyboardEventKeycode, value: keystroke.getEventKeycode())
+    newEvent!.flags = keystroke.flags
     
     // Hide main window, all done
     mainStore.dispatch(WindowHideAction())
