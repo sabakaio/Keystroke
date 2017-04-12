@@ -156,6 +156,26 @@ public enum KeyCode: UInt64 {
             return .Key_y
         case "z":
             return .Key_z
+        case "1":
+            return .Key_1
+        case "2":
+            return .Key_2
+        case "3":
+            return .Key_3
+        case "4":
+            return .Key_4
+        case "5":
+            return .Key_5
+        case "6":
+            return .Key_6
+        case "7":
+            return .Key_7
+        case "8":
+            return .Key_8
+        case "9":
+            return .Key_9
+        case "0":
+            return .Key_0
         default:
             throw KeystrokeError.UnknownKey(value: letter)
         }
@@ -215,6 +235,27 @@ public enum KeyCode: UInt64 {
             return "y"
         case .Key_z:
             return "z"
+        case .Key_1:
+            return "1"
+        case .Key_2:
+            return "2"
+        case .Key_3:
+            return "3"
+        case .Key_4:
+            return "4"
+        case .Key_5:
+            return "5"
+        case .Key_6:
+            return "6"
+        case .Key_7:
+            return "7"
+        case .Key_8:
+            return "8"
+        case .Key_9:
+            return "9"
+        case .Key_0:
+            return "0"
+
         default:
             throw KeystrokeError.CannotConvertToString(value: self)
         }

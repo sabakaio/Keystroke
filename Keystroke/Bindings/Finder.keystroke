@@ -1,0 +1,124 @@
+name: Finder
+
+operations:
+  # View
+  - name: View as Icons
+    hotkey: cmd-1
+  - name: View as List
+    hotkey: cmd-2
+  - name: View as Columns
+    hotkey: cmd-3
+  - name: View as Cover Flow
+    hotkey: cmd-4
+  # --- Arrange by
+  - name: Arrange by Name
+    hotkey: ctrl-cmd-1
+  - name: Arrange by Kind
+    hotkey: ctrl-cmd-2
+  - name: Arrange by Date Last Opened
+    hotkey: ctrl-cmd-3
+  - name: Arrange by Date Added
+    hotkey: ctrl-cmd-4
+  - name: Arrange by Date Modified
+    hotkey: ctrl-cmd-5
+  - name: Arrange by Size
+    hotkey: ctrl-cmd-6
+  - name: Arrange by Tags
+    hotkey: ctrl-cmd-7
+  # Go
+  - name: Go to All My Files
+    hotkey: shift-cmd-f
+  - name: Go to Documents
+    hotkey: shift-cmd-o
+  - name: Go to Desktop
+    hotkey: shift-cmd-d
+  - name: Go to Downloads
+    hotkey: shift-cmd-l
+  - name: Go to Home
+    hotkey: shift-cmd-h
+  - name: Go to Computer
+    hotkey: shift-cmd-c
+  - name: Go to AirDrop
+    hotkey: shift-cmd-r
+  - name: Go to Network
+    hotkey: shift-cmd-k
+  - name: Go to iCloud Drive
+    hotkey: shift-cmd-i
+  - name: Go to Applications
+    hotkey: shift-cmd-a
+  - name: Go to Utilites
+    hotkey: shift-cmd-u
+  # ---
+  - name: Go to Folder
+    hotkey: shift-cmd-g
+  
+
+bindings:
+  - key: a
+    name: arrange by
+    bindings:
+      - key: n
+        name: name
+        operation: Arrange by Name
+      - key: k
+        name: kind
+        operation: Arrange by Kind
+      - key: s
+        name: size
+        operation: Arrange by Size
+      - key: t
+        name: tags
+        operation: Arrange by Tags
+      - key: d
+        name: date
+        bindings:
+          - key: o
+            name: opened
+            operation: Arrange by Date Last Opened
+          - key: a
+            name: added
+            operation: Arrange by Date Added
+          - key: m
+            name: modified
+            operation: Arrange by Date Modified
+
+  - key: v
+    name: view as
+    bindings:
+      - key: i
+        name: icons
+        operation: View as Icons
+      - key: l
+        name: list
+        operation: View as List
+      - key: c
+        name: columns
+        operation: View as Columns
+      - key: f
+        name: cover flow
+        operation: View as Cover Flow
+
+  - key: g
+    name: go to
+    bindings:
+      - key: a
+        name: applications
+        operation: Go to Applications
+      - key: h
+        name: home
+        operation: Go to Home
+      - key: f
+        name: folder
+        operation: Go to Folder
+      - key: d
+        name: documents
+        operation: Go to Documents
+      - key: l
+        name: downloads
+        operation: Go to Downloads
+      - key: i
+        name: iCloud Drive
+        operation: Go to iCloud Drive
+      - key: r
+        name: AirDrop
+        operation: Go to AirDrop
