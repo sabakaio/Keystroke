@@ -1,0 +1,14 @@
+{
+  "name": "applescripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "menu_parse.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "js-yaml": "^3.8.3"
+  }
+}

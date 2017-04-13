@@ -17,7 +17,7 @@ on parseMenu(theMenu)
 end parseMenu
 
 tell application "System Events"
-	tell process "Google Chrome"
+	tell process "Xcode"
 		--get position of menu item "New Tab" of menu "File" of menu bar item "File" of menu bar 1
 		set topLevelMenus to {}
 		repeat with m in every menu of every menu bar item of menu bar 1
