@@ -1,4 +1,4 @@
-name: XCode
+name: Xcode
 
 operations:
   # File
@@ -39,6 +39,1231 @@ operations:
       - Product
       - Scheme
       - Edit Scheme…
+
+  # Menus
+  - name: Xcode - About Xcode
+    menu:
+      - Xcode
+      - About Xcode
+  - name: Xcode - Preferences…
+    menu:
+      - Xcode
+      - Preferences…
+  - name: Xcode - Open Developer Tool - Instruments
+    menu:
+      - Xcode
+      - Open Developer Tool
+      - Instruments
+  - name: Xcode - Open Developer Tool - Simulator
+    menu:
+      - Xcode
+      - Open Developer Tool
+      - Simulator
+  - name: Xcode - Open Developer Tool - Simulator (Watch)
+    menu:
+      - Xcode
+      - Open Developer Tool
+      - Simulator (Watch)
+  - name: Xcode - Open Developer Tool - Accessibility Inspector
+    menu:
+      - Xcode
+      - Open Developer Tool
+      - Accessibility Inspector
+  - name: Xcode - Open Developer Tool - FileMerge
+    menu:
+      - Xcode
+      - Open Developer Tool
+      - FileMerge
+  - name: Xcode - Open Developer Tool - Application Loader
+    menu:
+      - Xcode
+      - Open Developer Tool
+      - Application Loader
+  - name: Xcode - Hide Xcode
+    menu:
+      - Xcode
+      - Hide Xcode
+  - name: Xcode - Show All
+    menu:
+      - Xcode
+      - Show All
+  - name: Xcode - Quit Xcode
+    menu:
+      - Xcode
+      - Quit Xcode
+  - name: File - New - Tab
+    menu:
+      - File
+      - New
+      - Tab
+  - name: File - New - Window
+    menu:
+      - File
+      - New
+      - Window
+  - name: File - New - File…
+    menu:
+      - File
+      - New
+      - File…
+  - name: File - New - Playground…
+    menu:
+      - File
+      - New
+      - Playground…
+  - name: File - New - Target…
+    menu:
+      - File
+      - New
+      - Target…
+  - name: File - New - Project…
+    menu:
+      - File
+      - New
+      - Project…
+  - name: File - New - Workspace…
+    menu:
+      - File
+      - New
+      - Workspace…
+  - name: File - New - Group
+    menu:
+      - File
+      - New
+      - Group
+  - name: File - New - Group from Selection
+    menu:
+      - File
+      - New
+      - Group from Selection
+  - name: File - Add Files to Project
+    hotkey: alt-cmd-a
+  - name: File - Open…
+    menu:
+      - File
+      - Open…
+  - name: File - Open Quickly…
+    menu:
+      - File
+      - Open Quickly…
+  - name: File - Close Window
+    menu:
+      - File
+      - Close Window
+  - name: File - Close Other Windows
+    menu:
+      - File
+      - Close Other Windows
+  - name: File - Close Tab
+    menu:
+      - File
+      - Close Tab
+  - name: File - Close Current File
+    hotkey: ctrl-cmd-w
+  - name: File - Close Workspace
+    menu:
+      - File
+      - Close Workspace
+  - name: File - Save
+    menu:
+      - File
+      - Save
+  - name: File - Save All
+    menu:
+      - File
+      - Save All
+  - name: File - Duplicate…
+    menu:
+      - File
+      - Duplicate…
+  - name: File - Save As…
+    menu:
+      - File
+      - Save As…
+  - name: File - Revert to Saved…
+    menu:
+      - File
+      - Revert to Saved…
+  - name: File - Unlock…
+    menu:
+      - File
+      - Unlock…
+  - name: File - Export…
+    menu:
+      - File
+      - Export…
+  - name: File - Show in Finder
+    menu:
+      - File
+      - Show in Finder
+  - name: File - Open with External Editor
+    menu:
+      - File
+      - Open with External Editor
+  - name: File - Save As Workspace…
+    menu:
+      - File
+      - Save As Workspace…
+  - name: File - Workspace Settings…
+    menu:
+      - File
+      - Workspace Settings…
+  - name: Edit - Filter - Filter in Navigator
+    menu:
+      - Edit
+      - Filter
+      - Filter in Navigator
+  - name: Edit - Filter - Filter in Library
+    menu:
+      - Edit
+      - Filter
+      - Filter in Library
+  - name: Edit - Refactor - Rename…
+    menu:
+      - Edit
+      - Refactor
+      - Rename…
+  - name: Edit - Refactor - Extract…
+    menu:
+      - Edit
+      - Refactor
+      - Extract…
+  - name: Edit - Refactor - Create Superclass…
+    menu:
+      - Edit
+      - Refactor
+      - Create Superclass…
+  - name: Edit - Refactor - Move Up…
+    menu:
+      - Edit
+      - Refactor
+      - Move Up…
+  - name: Edit - Refactor - Move Down…
+    menu:
+      - Edit
+      - Refactor
+      - Move Down…
+  - name: Edit - Refactor - Encapsulate…
+    menu:
+      - Edit
+      - Refactor
+      - Encapsulate…
+  - name: Edit - Convert - To Current Swift Syntax…
+    menu:
+      - Edit
+      - Convert
+      - To Current Swift Syntax…
+  - name: Edit - Convert - To Modern Objective-C Syntax…
+    menu:
+      - Edit
+      - Convert
+      - To Modern Objective-C Syntax…
+  - name: Edit - Convert - To Objective-C ARC…
+    menu:
+      - Edit
+      - Convert
+      - To Objective-C ARC…
+  - name: View - Standard Editor - Show Standard Editor
+    menu:
+      - View
+      - Standard Editor
+      - Show Standard Editor
+  - name: View - Standard Editor - Show Related Items
+    menu:
+      - View
+      - Standard Editor
+      - Show Related Items
+  - name: View - Standard Editor - Show Previous History
+    menu:
+      - View
+      - Standard Editor
+      - Show Previous History
+  - name: View - Standard Editor - Show Previous Files History
+    menu:
+      - View
+      - Standard Editor
+      - Show Previous Files History
+  - name: View - Standard Editor - Show Next History
+    menu:
+      - View
+      - Standard Editor
+      - Show Next History
+  - name: View - Standard Editor - Show Next Files History
+    menu:
+      - View
+      - Standard Editor
+      - Show Next Files History
+  - name: View - Standard Editor - Show Top Level Items
+    menu:
+      - View
+      - Standard Editor
+      - Show Top Level Items
+  - name: View - Standard Editor - Show Group Files
+    menu:
+      - View
+      - Standard Editor
+      - Show Group Files
+  - name: View - Standard Editor - Show Document Items
+    menu:
+      - View
+      - Standard Editor
+      - Show Document Items
+  - name: View - Assistant Editor - Show Assistant Editor
+    menu:
+      - View
+      - Assistant Editor
+      - Show Assistant Editor
+  - name: View - Assistant Editor - Add Assistant Editor
+    menu:
+      - View
+      - Assistant Editor
+      - Add Assistant Editor
+  - name: View - Assistant Editor - Remove Assistant Editor
+    menu:
+      - View
+      - Assistant Editor
+      - Remove Assistant Editor
+  - name: View - Assistant Editor - Reset Editor
+    menu:
+      - View
+      - Assistant Editor
+      - Reset Editor
+  # - name: View - Assistant Editor - Assistant Editors on Right
+  #   menu:
+  #     - View
+  #     - Assistant Editor
+  #     - Assistant Editors on Right
+  # - name: View - Assistant Editor - Assistant Editors on Bottom
+  #   menu:
+  #     - View
+  #     - Assistant Editor
+  #     - Assistant Editors on Bottom
+  # - name: View - Assistant Editor - All Editors Stacked Horizontally
+  #   menu:
+  #     - View
+  #     - Assistant Editor
+  #     - All Editors Stacked Horizontally
+  # - name: View - Assistant Editor - All Editors Stacked Vertically
+  #   menu:
+  #     - View
+  #     - Assistant Editor
+  #     - All Editors Stacked Vertically
+  - name: View - Version Editor - Show Version Editor
+    menu:
+      - View
+      - Version Editor
+      - Show Version Editor
+  - name: View - Version Editor - Show Comparison View
+    menu:
+      - View
+      - Version Editor
+      - Show Comparison View
+  - name: View - Version Editor - Show Blame View
+    menu:
+      - View
+      - Version Editor
+      - Show Blame View
+  - name: View - Version Editor - Show Log View
+    menu:
+      - View
+      - Version Editor
+      - Show Log View
+  - name: View - Navigators - Show Project Navigator
+    menu:
+      - View
+      - Navigators
+      - Show Project Navigator
+  - name: View - Navigators - Show Symbol Navigator
+    menu:
+      - View
+      - Navigators
+      - Show Symbol Navigator
+  - name: View - Navigators - Show Find Navigator
+    menu:
+      - View
+      - Navigators
+      - Show Find Navigator
+  - name: View - Navigators - Show Issue Navigator
+    menu:
+      - View
+      - Navigators
+      - Show Issue Navigator
+  - name: View - Navigators - Show Test Navigator
+    menu:
+      - View
+      - Navigators
+      - Show Test Navigator
+  - name: View - Navigators - Show Debug Navigator
+    menu:
+      - View
+      - Navigators
+      - Show Debug Navigator
+  - name: View - Navigators - Show Breakpoint Navigator
+    menu:
+      - View
+      - Navigators
+      - Show Breakpoint Navigator
+  - name: View - Navigators - Show Report Navigator
+    menu:
+      - View
+      - Navigators
+      - Show Report Navigator
+  - name: View - Navigators - Hide Navigator
+    menu:
+      - View
+      - Navigators
+      - Hide Navigator
+  - name: View - Debug Area - Activate Console
+    menu:
+      - View
+      - Debug Area
+      - Activate Console
+  - name: View - Debug Area - Hide Debug Area
+    menu:
+      - View
+      - Debug Area
+      - Hide Debug Area
+  - name: View - Utilities - Show File Inspector
+    menu:
+      - View
+      - Utilities
+      - Show File Inspector
+  - name: View - Utilities - Show Quick Help Inspector
+    menu:
+      - View
+      - Utilities
+      - Show Quick Help Inspector
+  - name: View - Utilities - Show File Template Library
+    menu:
+      - View
+      - Utilities
+      - Show File Template Library
+  - name: View - Utilities - Show Code Snippet Library
+    menu:
+      - View
+      - Utilities
+      - Show Code Snippet Library
+  - name: View - Utilities - Show Object Library
+    menu:
+      - View
+      - Utilities
+      - Show Object Library
+  - name: View - Utilities - Show Media Library
+    menu:
+      - View
+      - Utilities
+      - Show Media Library
+  - name: View - Utilities - Hide Utilities
+    menu:
+      - View
+      - Utilities
+      - Hide Utilities
+  - name: View - Hide Toolbar
+    menu:
+      - View
+      - Hide Toolbar
+  - name: View - Show Tab Bar
+    menu:
+      - View
+      - Show Tab Bar
+  - name: View - Enter Full Screen
+    menu:
+      - View
+      - Enter Full Screen
+  - name: Find - Find in Workspace…
+    menu:
+      - Find
+      - Find in Workspace…
+  - name: Find - Find and Replace in Workspace…
+    menu:
+      - Find
+      - Find and Replace in Workspace…
+  - name: Find - Find Next in Workspace
+    menu:
+      - Find
+      - Find Next in Workspace
+  - name: Find - Find Previous in Workspace
+    menu:
+      - Find
+      - Find Previous in Workspace
+  - name: Find - Find Selected Text in Workspace
+    menu:
+      - Find
+      - Find Selected Text in Workspace
+  - name: Find - Find Selected Symbol in Workspace
+    menu:
+      - Find
+      - Find Selected Symbol in Workspace
+  - name: Find - Find Call Hierarchy
+    menu:
+      - Find
+      - Find Call Hierarchy
+  - name: Find - Find in Selected Groups…
+    menu:
+      - Find
+      - Find in Selected Groups…
+  - name: Find - Find…
+    menu:
+      - Find
+      - Find…
+  - name: Find - Find and Replace…
+    menu:
+      - Find
+      - Find and Replace…
+  - name: Find - Find Next
+    menu:
+      - Find
+      - Find Next
+  - name: Find - Find Previous
+    menu:
+      - Find
+      - Find Previous
+  - name: Find - Replace
+    menu:
+      - Find
+      - Replace
+  - name: Find - Replace All
+    menu:
+      - Find
+      - Replace All
+  - name: Find - Replace and Find Next
+    menu:
+      - Find
+      - Replace and Find Next
+  - name: Find - Replace and Find Previous
+    menu:
+      - Find
+      - Replace and Find Previous
+  - name: Find - Hide Find Bar
+    menu:
+      - Find
+      - Hide Find Bar
+  - name: Find - Use Selection for Find
+    menu:
+      - Find
+      - Use Selection for Find
+  - name: Find - Use Selection for Replace
+    menu:
+      - Find
+      - Use Selection for Replace
+  - name: Navigate - Reveal in Project Navigator
+    menu:
+      - Navigate
+      - Reveal in Project Navigator
+  - name: Navigate - Reveal in Symbol Navigator
+    menu:
+      - Navigate
+      - Reveal in Symbol Navigator
+  - name: Navigate - Reveal in Debug Navigator
+    menu:
+      - Navigate
+      - Reveal in Debug Navigator
+  - name: Navigate - Open in Assistant Editor
+    menu:
+      - Navigate
+      - Open in Assistant Editor
+  - name: Navigate - Open in…
+    menu:
+      - Navigate
+      - Open in…
+  - name: Navigate - Move Focus To Next Area
+    menu:
+      - Navigate
+      - Move Focus To Next Area
+  - name: Navigate - Move Focus To Previous Area
+    menu:
+      - Navigate
+      - Move Focus To Previous Area
+  - name: Navigate - Move Focus To Next Editor
+    menu:
+      - Navigate
+      - Move Focus To Next Editor
+  - name: Navigate - Move Focus To Previous Editor
+    menu:
+      - Navigate
+      - Move Focus To Previous Editor
+  - name: Navigate - Move Focus To Editor…
+    menu:
+      - Navigate
+      - Move Focus To Editor…
+  - name: Navigate - Go Forward
+    menu:
+      - Navigate
+      - Go Forward
+  - name: Navigate - Go Forward in Assistant Editor
+    menu:
+      - Navigate
+      - Go Forward in Assistant Editor
+  - name: Navigate - Go Forward in…
+    menu:
+      - Navigate
+      - Go Forward in…
+  - name: Navigate - Go Back
+    menu:
+      - Navigate
+      - Go Back
+  - name: Navigate - Go Back in Assistant Editor
+    menu:
+      - Navigate
+      - Go Back in Assistant Editor
+  - name: Navigate - Go Back in…
+    menu:
+      - Navigate
+      - Go Back in…
+  - name: Navigate - Jump to Selection
+    menu:
+      - Navigate
+      - Jump to Selection
+  - name: Navigate - Jump to Definition
+    menu:
+      - Navigate
+      - Jump to Definition
+  - name: Navigate - Jump to Definition in Assistant Editor
+    menu:
+      - Navigate
+      - Jump to Definition in Assistant Editor
+  - name: Navigate - Jump to Definition in…
+    menu:
+      - Navigate
+      - Jump to Definition in…
+  - name: Navigate - Jump to Generated Interface
+    menu:
+      - Navigate
+      - Jump to Generated Interface
+  - name: Navigate - Jump to Original Source/Generated Interface (option)
+    menu:
+      - Navigate
+      - Jump to Original Source/Generated Interface (option)
+  - name: Navigate - Jump to Original Source/Generated Interface (shift+option)
+    menu:
+      - Navigate
+      - Jump to Original Source/Generated Interface (shift+option)
+  - name: Navigate - Jump to Next Issue
+    menu:
+      - Navigate
+      - Jump to Next Issue
+  - name: Navigate - Fix Next Issue
+    menu:
+      - Navigate
+      - Fix Next Issue
+  - name: Navigate - Jump to Previous Issue
+    menu:
+      - Navigate
+      - Jump to Previous Issue
+  - name: Navigate - Fix Previous Issue
+    menu:
+      - Navigate
+      - Fix Previous Issue
+  - name: Navigate - Jump to Instruction Pointer
+    menu:
+      - Navigate
+      - Jump to Instruction Pointer
+  - name: Navigate - Jump to Next Counterpart
+    menu:
+      - Navigate
+      - Jump to Next Counterpart
+  - name: Navigate - Jump to Next Counterpart in Assistant Editor
+    menu:
+      - Navigate
+      - Jump to Next Counterpart in Assistant Editor
+  - name: Navigate - Jump to Next Counterpart in…
+    menu:
+      - Navigate
+      - Jump to Next Counterpart in…
+  - name: Navigate - Jump to Previous Counterpart
+    menu:
+      - Navigate
+      - Jump to Previous Counterpart
+  - name: Navigate - Jump to Previous Counterpart in Assistant Editor
+    menu:
+      - Navigate
+      - Jump to Previous Counterpart in Assistant Editor
+  - name: Navigate - Jump to Previous Counterpart in…
+    menu:
+      - Navigate
+      - Jump to Previous Counterpart in…
+  - name: Navigate - Jump to Line in “WindowController.swift”…
+    menu:
+      - Navigate
+      - Jump to Line in “WindowController.swift”…
+  - name: Navigate - Jump to Next Placeholder
+    menu:
+      - Navigate
+      - Jump to Next Placeholder
+  - name: Navigate - Jump to Previous Placeholder
+    menu:
+      - Navigate
+      - Jump to Previous Placeholder
+  - name: Editor - Show Completions
+    menu:
+      - Editor
+      - Show Completions
+  - name: Editor - Edit All in Scope
+    menu:
+      - Editor
+      - Edit All in Scope
+  - name: Editor - Fix All in Scope
+    menu:
+      - Editor
+      - Fix All in Scope
+  - name: Editor - Show Issue
+    menu:
+      - Editor
+      - Show Issue
+  - name: Editor - Issues - Hide All Issues
+    menu:
+      - Editor
+      - Issues
+      - Hide All Issues
+  - name: Editor - Issues - All Issues
+    menu:
+      - Editor
+      - Issues
+      - All Issues
+  - name: Editor - Issues - Errors Only
+    menu:
+      - Editor
+      - Issues
+      - Errors Only
+  - name: Editor - Structure - Balance Delimiter
+    menu:
+      - Editor
+      - Structure
+      - Balance Delimiter
+  - name: Editor - Structure - Re-Indent
+    menu:
+      - Editor
+      - Structure
+      - Re-Indent
+  - name: Editor - Structure - Shift Right
+    menu:
+      - Editor
+      - Structure
+      - Shift Right
+  - name: Editor - Structure - Shift Left
+    menu:
+      - Editor
+      - Structure
+      - Shift Left
+  - name: Editor - Structure - Move Line Up
+    menu:
+      - Editor
+      - Structure
+      - Move Line Up
+  - name: Editor - Structure - Move Line Down
+    menu:
+      - Editor
+      - Structure
+      - Move Line Down
+  - name: Editor - Structure - Comment Selection
+    menu:
+      - Editor
+      - Structure
+      - Comment Selection
+  - name: Editor - Structure - Add Documentation
+    menu:
+      - Editor
+      - Structure
+      - Add Documentation
+  - name: Editor - Code Folding - Fold
+    menu:
+      - Editor
+      - Code Folding
+      - Fold
+  - name: Editor - Code Folding - Unfold
+    menu:
+      - Editor
+      - Code Folding
+      - Unfold
+  - name: Editor - Code Folding - Unfold All
+    menu:
+      - Editor
+      - Code Folding
+      - Unfold All
+  - name: Editor - Code Folding - Fold Methods & Functions
+    menu:
+      - Editor
+      - Code Folding
+      - Fold Methods & Functions
+  - name: Editor - Code Folding - Unfold Methods & Functions
+    menu:
+      - Editor
+      - Code Folding
+      - Unfold Methods & Functions
+  - name: Editor - Code Folding - Fold Comment Blocks
+    menu:
+      - Editor
+      - Code Folding
+      - Fold Comment Blocks
+  - name: Editor - Code Folding - Unfold Comment Blocks
+    menu:
+      - Editor
+      - Code Folding
+      - Unfold Comment Blocks
+  - name: Editor - Code Folding - Focus Follows Selection
+    menu:
+      - Editor
+      - Code Folding
+      - Focus Follows Selection
+  # Syntax coloring
+  - name: Editor - Show Invisibles
+    menu:
+      - Editor
+      - Show Invisibles
+  - name: Editor - Show Blame for Line
+    menu:
+      - Editor
+      - Show Blame for Line
+  - name: Editor - Show Code Coverage
+    menu:
+      - Editor
+      - Show Code Coverage
+  - name: Product - Run
+    menu:
+      - Product
+      - Run
+  - name: Product - Test
+    menu:
+      - Product
+      - Test
+  - name: Product - Profile
+    menu:
+      - Product
+      - Profile
+  - name: Product - Analyze
+    menu:
+      - Product
+      - Analyze
+  - name: Product - Archive
+    menu:
+      - Product
+      - Archive
+  - name: Product - Build For - Running
+    menu:
+      - Product
+      - Build For
+      - Running
+  - name: Product - Build For - Testing
+    menu:
+      - Product
+      - Build For
+      - Testing
+  - name: Product - Build For - Profiling
+    menu:
+      - Product
+      - Build For
+      - Profiling
+  - name: Product - Perform Action - Run Without Building
+    menu:
+      - Product
+      - Perform Action
+      - Run Without Building
+  - name: Product - Perform Action - Test Without Building
+    menu:
+      - Product
+      - Perform Action
+      - Test Without Building
+  - name: Product - Perform Action - Profile Without Building
+    menu:
+      - Product
+      - Perform Action
+      - Profile Without Building
+  - name: Product - Perform Action - Test
+    menu:
+      - Product
+      - Perform Action
+      - Test
+  - name: Product - Perform Action - Test Again
+    menu:
+      - Product
+      - Perform Action
+      - Test Again
+  - name: Product - Perform Action - Profile
+    menu:
+      - Product
+      - Perform Action
+      - Profile
+  - name: Product - Perform Action - Profile Again
+    menu:
+      - Product
+      - Perform Action
+      - Profile Again
+  - name: Product - Perform Action - Compile File
+    menu:
+      - Product
+      - Perform Action
+      - Compile File
+  - name: Product - Perform Action - Analyze File
+    menu:
+      - Product
+      - Perform Action
+      - Analyze File
+  - name: Product - Perform Action - Preprocess File
+    menu:
+      - Product
+      - Perform Action
+      - Preprocess File
+  - name: Product - Perform Action - Assemble File
+    menu:
+      - Product
+      - Perform Action
+      - Assemble File
+  - name: Product - Perform Action - Generate Optimization Profile…
+    menu:
+      - Product
+      - Perform Action
+      - Generate Optimization Profile…
+  - name: Product - Build
+    menu:
+      - Product
+      - Build
+  - name: Product - Clean
+    menu:
+      - Product
+      - Clean
+  - name: Product - Clean Build Folder…
+    menu:
+      - Product
+      - Clean Build Folder…
+  - name: Product - Stop
+    menu:
+      - Product
+      - Stop
+  - name: Product - Scheme - Select Next Scheme
+    menu:
+      - Product
+      - Scheme
+      - Select Next Scheme
+  - name: Product - Scheme - Select Previous Scheme
+    menu:
+      - Product
+      - Scheme
+      - Select Previous Scheme
+  # Schemes
+  - name: Product - Scheme - Edit Scheme…
+    menu:
+      - Product
+      - Scheme
+      - Edit Scheme…
+  - name: Product - Scheme - New Scheme…
+    menu:
+      - Product
+      - Scheme
+      - New Scheme…
+  - name: Product - Scheme - Manage Schemes…
+    menu:
+      - Product
+      - Scheme
+      - Manage Schemes…
+  - name: Product - Destination - Select Next Destination
+    menu:
+      - Product
+      - Destination
+      - Select Next Destination
+  - name: Product - Destination - Select Previous Destination
+    menu:
+      - Product
+      - Destination
+      - Select Previous Destination
+  - name: Product - Create Bot…
+    menu:
+      - Product
+      - Create Bot…
+  - name: Debug - Pause
+    menu:
+      - Debug
+      - Pause
+  - name: Debug - Continue To Current Line
+    menu:
+      - Debug
+      - Continue To Current Line
+  - name: Debug - Step Over
+    menu:
+      - Debug
+      - Step Over
+  - name: Debug - Step Into
+    menu:
+      - Debug
+      - Step Into
+  - name: Debug - Step Out
+    menu:
+      - Debug
+      - Step Out
+  - name: Debug - Step Over Instruction
+    menu:
+      - Debug
+      - Step Over Instruction
+  - name: Debug - Step Over Thread
+    menu:
+      - Debug
+      - Step Over Thread
+  - name: Debug - Step Into Instruction
+    menu:
+      - Debug
+      - Step Into Instruction
+  - name: Debug - Step Into Thread
+    menu:
+      - Debug
+      - Step Into Thread
+  - name: Debug - Capture GPU Frame
+    menu:
+      - Debug
+      - Capture GPU Frame
+  - name: Debug - GPU Overrides - Don't overrride
+    menu:
+      - Debug
+      - GPU Overrides
+      - Don't overrride
+  - name: Debug - GPU Overrides - Minimize texture read bandwidth
+    menu:
+      - Debug
+      - GPU Overrides
+      - Minimize texture read bandwidth
+  - name: Debug - GPU Overrides - Minimize pixels rendered
+    menu:
+      - Debug
+      - GPU Overrides
+      - Minimize pixels rendered
+  - name: Debug - GPU Overrides - Disable blending stage
+    menu:
+      - Debug
+      - GPU Overrides
+      - Disable blending stage
+  - name: Debug - GPU Overrides - Disable draw calls
+    menu:
+      - Debug
+      - GPU Overrides
+      - Disable draw calls
+  - name: Debug - GPU Overrides - Wireframe mode
+    menu:
+      - Debug
+      - GPU Overrides
+      - Wireframe mode
+  - name: Debug - GPU Overrides - Tessellation scaling
+    menu:
+      - Debug
+      - GPU Overrides
+      - Tessellation scaling
+  # Simulate location
+  - name: Debug - Simulate Background Fetch
+    menu:
+      - Debug
+      - Simulate Background Fetch
+  - name: Debug - Simulate UI Snapshot
+    menu:
+      - Debug
+      - Simulate UI Snapshot
+  - name: Debug - iCloud - Trigger Sync in Simulator
+    menu:
+      - Debug
+      - iCloud
+      - Trigger Sync in Simulator
+  - name: Debug - iCloud - Delete Container Contents
+    menu:
+      - Debug
+      - iCloud
+      - Delete Container Contents
+  - name: Debug - View Debugging - Take Screenshot of Active Device
+    menu:
+      - Debug
+      - View Debugging
+      - Take Screenshot of Active Device
+  - name: Debug - View Debugging - Capture View Hierarchy
+    menu:
+      - Debug
+      - View Debugging
+      - Capture View Hierarchy
+  - name: Debug - View Debugging - Show View Frames
+    menu:
+      - Debug
+      - View Debugging
+      - Show View Frames
+  - name: Debug - View Debugging - Show Alignment Rectangles
+    menu:
+      - Debug
+      - View Debugging
+      - Show Alignment Rectangles
+  - name: Debug - View Debugging - Show View Drawing
+    menu:
+      - Debug
+      - View Debugging
+      - Show View Drawing
+  - name: Debug - View Debugging - Show Responsive Scrolling Status
+    menu:
+      - Debug
+      - View Debugging
+      - Show Responsive Scrolling Status
+  - name: Debug - Deactivate Breakpoints
+    menu:
+      - Debug
+      - Deactivate Breakpoints
+  - name: Debug - Breakpoints - Add Breakpoint at Current Line
+    menu:
+      - Debug
+      - Breakpoints
+      - Add Breakpoint at Current Line
+  - name: Debug - Breakpoints - Create Swift Error Breakpoint
+    menu:
+      - Debug
+      - Breakpoints
+      - Create Swift Error Breakpoint
+  - name: Debug - Breakpoints - Create Exception Breakpoint…
+    menu:
+      - Debug
+      - Breakpoints
+      - Create Exception Breakpoint…
+  - name: Debug - Breakpoints - Create Symbolic Breakpoint…
+    menu:
+      - Debug
+      - Breakpoints
+      - Create Symbolic Breakpoint…
+  - name: Debug - Breakpoints - Create Test Failure Breakpoint
+    menu:
+      - Debug
+      - Breakpoints
+      - Create Test Failure Breakpoint
+  - name: Debug - Debug Workflow - Always Show Disassembly
+    menu:
+      - Debug
+      - Debug Workflow
+      - Always Show Disassembly
+  - name: Debug - Debug Workflow - Shared Libraries...
+    menu:
+      - Debug
+      - Debug Workflow
+      - Shared Libraries...
+  - name: Debug - Debug Workflow - View Memory
+    menu:
+      - Debug
+      - Debug Workflow
+      - View Memory
+  - name: Debug - Debug Workflow - Clear Console
+    menu:
+      - Debug
+      - Debug Workflow
+      - Clear Console
+  - name: Debug - Debug Workflow - Reload Console
+    menu:
+      - Debug
+      - Debug Workflow
+      - Reload Console
+  - name: Debug - Attach to Process by PID or Name…
+    menu:
+      - Debug
+      - Attach to Process by PID or Name…
+  - name: Debug - Detach
+    menu:
+      - Debug
+      - Detach
+  - name: Source Control - Create Working Copy…
+    menu:
+      - Source Control
+      - Create Working Copy…
+  - name: Source Control - Check Out…
+    menu:
+      - Source Control
+      - Check Out…
+  - name: Source Control - Commit…
+    menu:
+      - Source Control
+      - Commit…
+  - name: Source Control - Push…
+    menu:
+      - Source Control
+      - Push…
+  - name: Source Control - Pull…
+    menu:
+      - Source Control
+      - Pull…
+  - name: Source Control - Pull…
+    menu:
+      - Source Control
+      - Pull…
+  - name: Source Control - Refresh Status
+    menu:
+      - Source Control
+      - Refresh Status
+  - name: Source Control - Discard All Changes…
+    menu:
+      - Source Control
+      - Discard All Changes…
+  - name: Source Control - Add Selected Files
+    menu:
+      - Source Control
+      - Add Selected Files
+  - name: Source Control - Discard Changes in Selected Files…
+    menu:
+      - Source Control
+      - Discard Changes in Selected Files…
+  - name: Source Control - Mark Selected Files as Resolved
+    menu:
+      - Source Control
+      - Mark Selected Files as Resolved
+  - name: Source Control - History…
+    menu:
+      - Source Control
+      - History…
+  - name: Window - Show Next Tab
+    menu:
+      - Window
+      - Show Next Tab
+  - name: Window - Show Previous Tab
+    menu:
+      - Window
+      - Show Previous Tab
+  - name: Window - Documentation and API Reference
+    menu:
+      - Window
+      - Documentation and API Reference
+  - name: Window - Welcome to Xcode
+    menu:
+      - Window
+      - Welcome to Xcode
+  - name: Window - Devices
+    menu:
+      - Window
+      - Devices
+  - name: Window - Organizer
+    menu:
+      - Window
+      - Organizer
+  - name: Window - Show Touch Bar
+    menu:
+      - Window
+      - Show Touch Bar
+  - name: Window - Bring All to Front
+    menu:
+      - Window
+      - Bring All to Front
+  - name: Help - Documentation and API Reference
+    menu:
+      - Help
+      - Documentation and API Reference
+  - name: Help - API Changes
+    menu:
+      - Help
+      - API Changes
+  - name: Help - Xcode Help
+    menu:
+      - Help
+      - Xcode Help
+  - name: Help - Release Notes
+    menu:
+      - Help
+      - Release Notes
+  - name: Help - Report an Issue
+    menu:
+      - Help
+      - Report an Issue
+  - name: Help - Quick Help for Selected Item
+    menu:
+      - Help
+      - Quick Help for Selected Item
+  - name: Help - Search Documentation for Selected Text
+    menu:
+      - Help
+      - Search Documentation for Selected Text
+
 
 bindings:
   - key: v

@@ -195,11 +195,11 @@
 		685CB4CB1E97F2BD00C92195 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				685CB4CC1E97F2E400C92195 /* Utils.swift */,
 				685CB4E11E981EF200C92195 /* AppConfigManager.swift */,
-				986A37131E9D33000028D9B3 /* EventLoopListener.swift */,
 				986A37171E9D8A850028D9B3 /* AppleScript.swift */,
+				986A37131E9D33000028D9B3 /* EventLoopListener.swift */,
 				6822E6AB1E99520400C38260 /* KeyCode.swift */,
+				685CB4CC1E97F2E400C92195 /* Utils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
