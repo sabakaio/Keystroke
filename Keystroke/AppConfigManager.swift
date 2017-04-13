@@ -23,13 +23,17 @@ public struct AppConfig {
 
 public struct AppOperation {
     let name: String
-    let keystroke: Keystroke
-    let appleScript: AppleScript?
+    let script: AppleScript
     
-    init(name operationName: String, originalKeystroke: String) throws {
+    init(_ operationName: String, tell appName: String, keystroke config: String) throws {
         name = operationName
-        keystroke = try Keystroke(for: originalKeystroke)
-        appleScript = AppleScript(to: keystroke)
+        let keystroke = try Keystroke(for: config)
+        script = try AppleScript(tell: appName, to: keystroke)
+    }
+    
+    init(_ operationName: String, tell appName: String, pressMenu config: [String]) throws {
+        name = operationName
+        script = try AppleScript(tell: appName, pressMenu: config)
     }
 }
 
@@ -86,10 +90,19 @@ class AppConfigManager: NSObject {
             // Extract list of Application Operations
             let operations = try value.dictionary!["operations"]!.array!.map({
                 (operation: Yaml) throws -> AppOperation in
-                let hotKey = operation.dictionary!["hotkey"]!.string!
+                // Expect hotkey configured for operation, look for menu item to press instead
+                guard let hotKey = operation.dictionary!["hotkey"] else {
+                    let menu = operation.dictionary!["menu"]!.array!
+                    return try AppOperation(
+                        operation.dictionary!["name"]!.string!,
+                        tell: file.appName,
+                        pressMenu: menu.map { item in item.string! }
+                    )
+                }
                 return try AppOperation(
-                    name: operation.dictionary!["name"]!.string!,
-                    originalKeystroke: hotKey
+                    operation.dictionary!["name"]!.string!,
+                    tell: file.appName,
+                    keystroke: hotKey.string!
                 )
             }).reduce([String: AppOperation]()) { accumulator, operation in
                 var dict = accumulator
@@ -108,7 +121,7 @@ class AppConfigManager: NSObject {
                     let letter = config["key"]!.string!
                     let name = config["name"]!.string!
                     let keyCode = try KeyCode.from(letter: letter)
-
+                    
                     // Is it a folder? Treat as an operation otherwise
                     guard let subfolder = config["bindings"]?.array else {
                         let operation = config["operation"]!.string!
@@ -131,7 +144,7 @@ class AppConfigManager: NSObject {
             let bindings = try toBindingsConfig(
                 name: file.appName,
                 value: value.dictionary!["bindings"]!.array!
-            ) as! AppBindingsConfigFolder
+                ) as! AppBindingsConfigFolder
             
             bindings.printTree()
             

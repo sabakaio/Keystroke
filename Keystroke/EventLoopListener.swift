@@ -70,7 +70,7 @@ fileprivate func handleEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGE
     
     // Execute Apple Script for the operation, disable handling CMD temporary
     mainStore.dispatch(WindowStopListenTrigger())
-    operation.appleScript!.execute()
+    operation.script.execute()
     mainStore.dispatch(WindowStartListenTrigger())
     
     return nil
