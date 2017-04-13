@@ -7,6 +7,514 @@ operations:
   - name: Split Horizontally
     hotkey: cmd-shift-d
 
+  - name: iTerm2 - About iTerm2
+    menu:
+      - iTerm2
+      - About iTerm2
+  - name: iTerm2 - Show Tip of the Day
+    menu:
+      - iTerm2
+      - Show Tip of the Day
+  - name: iTerm2 - Check for Incompatible Software
+    menu:
+      - iTerm2
+      - Check for Incompatible Software
+  - name: iTerm2 - Check For Updates…
+    menu:
+      - iTerm2
+      - Check For Updates…
+  - name: iTerm2 - Toggle Debug Logging
+    menu:
+      - iTerm2
+      - Toggle Debug Logging
+  - name: iTerm2 - Preferences...
+    menu:
+      - iTerm2
+      - Preferences...
+  - name: iTerm2 - Hide iTerm2
+    menu:
+      - iTerm2
+      - Hide iTerm2
+  - name: iTerm2 - Hide Others
+    menu:
+      - iTerm2
+      - Hide Others
+  - name: iTerm2 - Show All
+    menu:
+      - iTerm2
+      - Show All
+  - name: iTerm2 - Secure Keyboard Entry
+    menu:
+      - iTerm2
+      - Secure Keyboard Entry
+  - name: iTerm2 - Make iTerm2 Default Term
+    menu:
+      - iTerm2
+      - Make iTerm2 Default Term
+  - name: iTerm2 - Make Terminal Default Term
+    menu:
+      - iTerm2
+      - Make Terminal Default Term
+  - name: iTerm2 - Install Shell Integration
+    menu:
+      - iTerm2
+      - Install Shell Integration
+  - name: iTerm2 - Quit iTerm2
+    menu:
+      - iTerm2
+      - Quit iTerm2
+  - name: iTerm2 - Quit and Keep Windows
+    menu:
+      - iTerm2
+      - Quit and Keep Windows
+  - name: Shell - New Window
+    menu:
+      - Shell
+      - New Window
+  - name: Shell - New Tab
+    menu:
+      - Shell
+      - New Tab
+  - name: Shell - New Tab with Current Profile
+    menu:
+      - Shell
+      - New Tab with Current Profile
+  - name: Shell - Duplicate Tab
+    menu:
+      - Shell
+      - Duplicate Tab
+  - name: Shell - Split Vertically with Current Profile
+    menu:
+      - Shell
+      - Split Vertically with Current Profile
+  - name: Shell - Split Horizontally with Current Profile
+    menu:
+      - Shell
+      - Split Horizontally with Current Profile
+  - name: Shell - Split Horizontally…
+    menu:
+      - Shell
+      - Split Horizontally…
+  - name: Shell - Split Vertically…
+    menu:
+      - Shell
+      - Split Vertically…
+  - name: Shell - Save Selected Text…
+    menu:
+      - Shell
+      - Save Selected Text…
+  - name: Shell - Close
+    menu:
+      - Shell
+      - Close
+  - name: Shell - Close Terminal Window
+    menu:
+      - Shell
+      - Close Terminal Window
+  - name: Shell - Close All
+    menu:
+      - Shell
+      - Close All
+  - name: Shell - Close All Panes in Tab
+    menu:
+      - Shell
+      - Close All Panes in Tab
+  - name: Shell - Broadcast Input - Send Input to Current Session Only
+    menu:
+      - Shell
+      - Broadcast Input
+      - Send Input to Current Session Only
+  - name: Shell - Broadcast Input - Broadcast Input to All Panes in All Tabs
+    menu:
+      - Shell
+      - Broadcast Input
+      - Broadcast Input to All Panes in All Tabs
+  - name: Shell - Broadcast Input - Broadcast Input to All Panes in Current Tab
+    menu:
+      - Shell
+      - Broadcast Input
+      - Broadcast Input to All Panes in Current Tab
+  - name: Shell - Broadcast Input - Toggle Broadcast Input to Current Session
+    menu:
+      - Shell
+      - Broadcast Input
+      - Toggle Broadcast Input to Current Session
+  - name: Shell - Broadcast Input - Show Background Pattern Indicator
+    menu:
+      - Shell
+      - Broadcast Input
+      - Show Background Pattern Indicator
+  - name: Shell - tmux - Detach
+    menu:
+      - Shell
+      - tmux
+      - Detach
+  - name: Shell - tmux - New Tmux Window
+    menu:
+      - Shell
+      - tmux
+      - New Tmux Window
+  - name: Shell - tmux - New Tmux Tab
+    menu:
+      - Shell
+      - tmux
+      - New Tmux Tab
+  - name: Shell - tmux - Dashboard
+    menu:
+      - Shell
+      - tmux
+      - Dashboard
+  - name: Edit - Undo Close Session
+    menu:
+      - Edit
+      - Undo Close Session
+  - name: Edit - Redo
+    menu:
+      - Edit
+      - Redo
+  - name: Edit - Cut
+    menu:
+      - Edit
+      - Cut
+  - name: Edit - Copy
+    menu:
+      - Edit
+      - Copy
+  - name: Edit - Copy with Styles
+    menu:
+      - Edit
+      - Copy with Styles
+  - name: Edit - Open Selection
+    menu:
+      - Edit
+      - Open Selection
+  - name: Edit - Selection Respects Soft Boundaries
+    menu:
+      - Edit
+      - Selection Respects Soft Boundaries
+  - name: Edit - Select Output of Last Command
+    menu:
+      - Edit
+      - Select Output of Last Command
+  - name: Edit - Select Current Command
+    menu:
+      - Edit
+      - Select Current Command
+  - name: Edit - Find - Find...
+    menu:
+      - Edit
+      - Find
+      - Find...
+  - name: Edit - Find - Find Next
+    menu:
+      - Edit
+      - Find
+      - Find Next
+  - name: Edit - Find - Find Previous
+    menu:
+      - Edit
+      - Find
+      - Find Previous
+  - name: Edit - Find - Use Selection for Find
+    menu:
+      - Edit
+      - Find
+      - Use Selection for Find
+  - name: Edit - Find - Jump to Selection
+    menu:
+      - Edit
+      - Find
+      - Jump to Selection
+  - name: Edit - Find - Find URLs
+    menu:
+      - Edit
+      - Find
+      - Find URLs
+  - name: Edit - Marks and Annotations - Set Mark
+    menu:
+      - Edit
+      - Marks and Annotations
+      - Set Mark
+  - name: Edit - Marks and Annotations - Add Annotation at Cursor
+    menu:
+      - Edit
+      - Marks and Annotations
+      - Add Annotation at Cursor
+  - name: Edit - Marks and Annotations - Jump to Mark
+    menu:
+      - Edit
+      - Marks and Annotations
+      - Jump to Mark
+  - name: Edit - Marks and Annotations - Previous Mark/Annotation
+    menu:
+      - Edit
+      - Marks and Annotations
+      - Previous Mark/Annotation
+  - name: Edit - Marks and Annotations - Next Mark/Annotation
+    menu:
+      - Edit
+      - Marks and Annotations
+      - Next Mark/Annotation
+  - name: Edit - Marks and Annotations - Alerts
+    menu:
+      - Edit
+      - Marks and Annotations
+      - Alerts
+  - name: View - Show Tabs in Fullscreen
+    menu:
+      - View
+      - Show Tabs in Fullscreen
+  - name: View - Toggle Full Screen
+    menu:
+      - View
+      - Toggle Full Screen
+  - name: View - Find Cursor
+    menu:
+      - View
+      - Find Cursor
+  - name: View - Show Cursor Guide
+    menu:
+      - View
+      - Show Cursor Guide
+  - name: View - Show Timestamps
+    menu:
+      - View
+      - Show Timestamps
+  - name: View - Show Annotations
+    menu:
+      - View
+      - Show Annotations
+  - name: View - Auto Command Completion
+    menu:
+      - View
+      - Auto Command Completion
+  - name: View - Open Quickly
+    menu:
+      - View
+      - Open Quickly
+  - name: View - Maximize Active Pane
+    menu:
+      - View
+      - Maximize Active Pane
+  - name: View - Make Text Bigger
+    menu:
+      - View
+      - Make Text Bigger
+  - name: View - Make Text Normal Size
+    menu:
+      - View
+      - Make Text Normal Size
+  - name: View - Restore Text and Session Size
+    menu:
+      - View
+      - Restore Text and Session Size
+  - name: View - Make Text Smaller
+    menu:
+      - View
+      - Make Text Smaller
+  - name: View - Start Instant Replay
+    menu:
+      - View
+      - Start Instant Replay
+  - name: Session - Edit Session…
+    menu:
+      - Session
+      - Edit Session…
+  - name: Session - Run Coprocess…
+    menu:
+      - Session
+      - Run Coprocess…
+  - name: Session - Stop Coprocess
+    menu:
+      - Session
+      - Stop Coprocess
+  - name: Session - Restart Session
+    menu:
+      - Session
+      - Restart Session
+  - name: Session - Open Autocomplete...
+    menu:
+      - Session
+      - Open Autocomplete...
+  - name: Session - Open Command History...
+    menu:
+      - Session
+      - Open Command History...
+  - name: Session - Open Recent Directories...
+    menu:
+      - Session
+      - Open Recent Directories...
+  - name: Session - Open Paste History...
+    menu:
+      - Session
+      - Open Paste History...
+  - name: Session - Reset
+    menu:
+      - Session
+      - Reset
+  - name: Session - Reset Character Set
+    menu:
+      - Session
+      - Reset Character Set
+  - name: Session - Log - Start
+    menu:
+      - Session
+      - Log
+      - Start
+  - name: Session - Log - Stop
+    menu:
+      - Session
+      - Log
+      - Stop
+  - name: Session - Bury Session
+    menu:
+      - Session
+      - Bury Session
+  - name: Profiles - Open Profiles…
+    menu:
+      - Profiles
+      - Open Profiles…
+  # Toolbelt
+  - name: Window - Minimize
+    menu:
+      - Window
+      - Minimize
+  - name: Window - Minimize All
+    menu:
+      - Window
+      - Minimize All
+  - name: Window - Zoom
+    menu:
+      - Window
+      - Zoom
+  - name: Window - Zoom All
+    menu:
+      - Window
+      - Zoom All
+  - name: Window - Arrange Windows Horizontally
+    menu:
+      - Window
+      - Arrange Windows Horizontally
+  - name: Window - Exposé all Tabs
+    menu:
+      - Window
+      - Exposé all Tabs
+  - name: Window - Save Window Arrangement
+    menu:
+      - Window
+      - Save Window Arrangement
+  - name: Window - Save Current Window as Arrangement
+    menu:
+      - Window
+      - Save Current Window as Arrangement
+  - name: Window - Select Split Pane - Select Pane Above
+    menu:
+      - Window
+      - Select Split Pane
+      - Select Pane Above
+  - name: Window - Select Split Pane - Select Pane Below
+    menu:
+      - Window
+      - Select Split Pane
+      - Select Pane Below
+  - name: Window - Select Split Pane - Select Pane Left
+    menu:
+      - Window
+      - Select Split Pane
+      - Select Pane Left
+  - name: Window - Select Split Pane - Select Pane Right
+    menu:
+      - Window
+      - Select Split Pane
+      - Select Pane Right
+  - name: Window - Select Split Pane - Next Pane
+    menu:
+      - Window
+      - Select Split Pane
+      - Next Pane
+  - name: Window - Select Split Pane - Previous Pane
+    menu:
+      - Window
+      - Select Split Pane
+      - Previous Pane
+  - name: Window - Resize Split Pane - Move Divider Up
+    menu:
+      - Window
+      - Resize Split Pane
+      - Move Divider Up
+  - name: Window - Resize Split Pane - Move Divider Down
+    menu:
+      - Window
+      - Resize Split Pane
+      - Move Divider Down
+  - name: Window - Resize Split Pane - Move Divider Left
+    menu:
+      - Window
+      - Resize Split Pane
+      - Move Divider Left
+  - name: Window - Resize Split Pane - Move Divider Right
+    menu:
+      - Window
+      - Resize Split Pane
+      - Move Divider Right
+  - name: Window - Resize Window - Decrease Height
+    menu:
+      - Window
+      - Resize Window
+      - Decrease Height
+  - name: Window - Resize Window - Increase Height
+    menu:
+      - Window
+      - Resize Window
+      - Increase Height
+  - name: Window - Resize Window - Decrease Width
+    menu:
+      - Window
+      - Resize Window
+      - Decrease Width
+  - name: Window - Resize Window - Increase Width
+    menu:
+      - Window
+      - Resize Window
+      - Increase Width
+  - name: Window - Select Next Tab
+    menu:
+      - Window
+      - Select Next Tab
+  - name: Window - Select Previous Tab
+    menu:
+      - Window
+      - Select Previous Tab
+  - name: Window - Move Tab Left
+    menu:
+      - Window
+      - Move Tab Left
+  - name: Window - Move Tab Right
+    menu:
+      - Window
+      - Move Tab Right
+  - name: Window - Password Manager
+    menu:
+      - Window
+      - Password Manager
+  - name: Window - Pin Hotkey Window
+    menu:
+      - Window
+      - Pin Hotkey Window
+  - name: Window - Bring All To Front
+    menu:
+      - Window
+      - Bring All To Front
+  - name: Window - Arrange in Front
+    menu:
+      - Window
+      - Arrange in Front
+  - name: Help - iTerm2 Help
+    menu:
+      - Help
+      - iTerm2 Help
+
+
 bindings:
   - key: s
     name: split

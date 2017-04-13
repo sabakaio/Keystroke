@@ -1,5 +1,5 @@
 tell application "System Events"
-	tell process "Xcode"
+	tell process "iTerm2"
 		set topLevelMenus to {}
 		repeat with m in every menu of every menu bar item of menu bar 1
 			set end of topLevelMenus to m
