@@ -34,6 +34,11 @@ operations:
     hotkey: cmd-shift-f
   - name: Open Quickly
     hotkey: cmd-shift-o
+  - name: Edit Scheme
+    menu:
+      - Product
+      - Scheme
+      - Edit Scheme…
 
 bindings:
   - key: v
@@ -42,6 +47,12 @@ bindings:
       - key: d
         name: debug
         operation: Show Debug Area
+  - key: e
+    name: edit
+    bindings:
+      - key: s
+        name: scheme
+        operation: Edit Scheme
   - key: f
     name: find
     bindings:
