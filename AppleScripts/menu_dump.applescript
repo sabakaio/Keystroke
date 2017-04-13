@@ -1,24 +1,5 @@
--- I was trying to make a recursive walker here
-on parseMenu(theMenu)
-	set menuMapItem to {}
-	try
-		repeat with m in every menu item of theMenu
-			try
-				set innerMenu to (every menu of m)
-				set end of menuMapItem to parseMenu(innerMenu)
-			on error
-				set end of menuMapItem to name of m
-			end try
-		end repeat
-	on error
-		return false
-	end try
-	return {name of theMenu, menuMapItem}
-end parseMenu
-
 tell application "System Events"
 	tell process "Xcode"
-		--get position of menu item "New Tab" of menu "File" of menu bar item "File" of menu bar 1
 		set topLevelMenus to {}
 		repeat with m in every menu of every menu bar item of menu bar 1
 			set end of topLevelMenus to m
@@ -28,7 +9,15 @@ tell application "System Events"
 		repeat with topLevelMenu in topLevelMenus
 			set menuMapItem to {}
 			repeat with m in every menu item of topLevelMenu
-				set end of menuMapItem to name of m
+				set innerLevelMenus to {}
+				repeat with im in every menu item of every menu of m
+					set end of innerLevelMenus to name of im
+				end repeat
+				if (count innerLevelMenus) > 0 then
+					set end of menuMapItem to {name of m, innerLevelMenus}
+				else
+					set end of menuMapItem to {name of m}
+				end if
 			end repeat
 			
 			set end of menuMap to {name of topLevelMenu, menuMapItem}

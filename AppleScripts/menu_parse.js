@@ -1,5 +1,5 @@
 // Usage:
-// node menu_parse.js xcode.json
+// node menu_parse.js xcode.menudump
 
 var yaml = require('js-yaml')
 var fs = require('fs')
@@ -12,8 +12,12 @@ if (!fileName) {
 }
 
 try {
-  var menuItems = JSON.parse(fs.readFileSync(fileName, 'utf8'))
-  console.log('Loaded', fileName)
+  var rawMenuDump = fs.readFileSync(fileName, 'utf8')
+  var cleanMenuDump = rawMenuDump
+      .replace(/\{/g, '[')
+      .replace(/\}/g, ']')
+      .replace(/\[?missing value\]?,?/g, '')
+  var menuItems = JSON.parse(cleanMenuDump)
 
   var result = []
   menuItems.map((topLevelMenu) => {
@@ -21,14 +25,26 @@ try {
     var innerItems = topLevelMenu[1]
 
     innerItems.forEach((item) => {
-      result.push({
-        name: item,
-        menu: [topLevelMenuName, item]
-      })
+      switch (item.length) {
+      case 1:
+        result.push({
+          name: topLevelMenuName + ' - ' + item[0],
+          menu: [topLevelMenuName, item[0]]
+        })
+        break
+      case 2:
+        item[1].forEach((innerItem) => {
+          result.push({
+            name: topLevelMenuName + ' - ' + item[0] + ' - ' + innerItem,
+            menu: [topLevelMenuName, item[0], innerItem]
+          })
+        })
+        break
+      }
     })
   })
 
-  console.log(yaml.safeDump(result))
+  console.log(yaml.safeDump({operations: result}))
 } catch (e) {
   console.log(e)
   process.exit(1)
