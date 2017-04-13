@@ -23,13 +23,12 @@ public struct AppConfig {
 
 public struct AppOperation {
     let name: String
-    let keystroke: Keystroke
-    let appleScript: AppleScript?
+    let script: AppleScript
     
-    init(name operationName: String, originalKeystroke: String) throws {
+    init(name operationName: String, keystroke config: String) throws {
         name = operationName
-        keystroke = try Keystroke(for: originalKeystroke)
-        appleScript = AppleScript(to: keystroke)
+        let keystroke = try Keystroke(for: config)
+        script = try AppleScript(to: keystroke)
     }
 }
 
@@ -89,7 +88,7 @@ class AppConfigManager: NSObject {
                 let hotKey = operation.dictionary!["hotkey"]!.string!
                 return try AppOperation(
                     name: operation.dictionary!["name"]!.string!,
-                    originalKeystroke: hotKey
+                    keystroke: hotKey
                 )
             }).reduce([String: AppOperation]()) { accumulator, operation in
                 var dict = accumulator

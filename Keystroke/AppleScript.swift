@@ -8,12 +8,17 @@
 
 import Foundation
 
+enum AppleScriptTempleteError: Error {
+    case BuildError(source: String)
+    case UnknownKeyCode(code: KeyCode)
+}
+
 struct AppleScript {
     private var script: NSAppleScript
     
-    init?(to keystroke: Keystroke) {
+    init(to keystroke: Keystroke) throws {
         guard let key = try? keystroke.keyCode.toLetter() else {
-            return nil
+            throw AppleScriptTempleteError.UnknownKeyCode(code: keystroke.keyCode)
         }
         var operationScript = ""
             + "tell application \"System Events\" to keystroke \""
@@ -36,7 +41,7 @@ struct AppleScript {
             operationScript += "using {" + usingFlags.joined(separator: ", ") + "}"
         }
         guard let appleScript = NSAppleScript(source: operationScript) else {
-            return nil
+            throw AppleScriptTempleteError.BuildError(source: operationScript)
         }
         script = appleScript
     }
