@@ -615,7 +615,7 @@ bindings:
       - key: c
         name: cursor
         operation: View - Find Cursor
-  - key: t
+  - key: g
     name: toggle
     bindings:
       - key: c
