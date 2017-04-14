@@ -513,6 +513,25 @@ bindings:
   - name: open
     key: o
     bindings:
+      - name: preferences
+        key: p
+        operation: iTerm2 - Preferences...
+      - name: quickly
+        key: q
+        operation: View - Open Quickly
+
+  - name: new
+    key: n
+    bindings:
+      - name: window
+        key: w
+        operation: Shell - New Window
+      - name: duplicate tab
+        key: d
+        operation: Shell - Duplicate Tab
+      - name: tab
+        key: t
+        operation: Shell - New Tab with Current Profile
       - name: split
         key: s
         bindings:
@@ -528,21 +547,6 @@ bindings:
           - name: ⇩
             key: j
             operation: Shell - Split Horizontally with Current Profile
-      - name: window
-        key: w
-        operation: Shell - New Window
-      - name: preferences
-        key: p
-        operation: iTerm2 - Preferences...
-      - name: tab
-        key: t
-        operation: Shell - New Tab with Current Profile
-      - name: quickly
-        key: q
-        operation: View - Open Quickly
-      - name: duplicate tab
-        key: d
-        operation: Shell - Duplicate Tab
 
   - name: close
     key: c
@@ -557,8 +561,8 @@ bindings:
         key: a
         operation: iTerm2 - Quit iTerm2
 
-  - name: focus
-    key: f
+  - name: select
+    key: s
     bindings:
       - name: ⇧ split
         key: w
@@ -607,8 +611,8 @@ bindings:
         key: a
         operation: View - Show Annotations
 
-  - name: search
-    key: s
+  - name: find
+    key: f
     bindings:
       - name: using selection
         key: s
@@ -616,7 +620,7 @@ bindings:
       - name: cursor
         key: c
         operation: View - Find Cursor
-      - name: find urls
+      - name: urls
         key: u
         operation: Edit - Find - Find URLs
 
