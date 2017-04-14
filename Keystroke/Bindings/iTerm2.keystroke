@@ -510,123 +510,113 @@ operations:
 
 
 bindings:
-  - key: s
-    name: splits
+  - name: open
+    key: o
     bindings:
-      - key: s
-        name: split vertical
-        operation: Shell - Split Vertically with Current Profile
-      - key: v
-        name: split vertical
-        operation: Shell - Split Vertically with Current Profile
-      - key: h
-        name: split horizontal
-        operation: Shell - Split Horizontally with Current Profile
-      - key: a
-        name: above
-        operation: Window - Select Split Pane - Select Pane Above
-      - key: b
-        name: below
-        operation: Window - Select Split Pane - Select Pane Below
-      - key: l
-        name: left
-        operation: Window - Select Split Pane - Select Pane Left
-      - key: r
-        name: right
-        operation: Window - Select Split Pane - Select Pane Right
-      - key: n
-        name: next
-        operation: Window - Select Split Pane - Next Pane
-      - key: p
-        name: previous
-        operation: Window - Select Split Pane - Previous Pane
-      - key: r
-        name: resize
+      - name: split
+        key: s
         bindings:
-          - key: u
-            name: up
-            operation: Window - Resize Split Pane - Move Divider Up
-          - key: d
-            name: down
-            operation: Window - Resize Split Pane - Move Divider Down
-          - key: l
-            name: left
-            operation: Window - Resize Split Pane - Move Divider Left
-          - key: r
-            name: right
-            operation: Window - Resize Split Pane - Move Divider Right
-  - key: m
-    name: marks
-    bindings:
-      - key: m
-        name: set mark
-        operation: Edit - Marks and Annotations - Set Mark
-      - key: a
-        name: add annotation
-        operation: Edit - Marks and Annotations - Add Annotation at Cursor
-      - key: j
-        name: jump
-        operation: Edit - Marks and Annotations - Jump to Mark
-      - key: p
-        name: previous
-        operation: Edit - Marks and Annotations - Previous Mark/Annotation
-      - key: n
-        name: next
-        operation: Edit - Marks and Annotations - Next Mark/Annotation
-      - key: l
-        name: alerts
-        operation: Edit - Marks and Annotations - Alerts
-  - key: t
-    name: tabs
-    bindings:
-      - key: t
-        name: new tab
-        operation: Shell - New Tab
-      - key: p
-        name: new tab with profile
+          - name: ⇨
+            key: d
+            operation: Shell - Split Vertically with Current Profile
+          - name: ⇩
+            key: s
+            operation: Shell - Split Horizontally with Current Profile
+          - name: ⇨
+            key: l
+            operation: Shell - Split Vertically with Current Profile
+          - name: ⇩
+            key: j
+            operation: Shell - Split Horizontally with Current Profile
+      - name: window
+        key: w
+        operation: Shell - New Window
+      - name: preferences
+        key: p
+        operation: iTerm2 - Preferences...
+      - name: tab
+        key: t
         operation: Shell - New Tab with Current Profile
-      - key: d
-        name: duplicate
+      - name: quickly
+        key: q
+        operation: View - Open Quickly
+      - name: duplicate tab
+        key: d
         operation: Shell - Duplicate Tab
-      - key: c
-        name: close all panes
+
+  - name: close
+    key: c
+    bindings:
+      - name: window
+        key: w
+        operation: Shell - Close Terminal Window
+      - name: tab
+        key: t
         operation: Shell - Close All Panes in Tab
-      - key: f
-        name: show tabs in fullscreen
-        operation: View - Show Tabs in Fullscreen
-      - key: e
-        name: exposé
-        operation: Window - Exposé all Tabs
-      - key: n
-        name: next
-        operation: Window - Select Next Tab
-      - key: p
-        name: previous
-        operation: Window - Select Previous Tab
-      - key: l
-        name: move left
-        operation: Window - Move Tab Left
-      - key: r
-        name: move right
-        operation: Window - Move Tab Right
-  - key: f
-    name: find
+      - name: app
+        key: a
+        operation: iTerm2 - Quit iTerm2
+
+  - name: focus
+    key: f
     bindings:
-      - key: c
-        name: cursor
-        operation: View - Find Cursor
-  - key: g
-    name: toggle
+      - name: ⇧ split
+        key: w
+        operation: Window - Select Split Pane - Select Pane Above
+      - name: ⇩ split
+        key: s
+        operation: Window - Select Split Pane - Select Pane Below
+      - name: ⇦ split
+        key: a
+        operation: Window - Select Split Pane - Select Pane Left
+      - name: ⇨ split
+        key: d
+        operation: Window - Select Split Pane - Select Pane Right
+      - name: ⇧ split
+        key: k
+        operation: Window - Select Split Pane - Select Pane Above
+      - name: ⇩ split
+        key: j
+        operation: Window - Select Split Pane - Select Pane Below
+      - name: ⇦ split
+        key: h
+        operation: Window - Select Split Pane - Select Pane Left
+      - name: ⇨ split
+        key: l
+        operation: Window - Select Split Pane - Select Pane Right
+      - name: output of last command
+        key: o
+        operation: Edit - Select Output of Last Command
+      - name: current command
+        key: c
+        operation: Edit - Select Current Command
+
+  - name: toggle
+    key: t
     bindings:
-      - key: c
-        name: cursor guide
-        operation: View - Show Cursor Guide
-      - key: t
-        name: timestamps
+      - name: timestamps
+        key: t
         operation: View - Show Timestamps
-      - key: a
-        name: annotations
+      - name: cursor guide
+        key: c
+        operation: View - Show Cursor Guide
+      - name: fullscreen
+        key: f
+        operation: View - Toggle Full Screen
+      - name: annotations
+        key: a
         operation: View - Show Annotations
-      - key: a
-        name: autocomplete
-        operation: View - Auto Command Completion
+
+  - name: search
+    key: s
+    bindings:
+      - name: using selection
+        key: s
+        operation: Edit - Find - Use Selection for Find
+      - name: cursor
+        key: c
+        operation: View - Find Cursor
+      - name: find urls
+        key: u
+        operation: Edit - Find - Find URLs
+
