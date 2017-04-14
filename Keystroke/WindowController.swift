@@ -14,7 +14,7 @@ let WINDOW_PADDING_FROM_BOTTOM: CGFloat = 20.0
 
 class WindowController: NSWindowController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
-       
+
     func newState(state: AppState) {
         if (state.window.visible) {
             showWindow()
