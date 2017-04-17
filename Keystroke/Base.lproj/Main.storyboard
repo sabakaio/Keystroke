@@ -655,7 +655,21 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Keystroke" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Keystroke" customModuleProvider="target">
+                    <connections>
+                        <outlet property="statusMenu" destination="djC-mg-9pC" id="inH-Rd-bRB"/>
+                    </connections>
+                </customObject>
+                <menu id="djC-mg-9pC">
+                    <items>
+                        <menuItem title="Quit" id="eT0-OV-0yw">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="quitClicked:" target="Voe-Tx-rLC" id="oOI-M0-vZg"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -663,7 +677,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="WindowController" customModule="Keystroke" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="KeyboardWindowController" showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="WindowController" customModule="Keystroke" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="none" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" resizable="YES" fullSizeContentView="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES" fullScreenAuxiliary="YES"/>
