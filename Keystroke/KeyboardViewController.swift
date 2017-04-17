@@ -36,7 +36,7 @@ import BonMot
 
 let KEY_SIZE = NSSize(width: 45.0, height: 45.0)
 let CONTAINER_VIEW_INSETS = EdgeInsets(top: 35.0, left: 10.0, bottom: 20.0, right: 10.0)
-let KEY_FONT_SIZE: CGFloat = 20.0
+let KEY_FONT_SIZE: CGFloat = 16.0
 let KEY_SPACING: CGFloat = 10.0
 let KEY_TEXT_PADDING: CGFloat = 30.0
 let KEY_BORDER_COLOR = NSColor.init(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
