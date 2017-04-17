@@ -34,11 +34,11 @@ import ReSwift
 import PureLayout
 import BonMot
 
-let KEY_SIZE = NSSize(width: 80.0, height: 45.0)
+let KEY_SIZE = NSSize(width: 45.0, height: 45.0)
 let CONTAINER_VIEW_INSETS = EdgeInsets(top: 35.0, left: 10.0, bottom: 20.0, right: 10.0)
-let KEY_FONT_SIZE: CGFloat = 16.0
+let KEY_FONT_SIZE: CGFloat = 20.0
 let KEY_SPACING: CGFloat = 10.0
-let KEY_TEXT_PADDING: CGFloat = 15.0
+let KEY_TEXT_PADDING: CGFloat = 30.0
 let KEY_BORDER_COLOR = NSColor.init(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
 
 public struct KeyStyles {
@@ -167,8 +167,7 @@ class ViewController: NSViewController, StoreSubscriber {
                 keyContainerViews[rowIndex].append(keyContainerView)
                 
                 let textSize = keyView.attributedStringValue.size()
-                //let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
-                let keyWidthWithPadding = KEY_SIZE.width
+                let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
                 keyContainerView.setOrUpdateWidthDimension(keyWidthWithPadding)
                 keyContainerTotalWidths[rowIndex] = keyContainerTotalWidths[rowIndex] + keyWidthWithPadding
             }
@@ -192,8 +191,7 @@ class ViewController: NSViewController, StoreSubscriber {
                 keyView.setStringValue(for: key, using: keyStyles!)
                 
                 let textSize = keyView.attributedStringValue.size()
-                //let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
-                let keyWidthWithPadding = KEY_SIZE.width
+                let keyWidthWithPadding = max(textSize.width + KEY_TEXT_PADDING, KEY_SIZE.width)
                 keyContainerView.setOrUpdateWidthDimension(keyWidthWithPadding)
                 keyContainerTotalWidths[rowIndex] = keyContainerTotalWidths[rowIndex] + keyWidthWithPadding
             }
