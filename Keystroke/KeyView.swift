@@ -47,7 +47,7 @@ class KeyView: NSTextField {
         parentView.addSubview(view)
         view.setStringValue(for: key, using: styles)
         
-        view.autoPinEdge(toSuperviewEdge: .top, withInset: 15.0)
+        view.autoPinEdge(toSuperviewEdge: .top, withInset: 14.0)
         view.autoAlignAxis(toSuperviewAxis: .vertical)
         view.autoMatch(.width, to: .width, of: view.superview!, withOffset: 0.0)
         
