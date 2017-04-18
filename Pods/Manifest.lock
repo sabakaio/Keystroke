@@ -1,21 +1,24 @@
 PODS:
   - BonMot (4.3.1)
+  - HydraAsync (0.9.4)
   - PureLayout (3.0.2)
   - ReSwift (3.0.0)
   - Yaml (3.3.1)
 
 DEPENDENCIES:
   - BonMot
+  - HydraAsync
   - PureLayout
   - ReSwift
   - Yaml
 
 SPEC CHECKSUMS:
   BonMot: 043bb5a8834cc6d74e9d624742272b92385e0a27
+  HydraAsync: 7cd7fc544d4260f261d28a8d9b3f7dc0f77b4c8e
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   ReSwift: f0255f4b4f2dacd12c5d97d34d13fc5dad6d6371
   Yaml: 18b2cf7301c4132e2bbb508a6921d2637ed3046c
 
-PODFILE CHECKSUM: 891d9919858d3735ed42aba604b21c59ab165c45
+PODFILE CHECKSUM: 25eea5b624d4261832d0e9ecd11f1fb5fa3ab841
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
