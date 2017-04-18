@@ -1,124 +1,595 @@
 name: Finder
 
 operations:
-  # View
-  - name: View as Icons
-    hotkey: cmd-1
-  - name: View as List
-    hotkey: cmd-2
-  - name: View as Columns
-    hotkey: cmd-3
-  - name: View as Cover Flow
-    hotkey: cmd-4
-  # --- Arrange by
-  - name: Arrange by Name
-    hotkey: ctrl-cmd-1
-  - name: Arrange by Kind
-    hotkey: ctrl-cmd-2
-  - name: Arrange by Date Last Opened
-    hotkey: ctrl-cmd-3
-  - name: Arrange by Date Added
-    hotkey: ctrl-cmd-4
-  - name: Arrange by Date Modified
-    hotkey: ctrl-cmd-5
-  - name: Arrange by Size
-    hotkey: ctrl-cmd-6
-  - name: Arrange by Tags
-    hotkey: ctrl-cmd-7
-  # Go
-  - name: Go to All My Files
-    hotkey: shift-cmd-f
-  - name: Go to Documents
-    hotkey: shift-cmd-o
-  - name: Go to Desktop
-    hotkey: shift-cmd-d
-  - name: Go to Downloads
-    hotkey: shift-cmd-l
-  - name: Go to Home
-    hotkey: shift-cmd-h
-  - name: Go to Computer
-    hotkey: shift-cmd-c
-  - name: Go to AirDrop
-    hotkey: shift-cmd-r
-  - name: Go to Network
-    hotkey: shift-cmd-k
-  - name: Go to iCloud Drive
-    hotkey: shift-cmd-i
-  - name: Go to Applications
-    hotkey: shift-cmd-a
-  - name: Go to Utilites
-    hotkey: shift-cmd-u
-  # ---
-  - name: Go to Folder
-    hotkey: shift-cmd-g
+  - name: Finder - About Finder
+    menu:
+      - Finder
+      - About Finder
+  - name: Finder - Preferences…
+    menu:
+      - Finder
+      - Preferences…
+  - name: Finder - Empty Trash…
+    menu:
+      - Finder
+      - Empty Trash…
+  - name: Finder - Hide Finder
+    menu:
+      - Finder
+      - Hide Finder
+  - name: Finder - Hide Others
+    menu:
+      - Finder
+      - Hide Others
+  - name: Finder - Show All
+    menu:
+      - Finder
+      - Show All
+  - name: File - New Finder Window
+    menu:
+      - File
+      - New Finder Window
+  - name: File - New Folder
+    menu:
+      - File
+      - New Folder
+  - name: File - New Folder with Selection
+    hotkey: ctrl-cmd-n
+  - name: File - New Smart Folder
+    menu:
+      - File
+      - New Smart Folder
+  - name: File - New Tab
+    menu:
+      - File
+      - New Tab
+  - name: File - Open
+    menu:
+      - File
+      - Open
+  - name: File - Open in New Tab
+    menu:
+      - File
+      - Open in New Tab
+  - name: File - Open and Close Window
+    menu:
+      - File
+      - Open and Close Window
+  - name: File - Print
+    menu:
+      - File
+      - Print
+  - name: File - Close Window
+    menu:
+      - File
+      - Close Window
+  - name: File - Close All
+    menu:
+      - File
+      - Close All
+  - name: File - Get Info
+    menu:
+      - File
+      - Get Info
+  - name: File - Show Inspector
+    menu:
+      - File
+      - Show Inspector
+  - name: File - Get Summary Info
+    menu:
+      - File
+      - Get Summary Info
+  - name: File - Rename
+    menu:
+      - File
+      - Rename
+  - name: File - Compress
+    menu:
+      - File
+      - Compress
+  - name: File - Duplicate
+    menu:
+      - File
+      - Duplicate
+  - name: File - Make Alias
+    menu:
+      - File
+      - Make Alias
+  - name: File - Show Original
+    menu:
+      - File
+      - Show Original
+  - name: File - Add to Sidebar
+    menu:
+      - File
+      - Add to Sidebar
+  - name: File - Add to Dock
+    menu:
+      - File
+      - Add to Dock
+  - name: File - Move to Trash
+    menu:
+      - File
+      - Move to Trash
+  - name: File - Delete Immediately…
+    menu:
+      - File
+      - Delete Immediately…
+  - name: File - Find
+    menu:
+      - File
+      - Find
+  - name: File - Find by Name…
+    menu:
+      - File
+      - Find by Name…
+  - name: File - Set Focus To Search Field
+    menu:
+      - File
+      - Set Focus To Search Field
+  - name: File - Tags…
+    menu:
+      - File
+      - Tags…
+  - name: Edit - Emoji & Symbols
+    menu:
+      - Edit
+      - Emoji & Symbols
+  - name: View - as Icons
+    menu:
+      - View
+      - as Icons
+  - name: View - as List
+    menu:
+      - View
+      - as List
+  - name: View - as Columns
+    menu:
+      - View
+      - as Columns
+  - name: View - as Cover Flow
+    menu:
+      - View
+      - as Cover Flow
+  - name: View - Clean Up
+    menu:
+      - View
+      - Clean Up
+  - name: View - Clean Up Selection
+    menu:
+      - View
+      - Clean Up Selection
+  - name: View - Clean Up By - Name
+    menu:
+      - View
+      - Clean Up By
+      - Name
+  - name: View - Clean Up By - Kind
+    menu:
+      - View
+      - Clean Up By
+      - Kind
+  - name: View - Clean Up By - Date Modified
+    menu:
+      - View
+      - Clean Up By
+      - Date Modified
+  - name: View - Clean Up By - Date Created
+    menu:
+      - View
+      - Clean Up By
+      - Date Created
+  - name: View - Clean Up By - Size
+    menu:
+      - View
+      - Clean Up By
+      - Size
+  - name: View - Clean Up By - Tags
+    menu:
+      - View
+      - Clean Up By
+      - Tags
+  - name: View - Arrange By - Name
+    menu:
+      - View
+      - Arrange By
+      - Name
+  - name: View - Arrange By - Kind
+    menu:
+      - View
+      - Arrange By
+      - Kind
+  - name: View - Arrange By - Application
+    menu:
+      - View
+      - Arrange By
+      - Application
+  - name: View - Arrange By - Date Last Opened
+    menu:
+      - View
+      - Arrange By
+      - Date Last Opened
+  - name: View - Arrange By - Date Added
+    menu:
+      - View
+      - Arrange By
+      - Date Added
+  - name: View - Arrange By - Date Modified
+    menu:
+      - View
+      - Arrange By
+      - Date Modified
+  - name: View - Arrange By - Date Created
+    menu:
+      - View
+      - Arrange By
+      - Date Created
+  - name: View - Arrange By - Size
+    menu:
+      - View
+      - Arrange By
+      - Size
+  - name: View - Arrange By - Tags
+    menu:
+      - View
+      - Arrange By
+      - Tags
+  - name: View - Arrange By - None
+    menu:
+      - View
+      - Arrange By
+      - None
+  - name: View - Sort By - None
+    menu:
+      - View
+      - Sort By
+      - None
+  - name: View - Sort By - Snap to Grid
+    menu:
+      - View
+      - Sort By
+      - Snap to Grid
+  - name: View - Sort By - Name
+    menu:
+      - View
+      - Sort By
+      - Name
+  - name: View - Sort By - Kind
+    menu:
+      - View
+      - Sort By
+      - Kind
+  - name: View - Sort By - Date Last Opened
+    menu:
+      - View
+      - Sort By
+      - Date Last Opened
+  - name: View - Sort By - Date Added
+    menu:
+      - View
+      - Sort By
+      - Date Added
+  - name: View - Sort By - Date Modified
+    menu:
+      - View
+      - Sort By
+      - Date Modified
+  - name: View - Sort By - Date Created
+    menu:
+      - View
+      - Sort By
+      - Date Created
+  - name: View - Sort By - Size
+    menu:
+      - View
+      - Sort By
+      - Size
+  - name: View - Sort By - Tags
+    menu:
+      - View
+      - Sort By
+      - Tags
+  - name: View - Hide Tab Bar
+    menu:
+      - View
+      - Hide Tab Bar
+  - name: View - Show Path Bar
+    menu:
+      - View
+      - Show Path Bar
+  - name: View - Show Status Bar
+    menu:
+      - View
+      - Show Status Bar
+  - name: View - Hide Sidebar
+    menu:
+      - View
+      - Hide Sidebar
+  - name: View - Show Preview
+    menu:
+      - View
+      - Show Preview
+  - name: View - Hide Toolbar
+    menu:
+      - View
+      - Hide Toolbar
+  - name: View - Customize Toolbar…
+    menu:
+      - View
+      - Customize Toolbar…
+  - name: View - Customize Touch Bar…
+    menu:
+      - View
+      - Customize Touch Bar…
+  - name: View - Customize Control Strip…
+    menu:
+      - View
+      - Customize Control Strip…
+  - name: View - Show View Options
+    menu:
+      - View
+      - Show View Options
+  - name: View - Enter Full Screen
+    menu:
+      - View
+      - Enter Full Screen
+  - name: Go - Back
+    menu:
+      - Go
+      - Back
+  - name: Go - Forward
+    menu:
+      - Go
+      - Forward
+  - name: Go - Enclosing Folder
+    menu:
+      - Go
+      - Enclosing Folder
+  - name: Go - Enclosing Folder in New Window
+    menu:
+      - Go
+      - Enclosing Folder in New Window
+  - name: Go - Select Startup Disk on Desktop
+    menu:
+      - Go
+      - Select Startup Disk on Desktop
+  - name: Go - All My Files
+    menu:
+      - Go
+      - All My Files
+  - name: Go - Documents
+    menu:
+      - Go
+      - Documents
+  - name: Go - Desktop
+    menu:
+      - Go
+      - Desktop
+  - name: Go - Downloads
+    menu:
+      - Go
+      - Downloads
+  - name: Go - Home
+    menu:
+      - Go
+      - Home
+  - name: Go - Library
+    menu:
+      - Go
+      - Library
+  - name: Go - Computer
+    menu:
+      - Go
+      - Computer
+  - name: Go - AirDrop
+    menu:
+      - Go
+      - AirDrop
+  - name: Go - Network
+    menu:
+      - Go
+      - Network
+  - name: Go - iCloud Drive
+    menu:
+      - Go
+      - iCloud Drive
+  - name: Go - Applications
+    menu:
+      - Go
+      - Applications
+  - name: Go - Utilities
+    menu:
+      - Go
+      - Utilities
+  - name: Go - Go to Folder…
+    menu:
+      - Go
+      - Go to Folder…
+  - name: Go - Connect to Server…
+    menu:
+      - Go
+      - Connect to Server…
+  - name: Window - Minimize
+    menu:
+      - Window
+      - Minimize
+  - name: Window - Minimize All
+    menu:
+      - Window
+      - Minimize All
+  - name: Window - Zoom
+    menu:
+      - Window
+      - Zoom
+  - name: Window - Zoom All
+    menu:
+      - Window
+      - Zoom All
+  - name: Window - Cycle Through Windows
+    menu:
+      - Window
+      - Cycle Through Windows
+  - name: Window - Show Previous Tab
+    menu:
+      - Window
+      - Show Previous Tab
+  - name: Window - Show Next Tab
+    menu:
+      - Window
+      - Show Next Tab
+  - name: Window - Move Tab to New Window
+    menu:
+      - Window
+      - Move Tab to New Window
+  - name: Window - Merge All Windows
+    menu:
+      - Window
+      - Merge All Windows
+  - name: Window - Bring All to Front
+    menu:
+      - Window
+      - Bring All to Front
   
 
 bindings:
-  - key: a
-    name: arrange by
+  - key: s
+    name: sort by
     bindings:
       - key: n
         name: name
-        operation: Arrange by Name
+        operation: View - Arrange By - Name
       - key: k
         name: kind
-        operation: Arrange by Kind
+        operation: View - Arrange By - Kind
+      - key: a
+        name: application
+        operation: View - Arrange By - Application
+      - key: l
+        name: last opened date
+        operation: View - Arrange By - Date Last Opened
+      - key: a
+        name: added date
+        operation: View - Arrange By - Date Added
+      - key: m
+        name: modified date
+        operation: View - Arrange By - Date Modified
+      - key: c
+        name: created date
+        operation: View - Arrange By - Date Created
       - key: s
         name: size
-        operation: Arrange by Size
+        operation: View - Arrange By - Size
       - key: t
         name: tags
-        operation: Arrange by Tags
-      - key: d
-        name: date
-        bindings:
-          - key: o
-            name: opened
-            operation: Arrange by Date Last Opened
-          - key: a
-            name: added
-            operation: Arrange by Date Added
-          - key: m
-            name: modified
-            operation: Arrange by Date Modified
+        operation: View - Arrange By - Tags
+      - key: o
+        name: none
+        operation: View - Arrange By - None
 
   - key: v
     name: view as
     bindings:
       - key: i
         name: icons
-        operation: View as Icons
+        operation: View - as Icons
       - key: l
         name: list
-        operation: View as List
+        operation: View - as List
       - key: c
         name: columns
-        operation: View as Columns
+        operation: View - as Columns
       - key: f
         name: cover flow
-        operation: View as Cover Flow
+        operation: View - as Cover Flow
 
   - key: g
-    name: go to
+    name: go
     bindings:
       - key: a
         name: applications
-        operation: Go to Applications
-      - key: h
-        name: home
-        operation: Go to Home
+        operation: Go - Applications
+      - key: b
+        name: back
+        operation: Go - Back
       - key: f
-        name: folder
-        operation: Go to Folder
+        name: forward
+        operation: Go - Forward
+      - key: p
+        name: parent folder
+        operation: Go - Enclosing Folder
       - key: d
         name: documents
-        operation: Go to Documents
+        operation: Go - Documents
       - key: l
         name: downloads
-        operation: Go to Downloads
-      - key: i
-        name: iCloud Drive
-        operation: Go to iCloud Drive
+        operation: Go - Downloads
+      - key: h
+        name: home
+        operation: Go - Home
       - key: r
         name: AirDrop
-        operation: Go to AirDrop
+        operation: Go - AirDrop
+      - key: i
+        name: iCloud Drive
+        operation: Go - iCloud Drive
+      - key: g
+        name: Go to Folder…
+        operation: Go - Go to Folder…
+
+  - key: f
+    name: file
+    bindings:
+      - key: r
+        name: rename
+        operation: File - Rename
+      - key: c
+        name: compress
+        operation: File - Compress
+      - key: i
+        name: info
+        operation: File - Get Info
+      - key: d
+        name: duplicate
+        operation: File - Duplicate
+      - key: t
+        name: trash
+        operation: File - Move to Trash
+
+  - key: p
+    name: preferences
+    bindings:
+      - key: p
+        name: preferences
+        operation: Finder - Preferences…
+      - key: v
+        name: view
+        operation: View - Show View Options
+      
+
+# operation: File - Open
+# operation: File - Open in New Tab
+# operation: File - Open and Close Window
+# operation: File - Print
+# operation: File - Close Window
+# operation: File - Close All
+# operation: File - Get Summary Info
+# operation: File - Make Alias
+# operation: File - Show Original
+# operation: File - Add to Sidebar
+# operation: File - Add to Dock
+# operation: File - Delete Immediately…
+# operation: File - Find
+# operation: File - Find by Name…
+# operation: File - Set Focus To Search Field
+# operation: File - Tags…
+
+# operation: Go - Enclosing Folder in New Window
+# operation: Go - Select Startup Disk on Desktop
+# operation: Go - All My Files
+# operation: Go - Desktop
+# operation: Go - Library
+# operation: Go - Computer
+# operation: Go - Network
+# operation: Go - Utilities
+# operation: Go - Connect to Server…
+
