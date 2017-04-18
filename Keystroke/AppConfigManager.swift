@@ -7,8 +7,10 @@
 //
 
 import Cocoa
-import Yaml
+import Yams
 import Hydra
+
+private typealias YamlDictionary = [String: Any]
 
 private struct AppConfigFile {
     let url: URL
@@ -89,24 +91,34 @@ class AppConfigManager: NSObject {
     private func parse(config file: AppConfigFile) -> Promise<AppConfig> {
         return Promise<AppConfig>(in: .background, { resolve, reject in
             do {
-                let value = try Yaml.load(file.contents)
+                let appName = file.appName
+                
+                guard let yaml = try? Yams.load(yaml: file.contents) as! YamlDictionary else {
+                    fatalError("App config \(file.appName) - top level doesn't match expected format")
+                }
+                
+                guard let rawOperations = yaml["operations"] as? [YamlDictionary] else {
+                    fatalError("App config \(file.appName) - operations section doesn't match expected format")
+                }
                 
                 // Extract list of Application Operations
-                let operations = try value.dictionary!["operations"]!.array!.map({
-                    (operation: Yaml) throws -> AppOperation in
+                let operations = try rawOperations.map({ operation throws -> AppOperation in
+                    guard let name = operation["name"] as? String else {
+                        fatalError("App config \(file.appName) - operation name not found")
+                    }
                     // Expect hotkey configured for operation, look for menu item to press instead
-                    guard let hotKey = operation.dictionary!["hotkey"] else {
-                        let menu = operation.dictionary!["menu"]!.array!
+                    guard let hotkey = operation["hotkey"] as? String else {
+                        let menu = operation["menu"] as! [String]
                         return try AppOperation(
-                            operation.dictionary!["name"]!.string!,
+                            name,
                             tell: file.appName,
-                            pressMenu: menu.map { item in item.string! }
+                            pressMenu: menu.map { item in item }
                         )
                     }
                     return try AppOperation(
-                        operation.dictionary!["name"]!.string!,
+                        name,
                         tell: file.appName,
-                        keystroke: hotKey.string!
+                        keystroke: hotkey
                     )
                 }).reduce([String: AppOperation]()) { accumulator, operation in
                     var dict = accumulator
@@ -115,20 +127,20 @@ class AppConfigManager: NSObject {
                 }
                 
                 // Create a bindings tree
-                func toBindingsConfig(name: String, value: [Yaml]) throws -> AppBindingsConfig {
+                func toBindingsConfig(name: String, value: [YamlDictionary]) throws -> AppBindingsConfig {
                     let currentLevel = try value.reduce([KeyCode: AppBindingsConfig](), {
                         (result, value) throws -> [KeyCode: AppBindingsConfig] in
                         var result = result
                         
                         // Parse key config, extract a name and a key code
-                        let config = value.dictionary!
-                        let letter = config["key"]!.string!
-                        let name = config["name"]!.string!
+                        let config = value
+                        let letter = config["key"] as! String
+                        let name = config["name"] as! String
                         let keyCode = try KeyCode.from(letter: letter)
                         
                         // Is it a folder? Treat as an operation otherwise
-                        guard let subfolder = config["bindings"]?.array else {
-                            let operation = config["operation"]!.string!
+                        guard let subfolder = config["bindings"] as? [YamlDictionary] else {
+                            let operation = config["operation"] as! String
                             result[keyCode] = AppBindingsConfigOperation(
                                 name: name,
                                 operation: operations[operation]!
@@ -147,7 +159,7 @@ class AppConfigManager: NSObject {
                 }
                 let bindings = try toBindingsConfig(
                     name: file.appName,
-                    value: value.dictionary!["bindings"]!.array!
+                    value: yaml["bindings"] as! [YamlDictionary]
                     ) as! AppBindingsConfigFolder
                 
                 bindings.printTree()
