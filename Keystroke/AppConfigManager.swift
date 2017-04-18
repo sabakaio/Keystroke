@@ -7,7 +7,10 @@
 //
 
 import Cocoa
-import Yaml
+import Yams
+import Hydra
+
+private typealias YamlDictionary = [String: Any]
 
 private struct AppConfigFile {
     let url: URL
@@ -70,102 +73,117 @@ class AppConfigManager: NSObject {
         return Bundle.main.urls(forResourcesWithExtension: "keystroke", subdirectory: "")
     }
     
-    private func loadFile(from url: URL) -> AppConfigFile? {
-        do {
-            let contents = try String(contentsOf: url, encoding: String.Encoding.utf8)
-            return AppConfigFile(
-                url: url,
-                appName: url.deletingPathExtension().lastPathComponent,
-                contents: contents
-            )
-        } catch {
-            return nil
-        }
+    private func loadFile(from url: URL) -> Promise<AppConfigFile> {
+        return Promise<AppConfigFile>(in: .background, { resolve, reject in
+            do {
+                let contents = try String(contentsOf: url, encoding: String.Encoding.utf8)
+                resolve(AppConfigFile(
+                    url: url,
+                    appName: url.deletingPathExtension().lastPathComponent,
+                    contents: contents
+                ))
+            } catch {
+                reject(error)
+            }
+        })
     }
     
-    private func parse(config file: AppConfigFile) -> AppConfig? {
-        do {
-            let value = try Yaml.load(file.contents)
-            
-            // Extract list of Application Operations
-            let operations = try value.dictionary!["operations"]!.array!.map({
-                (operation: Yaml) throws -> AppOperation in
-                // Expect hotkey configured for operation, look for menu item to press instead
-                guard let hotKey = operation.dictionary!["hotkey"] else {
-                    let menu = operation.dictionary!["menu"]!.array!
+    private func parse(config file: AppConfigFile) -> Promise<AppConfig> {
+        return Promise<AppConfig>(in: .background, { resolve, reject in
+            do {
+                let appName = file.appName
+                
+                guard let yaml = try? Yams.load(yaml: file.contents) as! YamlDictionary else {
+                    fatalError("App config \(file.appName) - top level doesn't match expected format")
+                }
+                
+                guard let rawOperations = yaml["operations"] as? [YamlDictionary] else {
+                    fatalError("App config \(file.appName) - operations section doesn't match expected format")
+                }
+                
+                // Extract list of Application Operations
+                let operations = try rawOperations.map({ operation throws -> AppOperation in
+                    guard let name = operation["name"] as? String else {
+                        fatalError("App config \(file.appName) - operation name not found")
+                    }
+                    // Expect hotkey configured for operation, look for menu item to press instead
+                    guard let hotkey = operation["hotkey"] as? String else {
+                        let menu = operation["menu"] as! [String]
+                        return try AppOperation(
+                            name,
+                            tell: file.appName,
+                            pressMenu: menu.map { item in item }
+                        )
+                    }
                     return try AppOperation(
-                        operation.dictionary!["name"]!.string!,
+                        name,
                         tell: file.appName,
-                        pressMenu: menu.map { item in item.string! }
+                        keystroke: hotkey
+                    )
+                }).reduce([String: AppOperation]()) { accumulator, operation in
+                    var dict = accumulator
+                    dict[operation.name] = operation
+                    return dict
+                }
+                
+                // Create a bindings tree
+                func toBindingsConfig(name: String, value: [YamlDictionary]) throws -> AppBindingsConfig {
+                    let currentLevel = try value.reduce([KeyCode: AppBindingsConfig](), {
+                        (result, value) throws -> [KeyCode: AppBindingsConfig] in
+                        var result = result
+                        
+                        // Parse key config, extract a name and a key code
+                        let config = value
+                        let letter = config["key"] as! String
+                        let name = config["name"] as! String
+                        let keyCode = try KeyCode.from(letter: letter)
+                        
+                        // Is it a folder? Treat as an operation otherwise
+                        guard let subfolder = config["bindings"] as? [YamlDictionary] else {
+                            let operation = config["operation"] as! String
+                            result[keyCode] = AppBindingsConfigOperation(
+                                name: name,
+                                operation: operations[operation]!
+                            )
+                            return result
+                        }
+                        
+                        // Go to a recursion to parse next level
+                        result[keyCode] = try toBindingsConfig(name: name, value: subfolder)
+                        return result
+                    })
+                    return AppBindingsConfigFolder(
+                        name: name,
+                        bindings: currentLevel
                     )
                 }
-                return try AppOperation(
-                    operation.dictionary!["name"]!.string!,
-                    tell: file.appName,
-                    keystroke: hotKey.string!
-                )
-            }).reduce([String: AppOperation]()) { accumulator, operation in
-                var dict = accumulator
-                dict[operation.name] = operation
-                return dict
+                let bindings = try toBindingsConfig(
+                    name: file.appName,
+                    value: yaml["bindings"] as! [YamlDictionary]
+                    ) as! AppBindingsConfigFolder
+                
+                bindings.printTree()
+                
+                resolve(AppConfig(
+                    appName: file.appName,
+                    operations: operations,
+                    bindings: bindings
+                ))
+            } catch {
+                reject(error)
             }
-            
-            // Create a bindings tree
-            func toBindingsConfig(name: String, value: [Yaml]) throws -> AppBindingsConfig {
-                let currentLevel = try value.reduce([KeyCode: AppBindingsConfig](), {
-                    (result, value) throws -> [KeyCode: AppBindingsConfig] in
-                    var result = result
-                    
-                    // Parse key config, extract a name and a key code
-                    let config = value.dictionary!
-                    let letter = config["key"]!.string!
-                    let name = config["name"]!.string!
-                    let keyCode = try KeyCode.from(letter: letter)
-                    
-                    // Is it a folder? Treat as an operation otherwise
-                    guard let subfolder = config["bindings"]?.array else {
-                        let operation = config["operation"]!.string!
-                        result[keyCode] = AppBindingsConfigOperation(
-                            name: name,
-                            operation: operations[operation]!
-                        )
-                        return result
-                    }
-                    
-                    // Go to a recursion to parse next level
-                    result[keyCode] = try toBindingsConfig(name: name, value: subfolder)
-                    return result
-                })
-                return AppBindingsConfigFolder(
-                    name: name,
-                    bindings: currentLevel
-                )
-            }
-            let bindings = try toBindingsConfig(
-                name: file.appName,
-                value: value.dictionary!["bindings"]!.array!
-                ) as! AppBindingsConfigFolder
-            
-            bindings.printTree()
-            
-            return AppConfig(
-                appName: file.appName,
-                operations: operations,
-                bindings: bindings
-            )
-        } catch {
-            print(error)
-            return nil
-        }
+        })
     }
     
     public func loadConfigurationsFromBundle() {
         guard let urls = getConfigURLsFromBundle() else {return}
         
         for url in urls {
-            guard let file = loadFile(from: url) else {continue}
-            guard let appConfig = parse(config: file) else {continue}
-            mainStore.dispatch(AppBindingsSetAction(appName: appConfig.appName, config: appConfig))
+            loadFile(from: url).then(parse).then(in: .main, { appConfig in
+                mainStore.dispatch(AppBindingsSetAction(appName: appConfig.appName, config: appConfig))
+            }).catch(in: .main, { error in
+                print(error)
+            })
         }
     }
 }
