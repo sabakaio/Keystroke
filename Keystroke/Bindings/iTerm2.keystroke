@@ -532,21 +532,14 @@ bindings:
       - name: tab
         key: t
         operation: Shell - New Tab with Current Profile
-      - name: split
-        key: s
-        bindings:
-          - name: ⇨
-            key: d
-            operation: Shell - Split Vertically with Current Profile
-          - name: ⇩
-            key: s
-            operation: Shell - Split Horizontally with Current Profile
-          - name: ⇨
-            key: l
-            operation: Shell - Split Vertically with Current Profile
-          - name: ⇩
-            key: j
-            operation: Shell - Split Horizontally with Current Profile
+
+  - name: vertical split
+    key: v
+    operation: Shell - Split Vertically with Current Profile
+
+  - name: horizontal split
+    key: h
+    operation: Shell - Split Horizontally with Current Profile
 
   - name: close
     key: c
@@ -561,39 +554,18 @@ bindings:
         key: a
         operation: iTerm2 - Quit iTerm2
 
-  - name: select
+  - name: ⇧ split
+    key: w
+    operation: Window - Select Split Pane - Select Pane Above
+  - name: ⇩ split
     key: s
-    bindings:
-      - name: ⇧ split
-        key: w
-        operation: Window - Select Split Pane - Select Pane Above
-      - name: ⇩ split
-        key: s
-        operation: Window - Select Split Pane - Select Pane Below
-      - name: ⇦ split
-        key: a
-        operation: Window - Select Split Pane - Select Pane Left
-      - name: ⇨ split
-        key: d
-        operation: Window - Select Split Pane - Select Pane Right
-      - name: ⇧ split
-        key: k
-        operation: Window - Select Split Pane - Select Pane Above
-      - name: ⇩ split
-        key: j
-        operation: Window - Select Split Pane - Select Pane Below
-      - name: ⇦ split
-        key: h
-        operation: Window - Select Split Pane - Select Pane Left
-      - name: ⇨ split
-        key: l
-        operation: Window - Select Split Pane - Select Pane Right
-      - name: output of last command
-        key: o
-        operation: Edit - Select Output of Last Command
-      - name: current command
-        key: c
-        operation: Edit - Select Current Command
+    operation: Window - Select Split Pane - Select Pane Below
+  - name: ⇦ split
+    key: a
+    operation: Window - Select Split Pane - Select Pane Left
+  - name: ⇨ split
+    key: d
+    operation: Window - Select Split Pane - Select Pane Right
 
   - name: toggle
     key: t

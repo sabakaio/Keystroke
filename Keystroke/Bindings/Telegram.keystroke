@@ -1,0 +1,12 @@
+name: Telegram
+
+operations:
+  - name: Emoji
+    menu:
+      - Edit
+      - Emoji & Symbols
+
+bindings:
+  - key: e
+    name: emoji 👾
+    operation: Emoji
