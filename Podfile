@@ -7,7 +7,7 @@ target 'Keystroke' do
 
   # Pods for Keystroke
   pod 'ReSwift'
-  pod 'Yaml'
+  pod 'Yams'
   pod 'PureLayout'
   pod 'BonMot'
   pod 'HydraAsync'

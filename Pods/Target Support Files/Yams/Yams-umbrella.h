@@ -10,7 +10,11 @@
 #endif
 #endif
 
+#import "CYaml.h"
+#import "yaml.h"
+#import "yaml_private.h"
+#import "Yams.h"
 
-FOUNDATION_EXPORT double YamlVersionNumber;
-FOUNDATION_EXPORT const unsigned char YamlVersionString[];
+FOUNDATION_EXPORT double YamsVersionNumber;
+FOUNDATION_EXPORT const unsigned char YamsVersionString[];
 
